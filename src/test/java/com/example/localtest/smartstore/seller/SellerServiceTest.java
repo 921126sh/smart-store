@@ -8,15 +8,16 @@ import org.junit.jupiter.api.Test;
 import javax.xml.datatype.DatatypeFactory;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 public class SellerServiceTest {
-        // 발주 처리
+    // 발주 처리
     @Test
     public void 발주_확인처리() throws Exception {
         PlaceProductOrderRequest placeProductOrderRequest = new PlaceProductOrderRequest();
-        placeProductOrderRequest.setProductOrderID("2021052480881841");
+        placeProductOrderRequest.setProductOrderID("2021052412198141");
         placeProductOrderRequest.setCheckReceiverAddressChanged(true);
 
         Utils.setBaseSellerRequestType(placeProductOrderRequest);
@@ -36,6 +37,8 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -67,6 +70,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -98,6 +102,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -134,6 +139,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -170,6 +176,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -202,6 +209,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -232,6 +240,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -262,6 +271,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -294,6 +304,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -324,6 +335,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -354,6 +366,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -386,6 +399,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -416,6 +430,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -448,6 +463,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -478,6 +494,7 @@ public class SellerServiceTest {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
