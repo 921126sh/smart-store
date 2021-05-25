@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SellerServiceTest {
         // 발주 처리
     @Test
-    public void 단위_테스트_네이버스마트스토어_발주_처리() throws Exception {
+    public void 발주_처리() throws Exception {
         PlaceProductOrderRequest placeProductOrderRequest = new PlaceProductOrderRequest();
         placeProductOrderRequest.setProductOrderID("PONO200000000100");
         placeProductOrderRequest.setCheckReceiverAddressChanged(true);
@@ -45,7 +45,7 @@ public class SellerServiceTest {
 
     // 취소 승인
     @Test
-    public void 단위_테스트_네이버스마트스토어_취소_승인() throws Exception {
+    public void 취소_승인() throws Exception {
         ApproveCancelApplicationRequest approveCancelApplicationRequest = new ApproveCancelApplicationRequest();
         approveCancelApplicationRequest.setProductOrderID("PONO400000000002");
 
@@ -76,7 +76,7 @@ public class SellerServiceTest {
 
     // 판매 취소
     @Test
-    public void 단위_테스트_네이버스마트스토어_판매_취소() throws Exception {
+    public void 판매_취소() throws Exception {
         CancelSaleRequest cancelSaleRequest = new CancelSaleRequest();
         cancelSaleRequest.setProductOrderID("PONO500000000001");
         cancelSaleRequest.setCancelReasonCode(ClaimRequestReasonType.DROPPED_DELIVERY);
@@ -107,7 +107,7 @@ public class SellerServiceTest {
 
     // 발송 지연 처리
     @Test
-    public void 단위_테스트_네이버스마트스토어_발송지연_처리() throws Exception {
+    public void 발송지연_처리() throws Exception {
         DelayProductOrderRequest delayProductOrderRequest = new DelayProductOrderRequest();
         delayProductOrderRequest.setProductOrderID("PONO100000000004");
         delayProductOrderRequest.setDispatchDelayReasonCode(DelayedDispatchReasonType.CUSTOMER_REQUEST);
@@ -143,7 +143,7 @@ public class SellerServiceTest {
 
     // 발송 처리
     @Test
-    public void 단위_테스트_네이버스마트스토어_발송_처리() throws Exception {
+    public void 발송_처리() throws Exception {
         ShipProductOrderRequest shipProductOrderRequest = new ShipProductOrderRequest();
         shipProductOrderRequest.setProductOrderID("PONO100000000004");
         shipProductOrderRequest.setDeliveryMethodCode(DeliveryMethodType.RETURN_DELIVERY);
@@ -179,7 +179,7 @@ public class SellerServiceTest {
 
     // 반품 접수
     @Test
-    public void 단위_테스트_네이버스마트스토어_반품_접수() throws Exception {
+    public void 반품_접수() throws Exception {
         RequestReturnRequest requestReturnRequest = new RequestReturnRequest();
         requestReturnRequest.setProductOrderID("PONO100000000004");
         requestReturnRequest.setReturnReasonCode(ClaimRequestReasonType.DROPPED_DELIVERY);
@@ -211,7 +211,7 @@ public class SellerServiceTest {
 
     // 반품 승인
     @Test
-    public void 단위_테스트_네이버스마트스토어_반품_승인() throws Exception {
+    public void 반품_승인() throws Exception {
         ApproveReturnApplicationRequest approveReturnApplicationRequest = new ApproveReturnApplicationRequest();
         approveReturnApplicationRequest.setProductOrderID("PONO500000000001");
 
@@ -241,7 +241,7 @@ public class SellerServiceTest {
 
     // 반품 거부
     @Test
-    public void 단위_테스트_네이버스마트스토어_반품_거부() throws Exception {
+    public void 반품_거부() throws Exception {
         RejectReturnRequest rejectReturnRequest = new RejectReturnRequest();
         rejectReturnRequest.setProductOrderID("PONO500000000002");
 
@@ -271,7 +271,7 @@ public class SellerServiceTest {
 
     // 반품 보류
     @Test
-    public void 단위_테스트_네이버스마트스토어_반품_보류() throws Exception {
+    public void 반품_보류() throws Exception {
         WithholdReturnRequest withholdReturnRequest = new WithholdReturnRequest();
         withholdReturnRequest.setProductOrderID("PONO100000000004");
         withholdReturnRequest.setReturnHoldCode(HoldbackClassType.ETC);
@@ -303,7 +303,7 @@ public class SellerServiceTest {
 
     // 반품 보류 해제
     @Test
-    public void 단위_테스트_네이버스마트스토어_반품보류_해제() throws Exception {
+    public void 반품보류_해제() throws Exception {
         ReleaseReturnHoldRequest releaseReturnHoldRequest = new ReleaseReturnHoldRequest();
         releaseReturnHoldRequest.setProductOrderID("PONO100000000004");
 
@@ -333,7 +333,7 @@ public class SellerServiceTest {
 
     // 교환 수거완료
     @Test
-    public void 단위_테스트_네이버스마트스토어_교환_수거완료() throws Exception {
+    public void 교환_수거완료() throws Exception {
         ApproveCollectedExchangeRequest approveCollectedExchangeRequest = new ApproveCollectedExchangeRequest();
         approveCollectedExchangeRequest.setProductOrderID("PONO100000000004");
 
@@ -363,7 +363,7 @@ public class SellerServiceTest {
 
     // 교환 재배송 처리
     @Test
-    public void 단위_테스트_네이버스마트스토어_교환재배송_처리() throws Exception {
+    public void 교환재배송_처리() throws Exception {
         ReDeliveryExchangeRequest reDeliveryExchangeRequest = new ReDeliveryExchangeRequest();
         reDeliveryExchangeRequest.setProductOrderID("PONO100000000004");
         reDeliveryExchangeRequest.setReDeliveryMethodCode(DeliveryMethodType.RETURN_DELIVERY);
@@ -395,7 +395,7 @@ public class SellerServiceTest {
 
     // 교환 거부
     @Test
-    public void 단위_테스트_네이버스마트스토어_교환_거부() throws Exception {
+    public void 교환_거부() throws Exception {
         RejectExchangeRequest rejectExchangeRequest = new RejectExchangeRequest();
         rejectExchangeRequest.setProductOrderID("PONO100000000004");
 
@@ -425,7 +425,7 @@ public class SellerServiceTest {
 
     // 교환 보류
     @Test
-    public void 단위_테스트_네이버스마트스토어_교환_보류() throws Exception {
+    public void 교환_보류() throws Exception {
         WithholdExchangeRequest withholdExchangeRequest = new WithholdExchangeRequest();
         withholdExchangeRequest.setProductOrderID("PONO100000000004");
         withholdExchangeRequest.setExchangeHoldCode(HoldbackClassType.ETC);
@@ -457,7 +457,7 @@ public class SellerServiceTest {
 
     // 교환 보류 해제
     @Test
-    public void 단위_테스트_네이버스마트스토어_교환보류_해제() throws Exception {
+    public void 교환보류_해제() throws Exception {
         ReleaseExchangeHoldRequest releaseExchangeHoldRequest = new ReleaseExchangeHoldRequest();
         releaseExchangeHoldRequest.setProductOrderID("PONO100000000004");
 
