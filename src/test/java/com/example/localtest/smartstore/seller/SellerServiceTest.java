@@ -14,9 +14,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SellerServiceTest {
         // 발주 처리
     @Test
-    public void 발주_처리() throws Exception {
+    public void 발주_확인처리() throws Exception {
         PlaceProductOrderRequest placeProductOrderRequest = new PlaceProductOrderRequest();
-        placeProductOrderRequest.setProductOrderID("PONO200000000100");
+        placeProductOrderRequest.setProductOrderID("2021052480881841");
         placeProductOrderRequest.setCheckReceiverAddressChanged(true);
 
         Utils.setBaseSellerRequestType(placeProductOrderRequest);
@@ -145,7 +145,7 @@ public class SellerServiceTest {
     @Test
     public void 발송_처리() throws Exception {
         ShipProductOrderRequest shipProductOrderRequest = new ShipProductOrderRequest();
-        shipProductOrderRequest.setProductOrderID("PONO100000000004");
+        shipProductOrderRequest.setProductOrderID("2021052480881841");
         shipProductOrderRequest.setDeliveryMethodCode(DeliveryMethodType.RETURN_DELIVERY);
 
         GregorianCalendar fromDate = new GregorianCalendar();
