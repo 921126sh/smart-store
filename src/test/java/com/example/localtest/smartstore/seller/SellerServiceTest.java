@@ -38,7 +38,6 @@ public class SellerServiceTest {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
-            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
         assertThat(response.getResponseType()).isEqualTo("SUCCESS");
