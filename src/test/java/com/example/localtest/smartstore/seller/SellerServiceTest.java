@@ -17,7 +17,7 @@ public class SellerServiceTest {
     @Test
     public void 발주_확인처리() throws Exception {
         PlaceProductOrderRequest placeProductOrderRequest = new PlaceProductOrderRequest();
-        placeProductOrderRequest.setProductOrderID("2021052412198141");
+        placeProductOrderRequest.setProductOrderID("2021052528962071");
         placeProductOrderRequest.setCheckReceiverAddressChanged(true);
 
         Utils.setBaseSellerRequestType(placeProductOrderRequest);
@@ -36,7 +36,7 @@ public class SellerServiceTest {
         } else {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
-            log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            log.info("에러 상세정보 : [" + response.getError().getDetail() + "]"); 
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 

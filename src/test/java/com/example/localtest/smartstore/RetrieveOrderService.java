@@ -31,7 +31,7 @@ public class RetrieveOrderService {
         GetProductOrderInfoListRequest getProductOrderInfoListRequest = new GetProductOrderInfoListRequest();
 
         ArrayList<String> productOrderIdList = new ArrayList<String>() {{
-            add("2021052412198141");
+            add("2021052528962071");
         }};
 
         productOrderIdList.forEach(str -> getProductOrderInfoListRequest.getProductOrderIDList().add(str));
