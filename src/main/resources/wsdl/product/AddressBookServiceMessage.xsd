@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- AddressBookService Message XML Schema v.20120615 -->
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://shopn.platform.nhncorp.com/"
+	targetNamespace="http://shopn.platform.nhncorp.com/"
+>
+	<xs:include schemaLocation="BaseType.xsd" />
+
+	<!-- GetAddressBookListService Operation wrapper start -->
+	<xs:element name="GetAddressBookListRequest" type="tns:GetAddressBookListRequestType" />
+	<xs:complexType name="GetAddressBookListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="AddressId" type="xs:long" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Page" type="xs:int" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetAddressBookListResponse" type="tns:GetAddressBookListResponseType" />
+	<xs:complexType name="GetAddressBookListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="AddressBookList" type="tns:AddressBookListType" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Page" type="xs:int" />
+					<xs:element minOccurs="0" maxOccurs="1" name="TotalPage" type="xs:int" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- GetAddressBookListService Operation wrapper end -->
+</xs:schema>

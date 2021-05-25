@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- ShopN API WSDL -->
+<wsdl:definitions name="CheckoutAPI"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://seller.shopn.platform.nhncorp.com/"
+	xmlns:se="http://seller.shopn.platform.nhncorp.com/"
+	targetNamespace="http://seller.shopn.platform.nhncorp.com/"
+>
+
+	<wsdl:types>
+		<xs:schema targetNamespace="http://seller.shopn.platform.nhncorp.com/" elementFormDefault="qualified">
+			<xs:include schemaLocation="SellerServiceMessage.xsd" />
+		</xs:schema>
+	</wsdl:types>
+
+
+	<wsdl:message name="PlaceProductOrder">
+		<wsdl:part element="se:PlaceProductOrderRequest" name="PlaceProductOrderRequest" />
+	</wsdl:message>
+	<wsdl:message name="PlaceProductOrderResponse">
+		<wsdl:part element="se:PlaceProductOrderResponse" name="PlaceProductOrderResponse" />
+	</wsdl:message>
+	<wsdl:message name="WithholdExchange">
+		<wsdl:part element="se:WithholdExchangeRequest" name="WithholdExchangeRequest" />
+	</wsdl:message>
+	<wsdl:message name="WithholdExchangeResponse">
+		<wsdl:part element="se:WithholdExchangeResponse" name="WithholdExchangeResponse" />
+	</wsdl:message>
+	<wsdl:message name="ReleaseExchangeHold">
+		<wsdl:part element="se:ReleaseExchangeHoldRequest" name="ReleaseExchangeHoldRequest" />
+	</wsdl:message>
+	<wsdl:message name="ReleaseExchangeHoldResponse">
+		<wsdl:part element="se:ReleaseExchangeHoldResponse" name="ReleaseExchangeHoldResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetProductOrderInfoList">
+		<wsdl:part element="se:GetProductOrderInfoListRequest" name="GetProductOrderInfoListRequest" />
+	</wsdl:message>
+	<wsdl:message name="GetProductOrderInfoListResponse">
+		<wsdl:part element="se:GetProductOrderInfoListResponse" name="GetProductOrderInfoListResponse" />
+	</wsdl:message>
+	<wsdl:message name="ModifyECouponValidDate">
+		<wsdl:part element="se:ModifyECouponValidDateRequest" name="ModifyECouponValidDateRequest" />
+	</wsdl:message>
+	<wsdl:message name="ModifyECouponValidDateResponse">
+		<wsdl:part element="se:ModifyECouponValidDateResponse" name="ModifyECouponValidDateResponse" />
+	</wsdl:message>
+	<wsdl:message name="UseECoupon">
+		<wsdl:part element="se:UseECouponRequest" name="UseECouponRequest" />
+	</wsdl:message>
+	<wsdl:message name="UseECouponResponse">
+		<wsdl:part element="se:UseECouponResponse" name="UseECouponResponse" />
+	</wsdl:message>
+	<wsdl:message name="ApproveCollectedExchange">
+		<wsdl:part element="se:ApproveCollectedExchangeRequest" name="ApproveCollectedExchangeRequest" />
+	</wsdl:message>
+	<wsdl:message name="ApproveCollectedExchangeResponse">
+		<wsdl:part element="se:ApproveCollectedExchangeResponse" name="ApproveCollectedExchangeResponse" />
+	</wsdl:message>
+	<wsdl:message name="ApproveReturnApplication">
+		<wsdl:part element="se:ApproveReturnApplicationRequest" name="ApproveReturnApplicationRequest" />
+	</wsdl:message>
+	<wsdl:message name="ApproveReturnApplicationResponse">
+		<wsdl:part element="se:ApproveReturnApplicationResponse" name="ApproveReturnApplicationResponse" />
+	</wsdl:message>
+	<wsdl:message name="ShipProductOrder">
+		<wsdl:part element="se:ShipProductOrderRequest" name="ShipProductOrderRequest" />
+	</wsdl:message>
+	<wsdl:message name="ShipProductOrderResponse">
+		<wsdl:part element="se:ShipProductOrderResponse" name="ShipProductOrderResponse" />
+	</wsdl:message>
+	<wsdl:message name="WithholdReturn">
+		<wsdl:part element="se:WithholdReturnRequest" name="WithholdReturnRequest" />
+	</wsdl:message>
+	<wsdl:message name="WithholdReturnResponse">
+		<wsdl:part element="se:WithholdReturnResponse" name="WithholdReturnResponse" />
+	</wsdl:message>
+	<wsdl:message name="ChangeECouponStatus">
+		<wsdl:part element="se:ChangeECouponStatusRequest" name="ChangeECouponStatusRequest"/>
+	</wsdl:message>
+	<wsdl:message name="ChangeECouponStatusResponse">
+		<wsdl:part element="se:ChangeECouponStatusResponse" name="ChangeECouponStatusResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DelayProductOrder">
+		<wsdl:part element="se:DelayProductOrderRequest" name="DelayProductOrderRequest" />
+	</wsdl:message>
+	<wsdl:message name="DelayProductOrderResponse">
+		<wsdl:part element="se:DelayProductOrderResponse" name="DelayProductOrderResponse" />
+	</wsdl:message>
+	<wsdl:message name="ReleaseReturnHold">
+		<wsdl:part element="se:ReleaseReturnHoldRequest" name="ReleaseReturnHoldRequest" />
+	</wsdl:message>
+	<wsdl:message name="ReleaseReturnHoldResponse">
+		<wsdl:part element="se:ReleaseReturnHoldResponse" name="ReleaseReturnHoldResponse" />
+	</wsdl:message>
+	<wsdl:message name="RequestReturn">
+		<wsdl:part element="se:RequestReturnRequest" name="RequestReturnRequest" />
+	</wsdl:message>
+	<wsdl:message name="RequestReturnResponse">
+		<wsdl:part element="se:RequestReturnResponse" name="RequestReturnResponse" />
+	</wsdl:message>
+	<wsdl:message name="CancelSale">
+		<wsdl:part element="se:CancelSaleRequest" name="CancelSaleRequest" />
+	</wsdl:message>
+	<wsdl:message name="CancelSaleResponse">
+		<wsdl:part element="se:CancelSaleResponse" name="CancelSaleResponse" />
+	</wsdl:message>
+	<wsdl:message name="ReDeliveryExchange">
+		<wsdl:part element="se:ReDeliveryExchangeRequest" name="ReDeliveryExchangeRequest" />
+	</wsdl:message>
+	<wsdl:message name="ReDeliveryExchangeResponse">
+		<wsdl:part element="se:ReDeliveryExchangeResponse" name="ReDeliveryExchangeResponse" />
+	</wsdl:message>
+	<wsdl:message name="RejectExchange">
+		<wsdl:part element="se:RejectExchangeRequest" name="RejectExchangeRequest" />
+	</wsdl:message>
+	<wsdl:message name="RejectExchangeResponse">
+		<wsdl:part element="se:RejectExchangeResponse" name="RejectExchangeResponse" />
+	</wsdl:message>
+	<wsdl:message name="ApproveCancelApplication">
+		<wsdl:part element="se:ApproveCancelApplicationRequest" name="ApproveCancelApplicationRequest" />
+	</wsdl:message>
+	<wsdl:message name="ApproveCancelApplicationResponse">
+		<wsdl:part element="se:ApproveCancelApplicationResponse" name="ApproveCancelApplicationResponse" />
+	</wsdl:message>
+	<wsdl:message name="RejectReturn">
+		<wsdl:part element="se:RejectReturnRequest" name="RejectReturnRequest" />
+	</wsdl:message>
+	<wsdl:message name="RejectReturnResponse">
+		<wsdl:part element="se:RejectReturnResponse" name="RejectReturnResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetProductOrderIDList">
+		<wsdl:part element="se:GetProductOrderIDListRequest" name="GetProductOrderIDListRequest" />
+	</wsdl:message>
+	<wsdl:message name="GetProductOrderIDListResponse">
+		<wsdl:part element="se:GetProductOrderIDListResponse" name="GetProductOrderIDListResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetChangedProductOrderList">
+		<wsdl:part element="se:GetChangedProductOrderListRequest" name="GetChangedProductOrderListRequest" />
+	</wsdl:message>
+	<wsdl:message name="GetChangedProductOrderListResponse">
+		<wsdl:part element="se:GetChangedProductOrderListResponse" name="GetChangedProductOrderListResponse" />
+	</wsdl:message>
+
+	<wsdl:portType name="SellerServicePortType">
+		<wsdl:operation name="PlaceProductOrder">
+			<wsdl:input message="tns:PlaceProductOrder" name="PlaceProductOrder" />
+			<wsdl:output message="tns:PlaceProductOrderResponse" name="PlaceProductOrderResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="WithholdExchange">
+			<wsdl:input message="tns:WithholdExchange" name="WithholdExchange" />
+			<wsdl:output message="tns:WithholdExchangeResponse" name="WithholdExchangeResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ReleaseExchangeHold">
+			<wsdl:input message="tns:ReleaseExchangeHold" name="ReleaseExchangeHold" />
+			<wsdl:output message="tns:ReleaseExchangeHoldResponse" name="ReleaseExchangeHoldResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="GetProductOrderInfoList">
+			<wsdl:input message="tns:GetProductOrderInfoList" name="GetProductOrderInfoList" />
+			<wsdl:output message="tns:GetProductOrderInfoListResponse" name="GetProductOrderInfoListResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ModifyECouponValidDate">
+			<wsdl:input message="tns:ModifyECouponValidDate" name="ModifyECouponValidDate" />
+			<wsdl:output message="tns:ModifyECouponValidDateResponse" name="ModifyECouponValidDateResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="UseECoupon">
+			<wsdl:input message="tns:UseECoupon" name="UseECoupon" />
+			<wsdl:output message="tns:UseECouponResponse" name="UseECouponResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ApproveCollectedExchange">
+			<wsdl:input message="tns:ApproveCollectedExchange" name="ApproveCollectedExchange" />
+			<wsdl:output message="tns:ApproveCollectedExchangeResponse" name="ApproveCollectedExchangeResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ApproveReturnApplication">
+			<wsdl:input message="tns:ApproveReturnApplication" name="ApproveReturnApplication" />
+			<wsdl:output message="tns:ApproveReturnApplicationResponse" name="ApproveReturnApplicationResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ShipProductOrder">
+			<wsdl:input message="tns:ShipProductOrder" name="ShipProductOrder" />
+			<wsdl:output message="tns:ShipProductOrderResponse" name="ShipProductOrderResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="WithholdReturn">
+			<wsdl:input message="tns:WithholdReturn" name="WithholdReturn" />
+			<wsdl:output message="tns:WithholdReturnResponse" name="WithholdReturnResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ChangeECouponStatus">
+			<wsdl:input message="tns:ChangeECouponStatus" name="ChangeECouponStatus"/>
+			<wsdl:output message="tns:ChangeECouponStatusResponse" name="ChangeECouponStatusResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="DelayProductOrder">
+			<wsdl:input message="tns:DelayProductOrder" name="DelayProductOrder" />
+			<wsdl:output message="tns:DelayProductOrderResponse" name="DelayProductOrderResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ReleaseReturnHold">
+			<wsdl:input message="tns:ReleaseReturnHold" name="ReleaseReturnHold" />
+			<wsdl:output message="tns:ReleaseReturnHoldResponse" name="ReleaseReturnHoldResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="RequestReturn">
+			<wsdl:input message="tns:RequestReturn" name="RequestReturn" />
+			<wsdl:output message="tns:RequestReturnResponse" name="RequestReturnResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="CancelSale">
+			<wsdl:input message="tns:CancelSale" name="CancelSale" />
+			<wsdl:output message="tns:CancelSaleResponse" name="CancelSaleResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ReDeliveryExchange">
+			<wsdl:input message="tns:ReDeliveryExchange" name="ReDeliveryExchange" />
+			<wsdl:output message="tns:ReDeliveryExchangeResponse" name="ReDeliveryExchangeResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="RejectExchange">
+			<wsdl:input message="tns:RejectExchange" name="RejectExchange" />
+			<wsdl:output message="tns:RejectExchangeResponse" name="RejectExchangeResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ApproveCancelApplication">
+			<wsdl:input message="tns:ApproveCancelApplication" name="ApproveCancelApplication" />
+			<wsdl:output message="tns:ApproveCancelApplicationResponse" name="ApproveCancelApplicationResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="RejectReturn">
+			<wsdl:input message="tns:RejectReturn" name="RejectReturn" />
+			<wsdl:output message="tns:RejectReturnResponse" name="RejectReturnResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="GetProductOrderIDList">
+			<wsdl:input message="tns:GetProductOrderIDList" name="GetProductOrderIDList" />
+			<wsdl:output message="tns:GetProductOrderIDListResponse" name="GetProductOrderIDListResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="GetChangedProductOrderList">
+			<wsdl:input message="tns:GetChangedProductOrderList" name="GetChangedProductOrderList" />
+			<wsdl:output message="tns:GetChangedProductOrderListResponse" name="GetChangedProductOrderListResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="SellerServiceSOAP11Binding" type="tns:SellerServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="PlaceProductOrder">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="PlaceProductOrder">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="PlaceProductOrderResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="WithholdExchange">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="WithholdExchange">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="WithholdExchangeResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ReleaseExchangeHold">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="ReleaseExchangeHold">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ReleaseExchangeHoldResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetProductOrderInfoList">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="GetProductOrderInfoList">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="GetProductOrderInfoListResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ModifyECouponValidDate">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="ModifyECouponValidDate">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ModifyECouponValidDateResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="UseECoupon">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="UseECoupon">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="UseECouponResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ApproveCollectedExchange">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="ApproveCollectedExchange">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ApproveCollectedExchangeResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ApproveReturnApplication">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="ApproveReturnApplication">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ApproveReturnApplicationResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ShipProductOrder">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="ShipProductOrder">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ShipProductOrderResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="WithholdReturn">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="WithholdReturn">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="WithholdReturnResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ChangeECouponStatus">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="ChangeECouponStatus">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ChangeECouponStatusResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DelayProductOrder">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="DelayProductOrder">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="DelayProductOrderResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ReleaseReturnHold">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="ReleaseReturnHold">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ReleaseReturnHoldResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CancelSale">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="CancelSale">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="CancelSaleResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RequestReturn">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="RequestReturn">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="RequestReturnResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ReDeliveryExchange">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="ReDeliveryExchange">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ReDeliveryExchangeResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RejectExchange">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="RejectExchange">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="RejectExchangeResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ApproveCancelApplication">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="ApproveCancelApplication">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ApproveCancelApplicationResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RejectReturn">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="RejectReturn">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="RejectReturnResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetProductOrderIDList">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="GetProductOrderIDList">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="GetProductOrderIDListResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetChangedProductOrderList">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="GetChangedProductOrderList">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="GetChangedProductOrderListResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:binding name="SellerServiceSOAP12Binding" type="tns:SellerServicePortType">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="PlaceProductOrder">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="PlaceProductOrder">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="PlaceProductOrderResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="WithholdExchange">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="WithholdExchange">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="WithholdExchangeResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ReleaseExchangeHold">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="ReleaseExchangeHold">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ReleaseExchangeHoldResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetProductOrderInfoList">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="GetProductOrderInfoList">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="GetProductOrderInfoListResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ModifyECouponValidDate">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="ModifyECouponValidDate">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ModifyECouponValidDateResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="UseECoupon">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="UseECoupon">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="UseECouponResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ApproveCollectedExchange">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="ApproveCollectedExchange">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ApproveCollectedExchangeResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ApproveReturnApplication">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="ApproveReturnApplication">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ApproveReturnApplicationResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ShipProductOrder">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="ShipProductOrder">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ShipProductOrderResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="WithholdReturn">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="WithholdReturn">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="WithholdReturnResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ChangeECouponStatus">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="ChangeECouponStatus">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ChangeECouponStatusResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DelayProductOrder">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="DelayProductOrder">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="DelayProductOrderResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ReleaseReturnHold">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="ReleaseReturnHold">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ReleaseReturnHoldResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CancelSale">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="CancelSale">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="CancelSaleResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RequestReturn">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="RequestReturn">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="RequestReturnResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ReDeliveryExchange">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="ReDeliveryExchange">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ReDeliveryExchangeResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RejectExchange">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="RejectExchange">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="RejectExchangeResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ApproveCancelApplication">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="ApproveCancelApplication">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="ApproveCancelApplicationResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RejectReturn">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="RejectReturn">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="RejectReturnResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetProductOrderIDList">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="GetProductOrderIDList">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="GetProductOrderIDListResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetChangedProductOrderList">
+			<soap12:operation soapAction="" style="document" />
+			<wsdl:input name="GetChangedProductOrderList">
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="GetChangedProductOrderListResponse">
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="SellerService">
+		<wsdl:port binding="tns:SellerServiceSOAP11Binding" name="SellerServiceSOAP11Port">
+			<soap:address location="http://ec.api.naver.com/ShopN/SellerService41" />
+		</wsdl:port>
+		<wsdl:port binding="tns:SellerServiceSOAP12Binding" name="SellerServiceSOAP12Port">
+			<soap12:address location="http://ec.api.naver.com/ShopN/SellerService41" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

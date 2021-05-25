@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- SellerNoticeService Message XML Schema v.20120615 -->
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://shopn.platform.nhncorp.com/"
+	targetNamespace="http://shopn.platform.nhncorp.com/"
+>
+	<xs:include schemaLocation="BaseType.xsd" />
+
+	<!-- SellerNoticeService Operation wrapper start -->
+	<xs:element name="ApplySellerNoticeRequest" type="tns:ApplySellerNoticeRequestType" />
+	<xs:complexType name="ApplySellerNoticeRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="SellerNoticeId" type="xs:long" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ProductIdList" type="tns:ProductIdListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ApplySellerNoticeResponse" type="tns:ApplySellerNoticeResponseType" />
+	<xs:complexType name="ApplySellerNoticeResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DeleteSellerNoticeRequest" type="tns:DeleteSellerNoticeRequestType" />
+	<xs:complexType name="DeleteSellerNoticeRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="SellerNoticeId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DeleteSellerNoticeResponse" type="tns:DeleteSellerNoticeResponseType" />
+	<xs:complexType name="DeleteSellerNoticeResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetSellerNoticeRequest" type="tns:GetSellerNoticeRequestType" />
+	<xs:complexType name="GetSellerNoticeRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerNoticeId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetSellerNoticeResponse" type="tns:GetSellerNoticeResponseType" />
+	<xs:complexType name="GetSellerNoticeResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="SellerNotice" type="tns:SellerNoticeType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetSellerNoticeListRequest" type="tns:GetSellerNoticeListRequestType" />
+	<xs:complexType name="GetSellerNoticeListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Page" type="xs:int" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PageSize" type="xs:int" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetSellerNoticeListResponse" type="tns:GetSellerNoticeListResponseType" />
+	<xs:complexType name="GetSellerNoticeListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="SellerNoticeList" type="tns:SellerNoticeListType" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Page" type="xs:int" />
+					<xs:element minOccurs="0" maxOccurs="1" name="TotalPage" type="xs:int" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageSellerNoticeRequest" type="tns:ManageSellerNoticeRequestType" />
+	<xs:complexType name="ManageSellerNoticeRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerNotice" type="tns:SellerNoticeType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageSellerNoticeResponse" type="tns:ManageSellerNoticeResponseType" />
+	<xs:complexType name="ManageSellerNoticeResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="SellerNoticeId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- SellerNoticeService Operation wrapper end -->
+</xs:schema>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://customerinquiry.shopn.platform.nhncorp.com/"
+	targetNamespace="http://customerinquiry.shopn.platform.nhncorp.com/"
+>
+	<xs:include schemaLocation="BaseType.xsd" />
+
+	<xs:complexType name="InquiryType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="InquiryID" type="xs:string" />
+			<xs:element minOccurs="0" name="OrderID" type="xs:string" />
+			<xs:element minOccurs="0" name="ProductOrderID" type="xs:string" />
+			<xs:element minOccurs="0" name="ProductName" type="xs:string" />
+			<xs:element minOccurs="0" name="ProductID" type="xs:string" />
+			<xs:element minOccurs="0" name="ProductOrderOption" type="xs:string" />
+			<xs:element minOccurs="0" name="CustomerID" type="xs:string" />
+			<xs:element minOccurs="0" name="Title" type="xs:string" />
+			<xs:element minOccurs="0" name="Category" type="xs:string" />
+			<xs:element minOccurs="0" name="InquiryDateTime" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="InquiryContent" type="xs:string" />
+			<xs:element minOccurs="0" name="AnswerContentID" type="xs:string" />
+			<xs:element minOccurs="0" name="AnswerContent" type="xs:string" />
+			<xs:element minOccurs="0" name="AnswerTempleteID" type="xs:string" />
+			<xs:element minOccurs="0" name="IsAnswered" type="xs:boolean" />
+			<xs:element minOccurs="0" name="CustomerName" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GetCustomerInquiryListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ServiceType" type="xs:string" />
+					<xs:element minOccurs="0" name="MallID" type="xs:string" />
+					<xs:element minOccurs="0" name="InquiryTimeFrom" type="xs:dateTime" />
+					<xs:element minOccurs="0" name="InquiryTimeTo" type="xs:dateTime" />
+					<xs:element minOccurs="0" name="IsAnswered" type="xs:boolean" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetCustomerInquiryListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseCheckoutResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="CustomerInquiryList">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="CustomerInquiry" type="tns:InquiryType" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="ReturnedDataCount" type="xs:int" />
+					<xs:element minOccurs="0" name="HasMoreData" type="xs:boolean" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AnswerCustomerInquiryRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="MallID" type="xs:string" />
+					<xs:element minOccurs="0" name="ServiceType" type="xs:string" />
+					<xs:element minOccurs="0" name="InquiryID" type="xs:string" />
+					<xs:element minOccurs="0" name="AnswerContent" type="xs:string" />
+					<xs:element minOccurs="0" name="AnswerContentID" type="xs:string" />
+					<xs:element minOccurs="0" name="ActionType" type="xs:string" />
+					<xs:element minOccurs="0" name="AnswerTempleteID" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AnswerCustomerInquiryResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetCustomerInquiryListRequest" nillable="true" type="tns:GetCustomerInquiryListRequestType" />
+	<xs:element name="GetCustomerInquiryListResponse" nillable="true" type="tns:GetCustomerInquiryListResponseType" />
+	<xs:element name="AnswerCustomerInquiryRequest" nillable="true" type="tns:AnswerCustomerInquiryRequestType" />
+	<xs:element name="AnswerCustomerInquiryResponse" nillable="true" type="tns:AnswerCustomerInquiryResponseType" />
+</xs:schema>

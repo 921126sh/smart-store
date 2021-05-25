@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Base Type XML Schema v1.0.20110413 -->
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://customerinquiry.shopn.platform.nhncorp.com/"
+	targetNamespace="http://customerinquiry.shopn.platform.nhncorp.com/"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified"
+>
+	<!-- Base operation wrapper type definition start -->
+	<xs:complexType name="BaseRequestType" abstract="true">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="RequestID" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="AccessCredentials" type="tns:AccessCredentialsType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BaseResponseType" abstract="true">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="RequestID" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="ResponseType" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="ResponseTime" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Error" type="tns:ErrorType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="WarningList" type="tns:WarningListType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="QuotaStatus" type="tns:QuotaStatusType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BaseCheckoutRequestType" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="DetailLevel" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Version" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BaseCheckoutResponseType" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="DetailLevel" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Version" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Release" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Timestamp" type="xs:dateTime" />
+					<xs:element minOccurs="0" maxOccurs="1" name="MessageID" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ListRequestType" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="InquiryTimeFrom" type="xs:dateTime" />
+					<xs:element minOccurs="0" maxOccurs="1" name="InquiryTimeTo" type="xs:dateTime" />
+					<xs:element minOccurs="0" maxOccurs="1" name="InquiryExtraData" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ListResponseType" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseCheckoutResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ReturnedDataCount" type="xs:int" />
+					<xs:element minOccurs="0" maxOccurs="1" name="HasMoreData" type="xs:boolean" />
+					<xs:element minOccurs="0" maxOccurs="1" name="MoreDataTimeFrom" type="xs:dateTime" />
+					<xs:element minOccurs="0" maxOccurs="1" name="InquiryExtraData" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Base operation wrapper type definition end -->
+
+	<!-- Common type definition -->
+	<xs:complexType name="AccessCredentialsType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="AccessLicense" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Timestamp" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Signature" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Message" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Detail" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WarningListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Warning" type="tns:WarningType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WarningType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Message" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Detail" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QuotaStatusType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="RemainingQuota" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="ExpirationTime" type="xs:dateTime" />
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Common type definition end -->
+</xs:schema>

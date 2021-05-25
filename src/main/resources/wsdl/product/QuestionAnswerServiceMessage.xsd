@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- QuestionAnswerService Message XML Schema v.20120615 -->
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://shopn.platform.nhncorp.com/"
+	targetNamespace="http://shopn.platform.nhncorp.com/"
+>
+	<xs:include schemaLocation="BaseType.xsd" />
+
+	<!-- QuestionAnswerService Operation wrapper start -->
+	<xs:element name="GetQuestionAnswerListRequest" type="tns:GetQuestionAnswerListRequestType" />
+	<xs:complexType name="GetQuestionAnswerListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="FromDate" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ToDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Answered" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Page" type="xs:int" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetQuestionAnswerListResponse" type="tns:GetQuestionAnswerListResponseType" />
+	<xs:complexType name="GetQuestionAnswerListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="QuestionAnswerList" type="tns:QuestionAnswerListType" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Page" type="xs:int" />
+					<xs:element minOccurs="0" maxOccurs="1" name="TotalPage" type="xs:int" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetQuestionAnswerTemplateListRequest" type="tns:GetQuestionAnswerTemplateListRequestType" />
+	<xs:complexType name="GetQuestionAnswerTemplateListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetQuestionAnswerTemplateListResponse" type="tns:GetQuestionAnswerTemplateListResponseType" />
+	<xs:complexType name="GetQuestionAnswerTemplateListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="QuestionAnswerTemplateList" type="tns:QuestionAnswerTemplateListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageQuestionAnswerRequest" type="tns:ManageQuestionAnswerRequestType" />
+	<xs:complexType name="ManageQuestionAnswerRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string"/>
+					<xs:element minOccurs="1" maxOccurs="1" name="QuestionAnswerId" type="xs:long"/>
+					<xs:element minOccurs="1" maxOccurs="1" name="Answer" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageQuestionAnswerResponse" type="tns:ManageQuestionAnswerResponseType" />
+	<xs:complexType name="ManageQuestionAnswerResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="QuestionAnswerId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- QuestionAnswerService Operation wrapper end -->
+</xs:schema>

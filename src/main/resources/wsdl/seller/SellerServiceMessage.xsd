@@ -1,0 +1,896 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:se="http://seller.shopn.platform.nhncorp.com/"
+	targetNamespace="http://seller.shopn.platform.nhncorp.com/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="BaseType.xsd" />
+
+	<xs:element name="address" type="se:address" />
+	<xs:element name="delivery" type="se:delivery" />
+	<xs:complexType name="productOrderInfo">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="CancelInfo" type="se:cancelInfo" />
+			<xs:element minOccurs="0" name="DecisionHoldbackInfo" type="se:decisionHoldbackInfo" />
+			<xs:element minOccurs="0" name="Delivery" type="se:delivery" />
+			<xs:element minOccurs="0" name="ExchangeInfo" type="se:exchangeInfo" />
+			<xs:element minOccurs="0" name="Order" type="se:order" />
+			<xs:element minOccurs="0" name="ProductOrder" type="se:productOrder" />
+			<xs:element minOccurs="0" name="ReturnInfo" type="se:returnInfo" />
+			<xs:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="cancelInfo">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="CancelApprovalDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="CancelCompletedDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="CancelDetailedReason" type="xs:string" />
+			<xs:element minOccurs="0" name="CancelReason" type="se:claimRequestReasonType" />
+			<xs:element minOccurs="0" name="ClaimRequestDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="ClaimStatus" type="se:claimStatusType" />
+			<xs:element minOccurs="0" name="RefundExpectedDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="RefundStandbyReason" type="xs:string" />
+			<xs:element minOccurs="0" name="RefundStandbyStatus" type="xs:string" />
+			<xs:element minOccurs="0" name="RequestChannel" type="xs:string" />
+			<xs:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="decisionHoldbackInfo">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ClaimRequestDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="ClaimStatus" type="se:claimStatusType" />
+			<xs:element minOccurs="0" name="DecisionHoldbackDetailedReason" type="xs:string" />
+			<xs:element minOccurs="0" name="DecisionHoldbackReason" type="se:claimRequestReasonType" />
+			<xs:element minOccurs="0" name="DecisionHoldbackTreatMemo" type="xs:string" />
+			<xs:element minOccurs="0" name="ReDeliveryCompany" type="xs:string" />
+			<xs:element minOccurs="0" name="ReDeliveryExpectedDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="ReDeliveryMethod" type="se:deliveryMethodType" />
+			<xs:element minOccurs="0" name="ReDeliveryTrackingNumber" type="xs:string" />
+			<xs:element minOccurs="0" name="SellerOperationDate" type="xs:dateTime" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="delivery">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="DeliveredDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="DeliveryCompany" type="xs:string" />
+			<xs:element minOccurs="0" name="DeliveryMethod" type="se:deliveryMethodType" />
+			<xs:element minOccurs="0" name="DeliveryStatus" type="xs:string" />
+			<xs:element minOccurs="0" name="IsWrongTrackingNumber" type="xs:boolean" />
+			<xs:element minOccurs="0" name="PickupDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="SendDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="TrackingNumber" type="xs:string" />
+			<xs:element minOccurs="0" name="WrongTrackingNumberRegisteredDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="WrongTrackingNumberType" type="xs:string" />
+			<xs:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="exchangeInfo">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ClaimDeliveryFeeDemandAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="ClaimDeliveryFeePayMeans" type="xs:string" />
+			<xs:element minOccurs="0" name="ClaimDeliveryFeePayMethod" type="xs:string" />
+			<xs:element minOccurs="0" name="ClaimRequestDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="ClaimStatus" type="se:claimStatusType" />
+			<xs:element minOccurs="0" name="CollectAddress" type="se:address" />
+			<xs:element minOccurs="0" name="CollectCompletedDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="CollectDeliveryCompany" type="xs:string" />
+			<xs:element minOccurs="0" name="CollectDeliveryMethod" type="se:deliveryMethodType" />
+			<xs:element minOccurs="0" name="CollectStatus" type="xs:string" />
+			<xs:element minOccurs="0" name="CollectTrackingNumber" type="xs:string" />
+			<xs:element minOccurs="0" name="EtcFeeDemandAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="EtcFeePayMeans" type="xs:string" />
+			<xs:element minOccurs="0" name="EtcFeePayMethod" type="xs:string" />
+			<xs:element minOccurs="0" name="ExchangeDetailedReason" type="xs:string" />
+			<xs:element minOccurs="0" name="ExchangeReason" type="se:claimRequestReasonType" />
+			<xs:element minOccurs="0" name="HoldbackDetailedReason" type="xs:string" />
+			<xs:element minOccurs="0" name="HoldbackReason" type="se:holdbackClassType" />
+			<xs:element minOccurs="0" name="HoldbackStatus" type="se:holdbackStatusType" />
+			<xs:element minOccurs="0" name="ReDeliveryMethod" type="se:deliveryMethodType" />
+			<xs:element minOccurs="0" name="ReDeliveryStatus" type="xs:string" />
+			<xs:element minOccurs="0" name="ReDeliveryCompany" type="xs:string" />
+			<xs:element minOccurs="0" name="ReDeliveryTrackingNumber" type="xs:string" />
+			<xs:element minOccurs="0" name="RequestChannel" type="xs:string" />
+			<xs:element minOccurs="0" name="ReturnReceiveAddress" type="se:address" />
+			<xs:element minOccurs="0" name="HoldbackConfigDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="HoldbackConfigurer" type="xs:string" />
+			<xs:element minOccurs="0" name="HoldbackReleaseDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="HoldbackReleaser" type="xs:string" />
+			<xs:element minOccurs="0" name="ClaimDeliveryFeeProductOrderIds" type="xs:string" />
+			<xs:element minOccurs="0" name="ReDeliveryOperationDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="ClaimDeliveryFeeDiscountAmount" type="xs:int"/>
+			<xs:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="address">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="AddressType" type="se:addressType" />
+			<xs:element minOccurs="0" name="BaseAddress" type="xs:string" />
+			<xs:element minOccurs="0" name="City" type="xs:string" />
+			<xs:element minOccurs="0" name="Country" type="xs:string" />
+			<xs:element minOccurs="0" name="DetailedAddress" type="xs:string" />
+			<xs:element minOccurs="0" name="Name" type="xs:string" />
+			<xs:element minOccurs="0" name="State" type="xs:string" />
+			<xs:element minOccurs="0" name="Tel1" type="xs:string" />
+			<xs:element minOccurs="0" name="Tel2" type="xs:string" />
+			<xs:element minOccurs="0" name="ZipCode" type="xs:string" />
+			<xs:element minOccurs="0" name="IsRoadNameAddress" type="xs:boolean" />
+			<xs:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="order">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ChargeAmountPaymentAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="CheckoutAccumulationPaymentAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="GeneralPaymentAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="NaverMileagePaymentAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="OrderDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="OrderDiscountAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="OrderID" type="xs:string" />
+			<xs:element minOccurs="0" name="OrdererID" type="xs:string" />
+			<xs:element minOccurs="0" name="OrdererName" type="xs:string" />
+			<xs:element minOccurs="0" name="OrdererTel1" type="xs:string" />
+			<xs:element minOccurs="0" name="OrdererTel2" type="xs:string" />
+			<xs:element minOccurs="0" name="PaymentDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="PaymentDueDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="PaymentMeans" type="xs:string" />
+			<xs:element minOccurs="0" name="IsDeliveryMemoParticularInput" type="xs:string" />
+			<xs:element minOccurs="0" name="PayLocationType" type="xs:string" />
+			<xs:element minOccurs="0" name="OrdererNO" type="xs:string"/>
+			<xs:element minOccurs="0" name="PayLaterPaymentAmount" type="xs:int" />
+			<xs:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="productOrder">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ClaimStatus" type="se:claimStatusType" />
+			<xs:element minOccurs="0" name="ClaimType" type="se:claimType" />
+			<xs:element minOccurs="0" name="DecisionDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="DelayedDispatchDetailedReason" type="xs:string" />
+			<xs:element minOccurs="0" name="DelayedDispatchReason" type="se:delayedDispatchReasonType" />
+			<xs:element minOccurs="0" name="DeliveryDiscountAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="DeliveryFeeAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="DeliveryPolicyType" type="xs:string" />
+			<xs:element minOccurs="0" name="ExpectedDeliveryMethod" type="se:deliveryMethodType" />
+			<xs:element minOccurs="0" name="FreeGift" type="xs:string" />
+			<xs:element minOccurs="0" name="MallID" type="xs:string" />
+			<xs:element minOccurs="0" name="OptionCode" type="xs:string" />
+			<xs:element minOccurs="0" name="OptionPrice" type="xs:int" />
+			<xs:element minOccurs="0" name="PackageNumber" type="xs:string" />
+			<xs:element minOccurs="0" name="PlaceOrderDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="PlaceOrderStatus" type="se:placeOrderStatusType" />
+			<xs:element minOccurs="0" name="ProductClass" type="xs:string" />
+			<xs:element minOccurs="0" name="ProductDiscountAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="ProductID" type="xs:string" />
+			<xs:element minOccurs="0" name="ProductName" type="xs:string" />
+			<xs:element minOccurs="0" name="ProductOption" type="xs:string" />
+			<xs:element minOccurs="0" name="ProductOrderID" type="xs:string" />
+			<xs:element minOccurs="0" name="ProductOrderStatus" type="se:productOrderStatusType" />
+			<xs:element minOccurs="0" name="Quantity" type="xs:int" />
+			<xs:element minOccurs="0" name="SectionDeliveryFee" type="xs:int" />
+			<xs:element minOccurs="0" name="SellerProductCode" type="xs:string" />
+			<xs:element minOccurs="0" name="ShippingAddress" type="se:address" />
+			<xs:element minOccurs="0" name="ShippingDueDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="ShippingFeeType" type="xs:string" />
+			<xs:element minOccurs="0" name="ShippingMemo" type="xs:string" />
+			<xs:element minOccurs="0" name="TakingAddress" type="se:address" />
+			<xs:element minOccurs="0" name="TotalPaymentAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="TotalProductAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="UnitPrice" type="xs:int" />
+			<xs:element minOccurs="0" name="SellerBurdenDiscountAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="CommissionRatingType" type="xs:string" />
+			<xs:element minOccurs="0" name="CommissionPrePayStatus" type="se:commissionPrePayStatusType" />
+			<xs:element minOccurs="0" name="PaymentCommission" type="xs:int" />
+			<xs:element minOccurs="0" name="SaleCommission" type="xs:int" />
+			<xs:element minOccurs="0" name="ExpectedSettlementAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="InflowPath" type="xs:string" />
+			<xs:element minOccurs="0" name="ItemNo" type="xs:string" />
+			<xs:element minOccurs="0" name="OptionManageCode" type="xs:string" />
+			<xs:element minOccurs="0" name="PurchaserSocialSecurityNo" type="xs:string" />
+			<xs:element minOccurs="0" name="SellerCustomCode1" type="xs:string" />
+			<xs:element minOccurs="0" name="SellerCustomCode2" type="xs:string" />
+			<xs:element minOccurs="0" name="ClaimID" type="xs:string" />
+			<xs:element minOccurs="0" name="ChannelCommission" type="xs:int" />
+			<xs:element minOccurs="0" name="IndividualCustomUniqueCode" type="xs:string" />
+			<xs:element minOccurs="0" name="ProductImediateDiscountAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="ProductProductDiscountAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="ProductMultiplePurchaseDiscountAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="SellerBurdenImediateDiscountAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="SellerBurdenProductDiscountAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="SellerBurdenMultiplePurchaseDiscountAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="KnowledgeShoppingSellingInterlockCommission" type="xs:int" />
+			<xs:element minOccurs="0" name="GiftReceivingStatus" type="se:giftReceivingStatusType" />
+			<xs:element minOccurs="0" name="SellerBurdenStoreDiscountAmount" type="xs:int" />
+			<xs:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="returnInfo">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ClaimDeliveryFeeDemandAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="ClaimDeliveryFeePayMeans" type="xs:string" />
+			<xs:element minOccurs="0" name="ClaimDeliveryFeePayMethod" type="xs:string" />
+			<xs:element minOccurs="0" name="ClaimRequestDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="ClaimStatus" type="se:claimStatusType" />
+			<xs:element minOccurs="0" name="CollectAddress" type="se:address" />
+			<xs:element minOccurs="0" name="CollectCompletedDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="CollectDeliveryCompany" type="xs:string" />
+			<xs:element minOccurs="0" name="CollectDeliveryMethod" type="se:deliveryMethodType" />
+			<xs:element minOccurs="0" name="CollectStatus" type="xs:string" />
+			<xs:element minOccurs="0" name="CollectTrackingNumber" type="xs:string" />
+			<xs:element minOccurs="0" name="EtcFeeDemandAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="EtcFeePayMeans" type="xs:string" />
+			<xs:element minOccurs="0" name="EtcFeePayMethod" type="xs:string" />
+			<xs:element minOccurs="0" name="HoldbackDetailedReason" type="xs:string" />
+			<xs:element minOccurs="0" name="HoldbackReason" type="se:holdbackClassType" />
+			<xs:element minOccurs="0" name="HoldbackStatus" type="se:holdbackStatusType" />
+			<xs:element minOccurs="0" name="RefundExpectedDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="RefundStandbyReason" type="xs:string" />
+			<xs:element minOccurs="0" name="RefundStandbyStatus" type="xs:string" />
+			<xs:element minOccurs="0" name="RequestChannel" type="xs:string" />
+			<xs:element minOccurs="0" name="ReturnDetailedReason" type="xs:string" />
+			<xs:element minOccurs="0" name="ReturnReason" type="se:claimRequestReasonType" />
+			<xs:element minOccurs="0" name="ReturnReceiveAddress" type="se:address" />
+			<xs:element minOccurs="0" name="ReturnCompletedDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="HoldbackConfigDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="HoldbackConfigurer" type="xs:string" />
+			<xs:element minOccurs="0" name="HoldbackReleaseDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="HoldbackReleaser" type="xs:string" />
+			<xs:element minOccurs="0" name="ClaimDeliveryFeeProductOrderIds" type="xs:string" />
+			<xs:element minOccurs="0" name="ClaimDeliveryFeeDiscountAmount" type="xs:int"/>
+			<xs:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="changedProductOrderInfo">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ClaimStatus" type="se:claimStatusType" />
+			<xs:element minOccurs="0" name="ClaimType" type="se:claimType" />
+			<xs:element minOccurs="0" name="LastChangedDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="LastChangedStatus" type="se:productOrderChangeType" />
+			<xs:element minOccurs="0" name="OrderID" type="xs:string" />
+			<xs:element minOccurs="0" name="PaymentDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="ProductOrderID" type="xs:string" />
+			<xs:element minOccurs="0" name="ProductOrderStatus" type="se:productOrderStatusType" />
+			<xs:element minOccurs="0" name="IsReceiverAddressChanged" type="xs:boolean" />
+			<xs:element minOccurs="0" name="GiftReceivingStatus" type="se:giftReceivingStatusType" />
+			<xs:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="claimRequestReasonType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="INTENT_CHANGED" />
+			<xs:enumeration value="COLOR_AND_SIZE" />
+			<xs:enumeration value="WRONG_ORDER" />
+			<xs:enumeration value="PRODUCT_UNSATISFIED" />
+			<xs:enumeration value="DELAYED_DELIVERY" />
+			<xs:enumeration value="SOLD_OUT" />
+			<xs:enumeration value="DROPPED_DELIVERY" />
+			<xs:enumeration value="NOT_YET_DELIVERY" />
+			<xs:enumeration value="BROKEN" />
+			<xs:enumeration value="INCORRECT_INFO" />
+			<xs:enumeration value="WRONG_DELIVERY" />
+			<xs:enumeration value="WRONG_OPTION" />
+			<xs:enumeration value="ETC" />
+			<xs:enumeration value="NOT_YET_DISCUSSION" />
+			<xs:enumeration value="OUT_OF_STOCK" />
+			<xs:enumeration value="SALE_INTENT_CHANGED" />
+			<xs:enumeration value="NOT_YET_PAYMENT" />
+			<xs:enumeration value="NOT_YET_RECEIVE" />
+			<xs:enumeration value="RECEIVING_DUE_DATE_OVER" />
+			<xs:enumeration value="RECEIVER_MISMATCHED" />
+			<xs:enumeration value="GIFT_INTENT_CHANGED" />
+			<xs:enumeration value="GIFT_REFUSAL" />
+			<xs:enumeration value="MINOR_RESTRICTED" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="claimStatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CANCEL_REQUEST" />
+			<xs:enumeration value="CANCELING" />
+			<xs:enumeration value="CANCEL_DONE" />
+			<xs:enumeration value="CANCEL_REJECT" />
+			<xs:enumeration value="RETURN_REQUEST" />
+			<xs:enumeration value="EXCHANGE_REQUEST" />
+			<xs:enumeration value="COLLECTING" />
+			<xs:enumeration value="COLLECT_DONE" />
+			<xs:enumeration value="EXCHANGE_REDELIVERING" />
+			<xs:enumeration value="RETURN_DONE" />
+			<xs:enumeration value="EXCHANGE_DONE" />
+			<xs:enumeration value="RETURN_REJECT" />
+			<xs:enumeration value="EXCHANGE_REJECT" />
+			<xs:enumeration value="PURCHASE_DECISION_HOLDBACK" />
+			<xs:enumeration value="PURCHASE_DECISION_HOLDBACK_REDELIVERING" />
+			<xs:enumeration value="PURCHASE_DECISION_REQUEST" />
+			<xs:enumeration value="PURCHASE_DECISION_HOLDBACK_RELEASE" />
+			<xs:enumeration value="ADMIN_CANCELING" />
+			<xs:enumeration value="ADMIN_CANCEL_DONE" />
+			<xs:enumeration value="ADMIN_CANCEL_REJECT" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="deliveryMethodType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DELIVERY" />
+			<xs:enumeration value="GDFW_ISSUE_SVC" />
+			<xs:enumeration value="VISIT_RECEIPT" />
+			<xs:enumeration value="DIRECT_DELIVERY" />
+			<xs:enumeration value="QUICK_SVC" />
+			<xs:enumeration value="NOTHING" />
+			<xs:enumeration value="RETURN_DESIGNATED" />
+			<xs:enumeration value="RETURN_DELIVERY" />
+			<xs:enumeration value="RETURN_INDIVIDUAL" />
+			<xs:enumeration value="RETURN_VALUE_NULL" />
+			<xs:enumeration value="UNKNOWN" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="addressType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DOMESTIC" />
+			<xs:enumeration value="FOREIGN" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="holdbackClassType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RETURN_DELIVERYFEE" />
+			<xs:enumeration value="EXTRAFEEE" />
+			<xs:enumeration value="RETURN_DELIVERYFEE_AND_EXTRAFEEE" />
+			<xs:enumeration value="RETURN_PRODUCT_NOT_DELIVERED" />
+			<xs:enumeration value="ETC" />
+			<xs:enumeration value="EXCHANGE_DELIVERYFEE" />
+			<xs:enumeration value="EXCHANGE_EXTRAFEE" />
+			<xs:enumeration value="EXCHANGE_PRODUCT_READY" />
+			<xs:enumeration value="EXCHANGE_PRODUCT_NOT_DELIVERED" />
+			<xs:enumeration value="SELLER_CONFIRM_NEED" />
+			<xs:enumeration value="PURCHASER_CONFIRM_NEED" />
+			<xs:enumeration value="SELLER_REMIT" />
+			<xs:enumeration value="ETC2" />
+			<xs:enumeration value="EXCHANGE_HOLDBACK" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="holdbackStatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NOT_YET" />
+			<xs:enumeration value="HOLDBACK" />
+			<xs:enumeration value="RELEASED" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="claimType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CANCEL" />
+			<xs:enumeration value="RETURN" />
+			<xs:enumeration value="EXCHANGE" />
+			<xs:enumeration value="PURCHASE_DECISION_HOLDBACK" />
+			<xs:enumeration value="ADMIN_CANCEL" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="delayedDispatchReasonType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PRODUCT_PREPARE" />
+			<xs:enumeration value="CUSTOMER_REQUEST" />
+			<xs:enumeration value="CUSTOM_BUILD" />
+			<xs:enumeration value="RESERVED_DISPATCH" />
+			<xs:enumeration value="ETC" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="placeOrderStatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NOT_YET" />
+			<xs:enumeration value="OK" />
+			<xs:enumeration value="CANCEL" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="productOrderStatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PAYMENT_WAITING" />
+			<xs:enumeration value="CANCELED_BY_NOPAYMENT" />
+			<xs:enumeration value="PAYED" />
+			<xs:enumeration value="DELIVERING" />
+			<xs:enumeration value="DELIVERED" />
+			<xs:enumeration value="PURCHASE_DECIDED" />
+			<xs:enumeration value="CANCELED" />
+			<xs:enumeration value="RETURNED" />
+			<xs:enumeration value="EXCHANGED" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="commissionPrePayStatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GENERAL_PRD" />
+			<xs:enumeration value="PRE_PAY_PRD_NO_PAY" />
+			<xs:enumeration value="PRE_PAY_PRD_PAYED" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="giftReceivingStatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="WAIT_FOR_RECEIVING" />
+			<xs:enumeration value="RECEIVED" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eCouponStatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NOT_USED"/>
+			<xs:enumeration value="USED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="productOrderChangeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PAY_WAITING" />
+			<xs:enumeration value="PAYED" />
+			<xs:enumeration value="DISPATCHED" />
+			<xs:enumeration value="CANCEL_REQUESTED" />
+			<xs:enumeration value="RETURN_REQUESTED" />
+			<xs:enumeration value="EXCHANGE_REQUESTED" />
+			<xs:enumeration value="HOLDBACK_REQUESTED" />
+			<xs:enumeration value="CANCELED" />
+			<xs:enumeration value="RETURNED" />
+			<xs:enumeration value="EXCHANGED" />
+			<xs:enumeration value="PURCHASE_DECIDED" />
+			<xs:enumeration value="EXCHANGE_REDELIVERY_READY" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="BaseCheckoutRequestType">
+		<xs:complexContent>
+			<xs:extension base="se:BaseRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="DetailLevel" type="xs:string" />
+					<xs:element name="Version" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BaseCheckoutResponseType">
+		<xs:complexContent>
+			<xs:extension base="se:BaseResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="DetailLevel" type="xs:string" />
+					<xs:element minOccurs="0" name="Version" type="xs:string" />
+					<xs:element minOccurs="0" name="Release" type="xs:string" />
+					<xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
+					<xs:element minOccurs="0" name="MessageID" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ListResponseType">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ReturnedDataCount" type="xs:int" />
+					<xs:element minOccurs="0" name="HasMoreData" type="xs:boolean" />
+					<xs:element minOccurs="0" name="MoreDataTimeFrom" type="xs:dateTime" />
+					<xs:element minOccurs="0" name="InquiryExtraData" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ListRequestType">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="InquiryTimeFrom" type="xs:dateTime" />
+					<xs:element minOccurs="0" name="InquiryTimeTo" type="xs:dateTime" />
+					<xs:element minOccurs="0" name="InquiryExtraData" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+	<xs:complexType name="placeProductOrderRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+					<xs:element minOccurs="0" name="CheckReceiverAddressChanged" type="xs:boolean" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="placeProductOrderResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="IsReceiverAddressChanged" type="xs:boolean" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="withholdExchangeRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+					<xs:element name="ExchangeHoldCode" type="se:holdbackClassType" />
+					<xs:element name="ExchangeHoldDetailContent" type="xs:string" />
+					<xs:element minOccurs="0" name="EtcFeeDemandAmount" type="xs:int" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="withholdExchangeResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="releaseExchangeHoldRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="releaseExchangeHoldResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="getProductOrderInfoListRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" name="ProductOrderIDList" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="getProductOrderInfoListResponse">
+		<xs:complexContent>
+			<xs:extension base="se:ListResponseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="ProductOrderInfoList" type="se:productOrderInfo" />
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="FailedProductOrderIDList" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="modifyECouponValidDateRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ProductOrderID" type="xs:string" />
+					<xs:element minOccurs="0" name="OrderNo" type="xs:string" />
+					<xs:element name="ECouponNo" type="xs:string" />
+					<xs:element name="ValidStartDate" type="xs:dateTime" />
+					<xs:element name="ValidEndDate" type="xs:dateTime" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="modifyECouponValidDateResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="useECouponRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="OrderNo" type="xs:string" />
+					<xs:element name="ECouponNo" type="xs:string" />
+					<xs:element name="UseDate" type="xs:dateTime" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="useECouponResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="approveCollectedExchangeRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="approveCollectedExchangeResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="approveReturnApplicationRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="approveReturnApplicationResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="shipProductOrderRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+					<xs:element name="DeliveryMethodCode" type="se:deliveryMethodType" />
+					<xs:element minOccurs="0" name="DeliveryCompanyCode" type="xs:string" />
+					<xs:element minOccurs="0" name="TrackingNumber" type="xs:string" />
+					<xs:element name="DispatchDate" type="xs:dateTime" />
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="BarcodeNoList" type="xs:string" />
+					<xs:element minOccurs="0" name="ECouponNo" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="shipProductOrderResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="withholdReturnRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+					<xs:element name="ReturnHoldCode" type="se:holdbackClassType" />
+					<xs:element name="ReturnHoldDetailContent" type="xs:string" />
+					<xs:element minOccurs="0" name="EtcFeeDemandAmount" type="xs:int" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="withholdReturnResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="changeECouponStatusRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string"/>
+					<xs:element name="ECouponNo" type="xs:string"/>
+					<xs:element name="ECouponStatus" type="se:eCouponStatusType"/>
+					<xs:element name="ChangeDate" type="xs:dateTime"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="changeECouponStatusResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="delayProductOrderRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+					<xs:element name="DispatchDueDate" type="xs:dateTime" />
+					<xs:element name="DispatchDelayReasonCode" type="se:delayedDispatchReasonType" />
+					<xs:element minOccurs="0" name="DispatchDelayDetailReason" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="delayProductOrderResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="releaseReturnHoldRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="releaseReturnHoldResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="requestReturnRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+					<xs:element name="ReturnReasonCode" type="se:claimRequestReasonType" />
+					<xs:element name="CollectDeliveryMethodCode" type="se:deliveryMethodType" />
+					<xs:element minOccurs="0" name="CollectDeliveryCompanyCode" type="xs:string" />
+					<xs:element minOccurs="0" name="CollectTrackingNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="requestReturnResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="cancelSaleRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+					<xs:element name="CancelReasonCode" type="se:claimRequestReasonType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="cancelSaleResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="reDeliveryExchangeRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+					<xs:element name="ReDeliveryMethodCode" type="se:deliveryMethodType" />
+					<xs:element minOccurs="0" name="ReDeliveryCompanyCode" type="xs:string" />
+					<xs:element minOccurs="0" name="ReDeliveryTrackingNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="reDeliveryExchangeResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="rejectExchangeRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+					<xs:element name="RejectDetailContent" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="rejectExchangeResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="approveCancelApplicationRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="approveCancelApplicationResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="rejectReturnRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="ProductOrderID" type="xs:string" />
+					<xs:element name="RejectDetailContent" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="rejectReturnResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="getProductOrderIdListRequest">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutRequestType">
+				<xs:sequence>
+					<xs:element name="OrderID" type="xs:string" />
+					<xs:element minOccurs="0" name="MallID" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="getProductOrderIdListResponse">
+		<xs:complexContent>
+			<xs:extension base="se:BaseCheckoutResponseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="ProductOrderIDList" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="getChangedProductOrderListRequest">
+		<xs:complexContent>
+			<xs:extension base="se:ListRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="LastChangedStatusCode" type="se:productOrderChangeType" />
+					<xs:element minOccurs="0" name="MallID" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="getChangedProductOrderListResponse">
+		<xs:complexContent>
+			<xs:extension base="se:ListResponseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="ChangedProductOrderInfoList" type="se:changedProductOrderInfo" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="PlaceProductOrderRequest" nillable="true" type="se:placeProductOrderRequest" />
+	<xs:element name="PlaceProductOrderResponse" nillable="true" type="se:placeProductOrderResponse" />
+	<xs:element name="WithholdExchangeRequest" nillable="true" type="se:withholdExchangeRequest" />
+	<xs:element name="WithholdExchangeResponse" nillable="true" type="se:withholdExchangeResponse" />
+	<xs:element name="ReleaseExchangeHoldRequest" nillable="true" type="se:releaseExchangeHoldRequest" />
+	<xs:element name="ReleaseExchangeHoldResponse" nillable="true" type="se:releaseExchangeHoldResponse" />
+	<xs:element name="GetProductOrderInfoListRequest" nillable="true" type="se:getProductOrderInfoListRequest" />
+	<xs:element name="GetProductOrderInfoListResponse" nillable="true" type="se:getProductOrderInfoListResponse" />
+	<xs:element name="ModifyECouponValidDateRequest" nillable="true" type="se:modifyECouponValidDateRequest" />
+	<xs:element name="ModifyECouponValidDateResponse" nillable="true" type="se:modifyECouponValidDateResponse" />
+	<xs:element name="UseECouponRequest" nillable="true" type="se:useECouponRequest" />
+	<xs:element name="UseECouponResponse" nillable="true" type="se:useECouponResponse" />
+	<xs:element name="ApproveCollectedExchangeRequest" nillable="true" type="se:approveCollectedExchangeRequest" />
+	<xs:element name="ApproveCollectedExchangeResponse" nillable="true" type="se:approveCollectedExchangeResponse" />
+	<xs:element name="ApproveReturnApplicationRequest" nillable="true" type="se:approveReturnApplicationRequest" />
+	<xs:element name="ApproveReturnApplicationResponse" nillable="true" type="se:approveReturnApplicationResponse" />
+	<xs:element name="ShipProductOrderRequest" nillable="true" type="se:shipProductOrderRequest" />
+	<xs:element name="ShipProductOrderResponse" nillable="true" type="se:shipProductOrderResponse" />
+	<xs:element name="WithholdReturnRequest" nillable="true" type="se:withholdReturnRequest" />
+	<xs:element name="WithholdReturnResponse" nillable="true" type="se:withholdReturnResponse" />
+	<xs:element name="ChangeECouponStatusRequest" nillable="true" type="se:changeECouponStatusRequest"/>
+	<xs:element name="ChangeECouponStatusResponse" nillable="true" type="se:changeECouponStatusResponse"/>
+	<xs:element name="DelayProductOrderRequest" nillable="true" type="se:delayProductOrderRequest" />
+	<xs:element name="DelayProductOrderResponse" nillable="true" type="se:delayProductOrderResponse" />
+	<xs:element name="ReleaseReturnHoldRequest" nillable="true" type="se:releaseReturnHoldRequest" />
+	<xs:element name="ReleaseReturnHoldResponse" nillable="true" type="se:releaseReturnHoldResponse" />
+	<xs:element name="RequestReturnRequest" nillable="true" type="se:requestReturnRequest" />
+	<xs:element name="RequestReturnResponse" nillable="true" type="se:requestReturnResponse" />
+	<xs:element name="CancelSaleRequest" nillable="true" type="se:cancelSaleRequest" />
+	<xs:element name="CancelSaleResponse" nillable="true" type="se:cancelSaleResponse" />
+	<xs:element name="ReDeliveryExchangeRequest" nillable="true" type="se:reDeliveryExchangeRequest" />
+	<xs:element name="ReDeliveryExchangeResponse" nillable="true" type="se:reDeliveryExchangeResponse" />
+	<xs:element name="RejectExchangeRequest" nillable="true" type="se:rejectExchangeRequest" />
+	<xs:element name="RejectExchangeResponse" nillable="true" type="se:rejectExchangeResponse" />
+	<xs:element name="ApproveCancelApplicationRequest" nillable="true" type="se:approveCancelApplicationRequest" />
+	<xs:element name="ApproveCancelApplicationResponse" nillable="true" type="se:approveCancelApplicationResponse" />
+	<xs:element name="RejectReturnRequest" nillable="true" type="se:rejectReturnRequest" />
+	<xs:element name="RejectReturnResponse" nillable="true" type="se:rejectReturnResponse" />
+	<xs:element name="GetProductOrderIDListRequest" nillable="true" type="se:getProductOrderIdListRequest" />
+	<xs:element name="GetProductOrderIDListResponse" nillable="true" type="se:getProductOrderIdListResponse" />
+	<xs:element name="GetChangedProductOrderListRequest" nillable="true" type="se:getChangedProductOrderListRequest" />
+	<xs:element name="GetChangedProductOrderListResponse" nillable="true" type="se:getChangedProductOrderListResponse" />
+</xs:schema>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- GalleryService Message XML Schema v.20120615 -->
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://shopn.platform.nhncorp.com/"
+	targetNamespace="http://shopn.platform.nhncorp.com/"
+>
+	<xs:include schemaLocation="BaseType.xsd" />
+
+	<!-- GalleryService Operation wrapper start -->
+	<xs:element name="ApplyGalleryRequest" type="tns:ApplyGalleryRequestType" />
+	<xs:complexType name="ApplyGalleryRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="GalleryId" type="xs:long" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ProductIdList" type="tns:ProductIdListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ApplyGalleryResponse" type="tns:ApplyGalleryResponseType" />
+	<xs:complexType name="ApplyGalleryResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetGalleryRequest" type="tns:GetGalleryRequestType" />
+	<xs:complexType name="GetGalleryRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="GalleryId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetGalleryResponse" type="tns:GetGalleryResponseType" />
+	<xs:complexType name="GetGalleryResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="Gallery" type="tns:GalleryType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetGalleryListRequest" type="tns:GetGalleryListRequestType" />
+	<xs:complexType name="GetGalleryListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetGalleryListResponse" type="tns:GetGalleryListResponseType" />
+	<xs:complexType name="GetGalleryListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="GalleryList" type="tns:GalleryListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageGalleryRequest" type="tns:ManageGalleryRequestType" />
+	<xs:complexType name="ManageGalleryRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Gallery" type="tns:GalleryType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageGalleryResponse" type="tns:ManageGalleryResponseType" />
+	<xs:complexType name="ManageGalleryResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="GalleryId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- GalleryService Operation wrapper end -->
+</xs:schema>

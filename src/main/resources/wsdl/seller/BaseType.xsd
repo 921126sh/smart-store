@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:se="http://seller.shopn.platform.nhncorp.com/" targetNamespace="http://seller.shopn.platform.nhncorp.com/">
+	<xs:complexType name="BaseRequestType">
+		<xs:sequence>
+			<xs:element name="AccessCredentials" type="se:AccessCredentialsType" />
+			<xs:element minOccurs="0" name="RequestID" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccessCredentialsType">
+		<xs:sequence>
+			<xs:element name="AccessLicense" type="xs:string" />
+			<xs:element name="Timestamp" type="xs:string" />
+			<xs:element name="Signature" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BaseResponseType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="RequestID" type="xs:string" />
+			<xs:element name="ResponseType" type="xs:string" />
+			<xs:element minOccurs="0" name="ResponseTime" type="xs:long" />
+			<xs:element minOccurs="0" name="Error" type="se:ErrorType" />
+			<xs:element minOccurs="0" name="WarningList">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="Warning" type="se:WarningType" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element minOccurs="0" name="QuotaStatus" type="se:QuotaStatusType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorType">
+		<xs:sequence>
+			<xs:element name="Code" type="xs:string" />
+			<xs:element name="Message" type="xs:string" />
+			<xs:element minOccurs="0" name="Detail" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WarningType">
+		<xs:sequence>
+			<xs:element name="Code" type="xs:string" />
+			<xs:element name="Message" type="xs:string" />
+			<xs:element minOccurs="0" name="Detail" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QuotaStatusType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="RemainingQuota" type="xs:long" />
+			<xs:element minOccurs="0" name="ExpirationTime" type="xs:dateTime" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

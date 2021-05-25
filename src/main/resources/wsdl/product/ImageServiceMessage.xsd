@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ImageService Message XML Schema v.20120615 -->
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://shopn.platform.nhncorp.com/"
+	targetNamespace="http://shopn.platform.nhncorp.com/"
+>
+	<xs:include schemaLocation="BaseType.xsd" />
+
+	<!-- ImageService Operation wrapper start -->
+	<xs:element name="UploadImageRequest" type="tns:UploadImageRequestType" />
+	<xs:complexType name="UploadImageRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ImageURLList" type="tns:ImageURLListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UploadImageResponse" type="tns:UploadImageResponseType" />
+	<xs:complexType name="UploadImageResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ImageList" type="tns:ImageReturnListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ImageService Operation wrapper end -->
+</xs:schema>

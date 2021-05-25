@@ -1,0 +1,1746 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Base Type XML Schema -->
+<xs:schema
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns:bs="http://shopn.platform.nhncorp.com/"
+		targetNamespace="http://shopn.platform.nhncorp.com/"
+		elementFormDefault="qualified"
+		attributeFormDefault="unqualified"
+>
+	<xs:complexType name="BaseRequestType" abstract="true">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="RequestID" type="xs:string" />
+			<xs:element name="AccessCredentials" type="bs:AccessCredentialsType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BaseResponseType" abstract="true">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="RequestID" type="xs:string" />
+			<xs:element name="ResponseType" type="xs:string" />
+			<xs:element name="ResponseTime" type="xs:long" />
+			<xs:element minOccurs="0" name="Error" type="bs:ErrorType" />
+			<xs:element minOccurs="0" name="WarningList" type="bs:WarningListType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BaseProductRequestType" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseRequestType">
+				<xs:sequence>
+					<xs:element name="Version" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BaseProductResponseType" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Version" type="xs:string" />
+					<xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AccessCredentialsType">
+		<xs:sequence>
+			<xs:element name="AccessLicense" type="xs:string" />
+			<xs:element name="Timestamp" type="xs:string" />
+			<xs:element name="Signature" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorType">
+		<xs:sequence>
+			<xs:element name="Code" type="xs:string" />
+			<xs:element name="Message" type="xs:string" />
+			<xs:element minOccurs="0" name="Detail" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WarningListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Warning" type="bs:WarningType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WarningType">
+		<xs:sequence>
+			<xs:element name="Code" type="xs:string" />
+			<xs:element name="Message" type="xs:string" />
+			<xs:element minOccurs="0" name="Detail" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ModelType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Id" type="xs:long" />
+			<xs:element minOccurs="0" name="ManufacturerName" type="xs:string" />
+			<xs:element minOccurs="0" name="BrandName" type="xs:string" />
+			<xs:element minOccurs="0" name="ModelName" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductAttributeListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="ProductAttribute" type="bs:ProductAttributeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductAttributeType">
+		<xs:sequence>
+			<xs:element name="AttributeSeq" type="xs:long" />
+			<xs:element name="AttributeValueSeq" type="xs:long" />
+			<xs:element minOccurs="0" name="AttributeRealValue" type="xs:string" />
+			<xs:element minOccurs="0" name="AttributeRealValueUnitCode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CertificationListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Certification" type="bs:CertificationType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CertificationType">
+		<xs:sequence>
+			<xs:element name="Id" type="xs:long" />
+			<xs:element minOccurs="0" name="Name" type="xs:string" />
+			<xs:element minOccurs="0" name="Number" type="xs:string" />
+			<xs:element minOccurs="0" name="Date" type="xs:string" />
+			<xs:element minOccurs="0" name="Mark" type="xs:string" />
+			<xs:element minOccurs="0" name="CompanyName" type="xs:string" />
+			<xs:element minOccurs="0" name="KindType" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OriginAreaType">
+		<xs:sequence>
+			<xs:element name="Code" type="xs:string" />
+			<xs:element minOccurs="0" name="Importer" type="xs:string" />
+			<xs:element minOccurs="0" name="Plural" type="xs:string" />
+			<xs:element minOccurs="0" name="Content" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="URLType">
+		<xs:sequence>
+			<xs:element name="URL" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ImageType">
+		<xs:sequence>
+			<xs:element name="Representative" type="bs:URLType" />
+			<xs:element minOccurs="0" name="List" type="bs:URLType" />
+			<xs:element minOccurs="0" name="Image" type="bs:URLType" />
+			<xs:element minOccurs="0" name="Vertical" type="bs:URLType" />
+			<xs:element minOccurs="0" name="Gallery" type="bs:URLType" />
+			<xs:element minOccurs="0" name="OptionalList" type="bs:OptionalListType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QuickServiceAreaListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="QuickServiceAreaCode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeliveryType">
+		<xs:sequence>
+			<xs:element name="Type" type="xs:string" />
+			<xs:element name="BundleGroupAvailable" type="xs:string" />
+			<xs:element minOccurs="0" name="BundleGroupId" type="xs:long" />
+			<xs:element minOccurs="0" name="VisitAddressId" type="xs:long" />
+			<xs:element minOccurs="0" name="QuickServiceAreaList" type="bs:QuickServiceAreaListType" />
+			<xs:element name="FeeType" type="xs:string" />
+			<xs:element name="BaseFee" type="xs:int" />
+			<xs:element minOccurs="0" name="FreeConditionalAmount" type="xs:int" />
+			<xs:element minOccurs="0" name="RepeatQuantity" type="xs:int" />
+			<xs:element minOccurs="0" name="SecondBaseQuantity" type="xs:int" />
+			<xs:element minOccurs="0" name="SecondExtraFee" type="xs:int" />
+			<xs:element minOccurs="0" name="ThirdBaseQuantity" type="xs:int" />
+			<xs:element minOccurs="0" name="ThirdExtraFee" type="xs:int" />
+			<xs:element minOccurs="0" name="PayType" type="xs:string" />
+			<xs:element minOccurs="0" name="AreaType" type="xs:string" />
+			<xs:element minOccurs="0" name="Area2ExtraFee" type="xs:int" />
+			<xs:element minOccurs="0" name="Area3ExtraFee" type="xs:int" />
+			<xs:element name="ReturnDeliveryCompanyPriority" type="xs:string" />
+			<xs:element name="ReturnFee" type="xs:int" />
+			<xs:element name="ExchangeFee" type="xs:int" />
+			<xs:element minOccurs="0" name="ShippingAddressId" type="xs:long" />
+			<xs:element minOccurs="0" name="ReturnAddressId" type="xs:long" />
+			<xs:element minOccurs="0" name="DifferentialFee" type="xs:string" />
+			<xs:element minOccurs="0" name="InstallationFee" type="xs:string" />
+			<xs:element minOccurs="0" name="IndividualCustomUniqueCode" type="xs:string" />
+			<xs:element minOccurs="0" name="AttributeType" type="xs:string" />
+			<xs:element minOccurs="0" name="ExpectedDeliveryPeriodType" type="xs:string" />
+			<xs:element minOccurs="0" name="ExpectedDeliveryPeriodDirectInput" type="xs:string" />
+			<xs:element minOccurs="0" name="TodayStockQuantity" type="xs:int" />
+			<xs:element minOccurs="0" name="CustomProductAfterOrderYn" type="xs:string" />
+			<xs:element minOccurs="0" name="HopeDeliveryGroupUsable" type="xs:string" />
+			<xs:element minOccurs="0" name="HopeDeliveryGroupId" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SellerDiscountType">
+		<xs:sequence>
+			<xs:element name="Amount" type="xs:string" />
+			<xs:element minOccurs="0" name="StartDate" type="xs:string" />
+			<xs:element minOccurs="0" name="EndDate" type="xs:string" />
+			<xs:element name="MobileAmount" type="xs:string" />
+			<xs:element minOccurs="0" name="MobileStartDate" type="xs:string" />
+			<xs:element minOccurs="0" name="MobileEndDate" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MultiPurchaseDiscountType">
+		<xs:sequence>
+			<xs:element name="Amount" type="xs:string" />
+			<xs:element name="OrderAmount" type="xs:string" />
+			<xs:element minOccurs="0" name="StartDate" type="xs:string" />
+			<xs:element minOccurs="0" name="EndDate" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MileageType">
+		<xs:sequence>
+			<xs:element name="Amount" type="xs:string" />
+			<xs:element minOccurs="0" name="StartDate" type="xs:string" />
+			<xs:element minOccurs="0" name="EndDate" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StampType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="PurchaseReviewPaymentCount" type="xs:int" />
+			<xs:element minOccurs="0" name="PremiumPaymentCount" type="xs:int" />
+			<xs:element minOccurs="0" name="ReqularCustomerPaymentCount" type="xs:int" />
+			<xs:element minOccurs="0" name="StartDate" type="xs:string" />
+			<xs:element minOccurs="0" name="EndDate" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReviewPointType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="PurchaseReviewPoint" type="xs:int" />
+			<xs:element minOccurs="0" name="PremiumReviewPoint" type="xs:int" />
+			<xs:element minOccurs="0" name="AfterUseTextReviewPoint" type="xs:int" />
+			<xs:element minOccurs="0" name="AfterUsePhotoVideoReviewPoint" type="xs:int" />
+			<xs:element minOccurs="0" name="RegularCustomerPoint" type="xs:int" />
+			<xs:element minOccurs="0" name="StartDate" type="xs:string" />
+			<xs:element minOccurs="0" name="EndDate" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FreeInterestType">
+		<xs:sequence>
+			<xs:element name="Month" type="xs:int" />
+			<xs:element minOccurs="0" name="StartDate" type="xs:string" />
+			<xs:element minOccurs="0" name="EndDate" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GiftType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ECouponType">
+		<xs:sequence>
+			<xs:element name="PeriodType" type="xs:string" />
+			<xs:element minOccurs="0" name="ValidStartDate" type="xs:string" />
+			<xs:element minOccurs="0" name="ValidEndDate" type="xs:string" />
+			<xs:element minOccurs="0" name="PeriodDays" type="xs:int" />
+			<xs:element name="PublicInformationContents" type="xs:string" />
+			<xs:element name="ContactInformationContents" type="xs:string" />
+			<xs:element name="UsePlaceType" type="xs:string" />
+			<xs:element name="UsePlaceContents" type="xs:string" />
+			<xs:element name="RestrictCart" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ProductId" type="xs:long" />
+			<xs:element name="StatusType" type="xs:string" />
+			<xs:element minOccurs="0" name="SaleType" type="xs:string" />
+			<xs:element minOccurs="0" name="CustomMade" type="xs:string" />
+			<xs:element minOccurs="0" name="UseReturnCancelNotification" type="xs:string" />
+			<xs:element minOccurs="0" name="EstimatedDeliveryTime" type="xs:string" />
+			<xs:element minOccurs="0" name="CategoryId" type="xs:string" />
+			<xs:element minOccurs="0" name="LayoutType" type="xs:string" />
+			<xs:element name="Name" type="xs:string" />
+			<xs:element minOccurs="0" name="PublicityPhraseContent" type="xs:string" />
+			<xs:element minOccurs="0" name="PublicityPhraseStartDate" type="xs:string" />
+			<xs:element minOccurs="0" name="PublicityPhraseEndDate" type="xs:string" />
+			<xs:element minOccurs="0" name="SellerManagementCode" type="xs:string" />
+			<xs:element minOccurs="0" name="SellerBarCode" type="xs:string" />
+			<xs:element minOccurs="0" name="Model" type="bs:ModelType" />
+			<xs:element minOccurs="0" name="ProductAttributeList" type="bs:ProductAttributeListType" />
+			<xs:element minOccurs="0" name="CertificationList" type="bs:CertificationListType" />
+			<xs:element minOccurs="0" name="ChildCertifiedProductExclusion" type="xs:string" />
+			<xs:element minOccurs="0" name="KCCertifiedProductExclusion" type="xs:string" />
+			<xs:element minOccurs="0" name="KCExemptionType" type="xs:string" />
+			<xs:element minOccurs="0" name="GreenCertifiedProductExclusion" type="xs:string" />
+			<xs:element name="OriginArea" type="bs:OriginAreaType" />
+			<xs:element minOccurs="0" name="ManufactureDate" type="xs:string" />
+			<xs:element minOccurs="0" name="ValidDate" type="xs:string" />
+			<xs:element name="TaxType" type="xs:string" />
+			<xs:element name="MinorPurchasable" type="xs:string" />
+			<xs:element name="Image" type="bs:ImageType" />
+			<xs:element minOccurs="0" name="DetailContent" type="xs:string" />
+			<xs:element minOccurs="0" name="SellerNoticeId" type="xs:long" />
+			<xs:element name="AfterServiceTelephoneNumber" type="xs:string" />
+			<xs:element name="AfterServiceGuideContent" type="xs:string" />
+			<xs:element minOccurs="0" name="PurchaseReviewExposure" type="xs:string" />
+			<xs:element minOccurs="0" name="RegularCustomerExclusiveProduct" type="xs:string" />
+			<xs:element minOccurs="0" name="KnowledgeShoppingProductRegistration" type="xs:string" />
+			<xs:element minOccurs="0" name="GalleryId" type="xs:long" />
+			<xs:element minOccurs="0" name="SaleStartDate" type="xs:string" />
+			<xs:element minOccurs="0" name="SaleEndDate" type="xs:string" />
+			<xs:element name="SalePrice" type="xs:long" />
+			<xs:element minOccurs="0" name="StockQuantity" type="xs:long" />
+			<xs:element minOccurs="0" name="MinPurchaseQuantity" type="xs:int" />
+			<xs:element minOccurs="0" name="MaxPurchaseQuantityPerId" type="xs:long" />
+			<xs:element minOccurs="0" name="MaxPurchaseQuantityPerOrder" type="xs:long" />
+			<xs:element minOccurs="0" name="Delivery" type="bs:DeliveryType" />
+			<xs:element minOccurs="0" name="SellerDiscount" type="bs:SellerDiscountType" />
+			<xs:element minOccurs="0" name="MultiPurchaseDiscount" type="bs:MultiPurchaseDiscountType" />
+			<xs:element minOccurs="0" name="Mileage" type="bs:MileageType" />
+			<xs:element minOccurs="0" name="Stamp" type="bs:StampType" />
+			<xs:element minOccurs="0" name="ReviewPoint" type="bs:ReviewPointType" />
+			<xs:element minOccurs="0" name="FreeInterest" type="bs:FreeInterestType" />
+			<xs:element minOccurs="0" name="Gift" type="bs:GiftType" />
+			<xs:element minOccurs="0" name="ECoupon" type="bs:ECouponType" />
+			<xs:element minOccurs="0" name="PurchaseApplicationUrl" type="xs:string" />
+			<xs:element minOccurs="0" name="CellPhonePrice" type="xs:long" />
+			<xs:element minOccurs="0" name="WifiOnly" type="xs:string" />
+			<xs:element minOccurs="0" name="ProductSummary" type="bs:ProductSummaryType" />
+			<xs:element minOccurs="0" name="SellerCommentUsable" type="xs:string" />
+			<xs:element minOccurs="0" name="SellerCommentContent" type="xs:string" />
+			<xs:element minOccurs="0" name="SellerCustomCode1" type="xs:string" />
+			<xs:element minOccurs="0" name="SellerCustomCode2" type="xs:string" />
+			<xs:element minOccurs="0" name="AdditionalInfo" type="bs:AdditionalInfoType" />
+			<xs:element minOccurs="0" name="Isbn13" type="xs:string" />
+			<xs:element minOccurs="0" name="IndependentPublicationYn" type="xs:string" />
+			<xs:element minOccurs="0" name="CultureCostIncomeDeductionYn" type="xs:string" />
+			<xs:element minOccurs="0" name="CustomProductYn" type="xs:string" />
+			<xs:element minOccurs="0" name="ItselfProductionProductYn" type="xs:string" />
+			<xs:element minOccurs="0" name="BrandCertificationYn" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductListItemType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ProductId" type="xs:long" />
+			<xs:element minOccurs="0" name="InjectProductId" type="xs:long" />
+			<xs:element minOccurs="0" name="CategoryId" type="xs:string" />
+			<xs:element minOccurs="0" name="Name" type="xs:string" />
+			<xs:element minOccurs="0" name="SellerManagementCode" type="xs:string" />
+			<xs:element minOccurs="0" name="StatusType" type="xs:string" />
+			<xs:element minOccurs="0" name="Display" type="xs:string" />
+			<xs:element minOccurs="0" name="SalePrice" type="xs:long" />
+			<xs:element minOccurs="0" name="DiscountedPrice" type="xs:long" />
+			<xs:element minOccurs="0" name="StockQuantity" type="xs:long" />
+			<xs:element minOccurs="0" name="KnowledgeShoppingProductRegistration" type="xs:string" />
+			<xs:element minOccurs="0" name="DeliveryType" type="xs:string" />
+			<xs:element minOccurs="0" name="DeliveryAttributeType" type="xs:string" />
+			<xs:element minOccurs="0" name="DeliveryFee" type="xs:int" />
+			<xs:element minOccurs="0" name="ReturnFee" type="xs:int" />
+			<xs:element minOccurs="0" name="ExchangeFee" type="xs:int" />
+			<xs:element minOccurs="0" name="MultiPurchaseDiscount" type="xs:string" />
+			<xs:element minOccurs="0" name="Mileage" type="xs:string" />
+			<xs:element minOccurs="0" name="NMPMileage" type="xs:string" />
+			<xs:element minOccurs="0" name="PurchaseReviewPoint" type="xs:string" />
+			<xs:element minOccurs="0" name="PremiumReviewPoint" type="xs:string" />
+			<xs:element minOccurs="0" name="AfterUseTextReviewPoint" type="xs:string" />
+			<xs:element minOccurs="0" name="AfterUsePhotoVideoReviewPoint" type="xs:string" />
+			<xs:element minOccurs="0" name="RegularCustomerPoint" type="xs:string" />
+			<xs:element minOccurs="0" name="FreeInterest" type="xs:string" />
+			<xs:element minOccurs="0" name="Gift" type="xs:string" />
+			<xs:element minOccurs="0" name="SaleStartDate" type="xs:string" />
+			<xs:element minOccurs="0" name="SaleEndDate" type="xs:string" />
+			<xs:element minOccurs="0" name="RegisteredDate" type="xs:string" />
+			<xs:element minOccurs="0" name="ModifiedDate" type="xs:string" />
+			<xs:element minOccurs="0" name="Event" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductSummaryType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="AirlineTicket" type="bs:AirlineTicketSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Bag" type="bs:BagSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Biochemistry" type="bs:BiochemistrySummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Biocidal" type="bs:BiocidalSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Books" type="bs:BooksSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="CarArticles" type="bs:CarArticlesSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Cellphone" type="bs:CellphoneSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Cosmetic" type="bs:CosmeticSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="DietFood" type="bs:DietFoodSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="DigitalContents" type="bs:DigitalContentsSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Etc" type="bs:EtcSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="EtcService" type="bs:EtcServiceSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="FashionItems" type="bs:FashionItemsSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Food" type="bs:FoodSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Furniture" type="bs:FurnitureSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="GeneralFood" type="bs:GeneralFoodSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="GiftCard" type="bs:GiftCardSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="HomeAppliances" type="bs:HomeAppliancesSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="ImageAppliances" type="bs:ImageAppliancesSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Jewellery" type="bs:JewellerySummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Kids" type="bs:KidsSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="KitchenUtensils" type="bs:KitchenUtensilsSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="LodgmentReservation" type="bs:LodgmentReservationSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="MedicalAppliances" type="bs:MedicalAppliancesSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="MicroElectronics" type="bs:MicroElectronicsSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="MobileCoupon" type="bs:MobileCouponSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="MovieShow" type="bs:MovieShowSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="MusicalInstrument" type="bs:MusicalInstrumentSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Navigation" type="bs:NavigationSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="OfficeAppliances" type="bs:OfficeAppliancesSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="OpticsAppliances" type="bs:OpticsAppliancesSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="RentCar" type="bs:RentCarSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="RentalEtc" type="bs:RentalEtcSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="RentalHa" type="bs:RentalHaSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="SeasonAppliances" type="bs:SeasonAppliancesSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Shoes" type="bs:ShoesSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="SleepingGear" type="bs:SleepingGearSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="SportsEquipment" type="bs:SportsEquipmentSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="TravelPackage" type="bs:TravelPackageSummaryType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Wear" type="bs:WearSummaryType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AirlineTicketSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ChargeCondition" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="RoundTrip" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ExpirationDate" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Restriction" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="TicketDeliveryMean" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="SeatType" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AdditionalCharge" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CancelationPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ReservationistContact" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="BaseSummaryType">
+		<xs:sequence>
+			<xs:element name="NoRefundReason" type="xs:string" />
+			<xs:element name="ReturnCostReason" type="xs:string" />
+			<xs:element name="QualityAssuranceStandard" type="xs:string" />
+			<xs:element name="CompensationProcedure" type="xs:string" />
+			<xs:element name="TroubleShootingContents" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BagSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="Type" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Material" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Color" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Caution" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BiochemistrySummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element name="ProductName" type="xs:string"/>
+					<xs:element name="DosageForm" type="xs:string"/>
+					<xs:element minOccurs="0" name="PackDate" type="xs:string"/>
+					<xs:element minOccurs="0" name="PackDateText" type="xs:string"/>
+					<xs:element minOccurs="0" name="ExpirationDate" type="xs:string"/>
+					<xs:element minOccurs="0" name="ExpirationDateText" type="xs:string"/>
+					<xs:element name="Weight" type="xs:string"/>
+					<xs:element name="Effect" type="xs:string"/>
+					<xs:element minOccurs="0" name="Importer" type="xs:string"/>
+					<xs:element name="Producer" type="xs:string"/>
+					<xs:element name="Manufacturer" type="xs:string"/>
+					<xs:element name="ChildProtection" type="xs:string"/>
+					<xs:element name="Chemicals" type="xs:string"/>
+					<xs:element name="Caution" type="xs:string"/>
+					<xs:element name="SafeCriterionNo" type="xs:string"/>
+					<xs:element name="CustomerServicePhoneNumber" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BiocidalSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element name="ProductName" type="xs:string"/>
+					<xs:element name="Weight" type="xs:string"/>
+					<xs:element name="Effect" type="xs:string"/>
+					<xs:element name="RangeOfUse" type="xs:string"/>
+					<xs:element minOccurs="0" name="Importer" type="xs:string"/>
+					<xs:element name="Producer" type="xs:string"/>
+					<xs:element name="Manufacturer" type="xs:string"/>
+					<xs:element name="ChildProtection" type="xs:string"/>
+					<xs:element name="HarmfulChemicalSubstance" type="xs:string"/>
+					<xs:element name="Maleficence" type="xs:string"/>
+					<xs:element name="Caution" type="xs:string"/>
+					<xs:element name="ApprovalNumber" type="xs:string"/>
+					<xs:element name="CustomerServicePhoneNumber" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BooksSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="Title" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Author" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Publisher" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Pages" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Components" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PublishDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PublishDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Description" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CarArticlesSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Certified" type="xs:string" />
+					<xs:element name="Caution" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ApplyModel" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="RoadWorthyCertification" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CellphoneSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Certified" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Weight" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="TelecomType" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="JoinProcess" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ExtraBurden" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Specification" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CosmeticSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="Capacity" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Specification" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ExpirationDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ExpirationDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Usage" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Producer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Distributor" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="MainIngredient" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Certified" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Caution" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CustomerServicePhoneNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DietFoodSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ProductName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="FoodType" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Producer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Location" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PackDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PackDateText" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ExpirationDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ExpirationDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Weight" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Amount" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Ingredients" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="NutritionFacts" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Specification" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CautionAndSideEffect" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="NonMedicinalUsesMessage" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="GeneticallyModified" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ImportDeclarationCheck" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ConsumerSafetyCaution" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CustomerServicePhoneNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DigitalContentsSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="Producer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="TermsOfUse" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="UsePeriod" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Medium" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Requirement" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CancelationPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CustomerServicePhoneNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EtcSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="CertificateDetails" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="CustomerServicePhoneNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EtcServiceSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element name="ServiceProvider" type="xs:string" />
+					<xs:element name="CertificateDetails" type="xs:string" />
+					<xs:element name="UsableCondition" type="xs:string" />
+					<xs:element name="CancelationStandard" type="xs:string" />
+					<xs:element name="CancelationPolicy" type="xs:string" />
+					<xs:element name="CustomerServicePhoneNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FashionItemsSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="Type" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Material" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Caution" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FoodSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="FoodItem" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Weight" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Amount" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PackDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PackDateText" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ExpirationDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ExpirationDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Producer" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="RelevantLawContent" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ProductComposition" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Keep" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AdCaution" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CustomerServicePhoneNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FurnitureSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Certified" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Color" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Components" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Material" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Importer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Producer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="InstalledCharge" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GeneralFoodSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ProductName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="FoodType" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Producer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Location" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PackDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PackDateText" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ExpirationDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ExpirationDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Weight" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Amount" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Ingredients" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="NutritionFacts" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="GeneticallyModified" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ConsumerSafetyCaution" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ImportDeclarationCheck" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CustomerServicePhoneNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GiftCardSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="Issuer" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PeriodStartDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PeriodEndDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PeriodDays" type="xs:int" />
+					<xs:element minOccurs="1" maxOccurs="1" name="TermsOfUse" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="UseStorePlace" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="UseStoreAddressId" type="xs:long" />
+					<xs:element minOccurs="0" maxOccurs="1" name="UseStoreUrl" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="RefundPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CustomerServicePhoneNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="HomeAppliancesSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Certified" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="RatedVoltage" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PowerConsumption" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="EnergyEfficiencyRating" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ImageAppliancesSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Certified" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="RatedVoltage" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PowerConsumption" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="EnergyEfficiencyRating" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="DisplaySpecification" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="JewellerySummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="Material" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Purity" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="BandMaterial" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Weight" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Producer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Caution" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Specification" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ProvideWarranty" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="KidsSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Certified" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Weight" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Color" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Material" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="RecommendedAge" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Caution" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="KitchenUtensilsSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Material" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Component" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Producer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ImportDeclaration" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LodgmentReservationSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="Location" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="LodgmentType" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Grade" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="RoomType" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="RoomCapacity" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ExtraPersonCharge" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AdditionalFacilities" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ProvidedService" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CancelationPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ReservationistContact" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MedicalAppliancesSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="LicenceNo" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AdvertisingCertified" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="RatedVoltage" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PowerConsumption" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Purpose" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Usage" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Caution" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MicroElectronicsSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Certified" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="RatedVoltage" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="PowerConsumption" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Weight" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Specification" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MobileCouponSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element name="Issuer" type="xs:string" />
+					<xs:element name="UsableCondition" type="xs:string" />
+					<xs:element name="UsableStore" type="xs:string" />
+					<xs:element name="CancelationPolicy" type="xs:string" />
+					<xs:element name="CustomerServicePhoneNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MovieShowSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element name="Sponsor" type="xs:string" />
+					<xs:element name="Actor" type="xs:string" />
+					<xs:element name="Rating" type="xs:string" />
+					<xs:element name="ShowTime" type="xs:string" />
+					<xs:element name="ShowPlace" type="xs:string" />
+					<xs:element name="CancelationCondition" type="xs:string" />
+					<xs:element name="CancelationPolicy" type="xs:string" />
+					<xs:element name="CustomerServicePhoneNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MusicalInstrumentSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Color" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Material" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Components" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="DetailContent" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NavigationSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Certified" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="RatedVoltage" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="PowerConsumption" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Weight" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Specification" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="UpdateCost" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="FreeCostPeriod" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OfficeAppliancesSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Certified" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="RatedVoltage" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PowerConsumption" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="EnergyEfficiencyRating" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Weight" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Specification" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OpticsAppliancesSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Certified" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Weight" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Specification" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RentCarSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="OwnershipTransferCondition" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AdditionalCharge" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="FuelCostPaymentMean" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="PayingForLossOrDamage" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="RefundPolicyForCancel" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CustomerServicePhoneNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RentalEtcSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="OwnershipTransferCondition" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="PayingForLossOrDamage" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="RefundPolicyForCancel" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CustomerServicePhoneNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RentalHaSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="OwnershipTransferCondition" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Maintenance" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="PayingForLossOrDamage" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="RefundPolicyForCancel" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Specification" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CustomerServicePhoneNumber" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SeasonAppliancesSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Certified" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="RatedVoltage" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PowerConsumption" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="EnergyEfficiencyRating" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Area" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="InstalledCharge" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ShoesSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="Material" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Color" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Height" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Caution" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SleepingGearSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="Material" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Color" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Components" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Caution" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SportsEquipmentSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ItemName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Weight" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Color" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Material" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Components" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReleaseDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="DetailContent" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TravelPackageSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="TravelAgency" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Flight" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="TravelPeriod" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Schedule" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="MaximumNumberOfPeople" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="MinimumNumberOfPeople" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AccomodationInfo" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Details" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AdditionalCharge" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="CancelationPolicy" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="TravelWarnings" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ReservationistContact" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WearSummaryType">
+		<xs:complexContent>
+			<xs:extension base="bs:BaseSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="Material" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Color" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Manufacturer" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Caution" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PackDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PackDateText" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="WarrantyPolicy" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="AfterServiceDirector" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AdditionalInfoType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Band" type="bs:BandType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BandType">
+		<xs:sequence>
+			<xs:element name="CategoryId" type="xs:string" />
+			<xs:element minOccurs="0" name="BrandId" type="xs:long" />
+			<xs:element minOccurs="0" name="Description" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SimpleOptionItemType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Value" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Usable" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CustomOptionItemType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Usable" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CombinationOptionItemType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Value1" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Value2" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Value3" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Value4" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Value5" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Price" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Quantity" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="SellerManagerCode" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Usable" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CombinationOptionNamesType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="Name1" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Name2" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Name3" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Name4" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Name5" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CombinationOptionType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Names" type="bs:CombinationOptionNamesType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="ItemList" type="bs:CombinationOptionItemListType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OptionDeliveryAttributeType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ValueList">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="Value" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Type" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OptionType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="SortType" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="SimpleList" type="bs:SimpleOptionItemListType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="CustomList" type="bs:CustomOptionItemListType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Combination" type="bs:CombinationOptionType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="DeliveryAttribute" type="bs:OptionDeliveryAttributeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StandardOptionGroupType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="GroupName" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="StandardOptionAttributeList" type="bs:StandardOptionAttributeListType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StandardOptionAttributeType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="AttributeId" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="AttributeValueId" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="AttributeValueName" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="AttributeValueRealName" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="ImageUrl" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StandardOptionType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="CategoryId" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="UseStockManagement" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="StandardOptionGroupList" type="bs:StandardOptionGroupListType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="StandardOptionItemList" type="bs:StandardOptionItemListType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StandardOptionItemType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Id" type="xs:long" />
+			<xs:element minOccurs="1" name="OptionValue1" type="xs:string" />
+			<xs:element minOccurs="0" name="OptionValue2" type="xs:string" />
+			<xs:element minOccurs="0" name="Quantity" type="xs:long" />
+			<xs:element minOccurs="0" name="SellerManagerCode" type="xs:string" />
+			<xs:element minOccurs="1" name="Usable" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StandardOptionCategoryType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="UseStandardOption" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="StandardOptionCategoryGroups" type="bs:StandardOptionCategoryGroupsType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StandardOptionCategoryGroupType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="AttributeId" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="AttributeName" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="GroupName" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="ImageRegistrationUsable" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="RealValueUsable" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="OptionSetRequired" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="StandardOptionCategoryAttributeList" type="bs:StandardOptionCategoryAttributeListType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StandardOptionCategoryAttributeType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="AttributeId" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="AttributeValueId" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="AttributeValueName" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="AttributeColorCode" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Order" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SupplementProductItemType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Value" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Price" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Quantity" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="SellerManagementCode" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Usable" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SupplementProductType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="SortType" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="ItemList" type="bs:SupplementProductItemListType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GalleryProductMappingType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="PriorityExposure" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GalleryType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="SortType" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="GalleryProductMappingList" type="bs:GalleryProductMappingListType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GalleryInfoType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SaleStatusType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="StatusType" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="SaleStartDate" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="SaleEndDate" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="StockQuantity" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OptionalListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Optional" type="bs:URLType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StringCodeType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NumericCodeType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="Code" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttributeType">
+		<xs:sequence>
+			<xs:element name="AttributeSeq" type="xs:long" />
+			<xs:element name="AttributeName" type="xs:string" />
+			<xs:element name="AttributeClassificationType" type="xs:string" />
+			<xs:element name="AttributeClassificationCodeName" type="xs:string" />
+			<xs:element name="AttributeType" type="xs:string" />
+			<xs:element name="AttributeTypeCodeName" type="xs:string" />
+			<xs:element name="UnitUsable" type="xs:string" />
+			<xs:element minOccurs="0" name="RepresentativeUnitCode" type="xs:string" />
+			<xs:element minOccurs="0" name="RealValueUsable" type="xs:string" />
+			<xs:element minOccurs="0" name="AttributeValueMaxMatchingCount" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttributeValueType">
+		<xs:sequence>
+			<xs:element name="AttributeSeq" type="xs:long" />
+			<xs:element name="AttributeValueSeq" type="xs:long" />
+			<xs:element minOccurs="0" name="MinAttributeValue" type="xs:string" />
+			<xs:element minOccurs="0" name="MinAttributeValueUnitCode" type="xs:string" />
+			<xs:element minOccurs="0" name="MaxAttributeValue" type="xs:string" />
+			<xs:element minOccurs="0" name="MaxAttributeValueUnitCode" type="xs:string" />
+			<xs:element name="ExposureOrder" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttributeValueUnitType">
+		<xs:sequence>
+			<xs:element name="Id" type="xs:string" />
+			<xs:element name="UnitCodeName" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CertificationInfoType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="KindTypeList" type="bs:KindTypeListType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ModelReturnType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="ModelName" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="ModelId" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="WholeCategoryName" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="CategoryId" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="ManufacturerName" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="ManufacturerCode" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="BrandName" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="BrandCode" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ImageUploadType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Source" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="URL" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CategoryType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="CategoryName" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Last" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CategoryReturnType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="CategoryName" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="ExceptionalCategoryList" type="bs:ExceptionalCategoryListType" />
+			<xs:element minOccurs="0" maxOccurs="1" name="CertificationCategoryList" type="bs:CertificationCategoryListType" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Last" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="CertificationInfoList" type="bs:CertificationInfoListType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddressBookReturnType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="AddressId" type="xs:long" />
+			<xs:element minOccurs="0" name="Name" type="xs:string" />
+			<xs:element minOccurs="0" name="AddressType" type="xs:string" />
+			<xs:element minOccurs="0" name="PostalCode" type="xs:string" />
+			<xs:element minOccurs="0" name="BaseAddress" type="xs:string" />
+			<xs:element minOccurs="0" name="DetailAddress" type="xs:string" />
+			<xs:element minOccurs="0" name="FullAddress" type="xs:string" />
+			<xs:element minOccurs="0" name="PhoneNumber1" type="xs:string" />
+			<xs:element minOccurs="0" name="PhoneNumber2" type="xs:string" />
+			<xs:element minOccurs="0" name="HasLocation" type="xs:string" />
+			<xs:element minOccurs="0" name="RoadNameAddress" type="xs:string" />
+			<xs:element minOccurs="0" name="OverseasAddress" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QuestionAnswerReturnType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="QuestionAnswerId" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="CreateDate" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="QuestionType" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Subject" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Question" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Answer" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Purchased" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Answered" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="ProductId" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="ProductName" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="WriterId" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="WriterName" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QuestionAnswerTemplateReturnType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="QuestionType" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Subject" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Content" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SellerNoticeListItemType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Type" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Title" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Important" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="WholeNotice" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="DisplayStartDate" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Displayable" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SellerNoticeType">
+		<xs:complexContent>
+			<xs:extension base="bs:SellerNoticeListItemType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="Popup" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PopupDisplayStartDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PopupDisplayEndDate" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Content" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeliveryFeeByAreaType">
+		<xs:sequence>
+			<xs:element minOccurs="1" maxOccurs="1" name="AreaType" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Area2ExtraFee" type="xs:int" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Area3ExtraFee" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BundleGroupType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Name" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Available" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Base" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="CalculationMethod" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="DeliveryFeeByArea" type="bs:DeliveryFeeByAreaType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HopeDeliveryGroupType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Id" type="xs:long" />
+			<xs:element name="Name" type="xs:string" />
+			<xs:element name="Usable" type="xs:string"/>
+			<xs:element name="BaseHopeGroupYn" type="xs:string"/>
+			<xs:element minOccurs="0" name="HopeGroupStartTime" type="xs:int"/>
+			<xs:element minOccurs="0" name="HopeGroupEndTime" type="xs:int"/>
+			<xs:element minOccurs="0" name="RegularHolidayList" type="bs:RegularHolidayCodeListType"/>
+			<xs:element minOccurs="0" name="LadderTruckUseComment" type="xs:string"/>
+			<xs:element minOccurs="0" name="ProductRemovalType" type="xs:string"/>
+			<xs:element name="HopeDeliveryGroupDayList" type="bs:HopeDeliveryGroupDayListType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HopeDeliveryGroupDayType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Id" type="xs:long" />
+			<xs:element name="RegionName" type="xs:string" />
+			<xs:element minOccurs="0" name="Usable" type="xs:string" />
+			<xs:element minOccurs="0" name="HopeStartDay" type="xs:int" />
+			<xs:element minOccurs="0" name="HopeEndDay" type="xs:int" />
+			<xs:element minOccurs="0" name="ExpectationDeliveryFee" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ImageReturnType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="Source" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="URL" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ModificationRequiredProductType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ProductId" type="xs:long" />
+			<xs:element minOccurs="0" name="Reason" type="xs:string" />
+			<xs:element minOccurs="0" name="Action" type="xs:string" />
+			<xs:element minOccurs="0" name="RestorationRequestAvailable" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MobileImageInfoType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="ProductId" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Type" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="URL" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExceptionalCategoryListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="ExceptionalCategory" type="bs:StringCodeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CertificationCategoryListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="CertificationCategory" type="bs:NumericCodeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CertificationInfoListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="CertificationInfo" type="bs:CertificationInfoType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SimpleOptionItemListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Simple" type="bs:SimpleOptionItemType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CustomOptionItemListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Custom" type="bs:CustomOptionItemType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CombinationOptionItemListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Item" type="bs:CombinationOptionItemType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SupplementProductItemListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Item" type="bs:SupplementProductItemType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GalleryProductMappingListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="GalleryProductMapping" type="bs:GalleryProductMappingType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KindTypeListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="KindType" type="bs:StringCodeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OriginAreaListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="OriginArea" type="bs:StringCodeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ManufacturerListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Manufacturer" type="bs:NumericCodeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttributeListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Attribute" type="bs:AttributeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttributeValueListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="AttributeValue" type="bs:AttributeValueType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttributeValueUnitListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="AttributeValueUnit" type="bs:AttributeValueUnitType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BrandListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Brand" type="bs:NumericCodeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ModelListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Model" type="bs:ModelReturnType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BundleGroupListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="BundleGroup" type="bs:NumericCodeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReturnsCompanyListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="ReturnsCompany" type="bs:StringCodeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CategoryListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Category" type="bs:CategoryType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddressBookListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="AddressBook" type="bs:AddressBookReturnType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QuestionAnswerListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="QuestionAnswerList" type="bs:QuestionAnswerReturnType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QuestionAnswerTemplateListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="QuestionAnswerTemplateList" type="bs:QuestionAnswerTemplateReturnType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Product" type="bs:ProductListItemType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductIdListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="ProductId" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GalleryListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Gallery" type="bs:GalleryInfoType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SellerNoticeListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="SellerNotice" type="bs:SellerNoticeListItemType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ImageURLListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="URL" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ImageReturnListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Image" type="bs:ImageReturnType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ModificationRequiredProductListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="ModificationRequiredProduct" type="bs:ModificationRequiredProductType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HopeDeliveryGroupListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="HopeDeliveryGroup" type="bs:NumericCodeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RegularHolidayCodeListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="RegularHolidayCode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HopeDeliveryGroupDayListType">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="HopeDeliveryGroupDay" type="bs:HopeDeliveryGroupDayType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StandardOptionGroupListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="StandardOptionGroup" type="bs:StandardOptionGroupType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StandardOptionAttributeListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="StandardOptionAttribute" type="bs:StandardOptionAttributeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StandardOptionItemListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="StandardOptionItem" type="bs:StandardOptionItemType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StandardOptionCategoryGroupsType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Group" type="bs:StandardOptionCategoryGroupType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StandardOptionCategoryAttributeListType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Attribute" type="bs:StandardOptionCategoryAttributeType" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

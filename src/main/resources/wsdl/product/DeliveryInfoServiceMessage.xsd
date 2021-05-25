@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- DeliveryInfoService Message XML Schema v.20120615 -->
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://shopn.platform.nhncorp.com/"
+	targetNamespace="http://shopn.platform.nhncorp.com/"
+>
+	<xs:include schemaLocation="BaseType.xsd" />
+
+	<!-- DeliveryInfoService Operation wrapper start -->
+	<xs:element name="GetBundleGroupListRequest" type="tns:GetBundleGroupListRequestType" />
+	<xs:complexType name="GetBundleGroupListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="BundleGroupName" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetBundleGroupListResponse" type="tns:GetBundleGroupListResponseType" />
+	<xs:complexType name="GetBundleGroupListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="BundleGroupList" type="tns:BundleGroupListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetReturnsCompanyListRequest" type="tns:GetReturnsCompanyListRequestType" />
+	<xs:complexType name="GetReturnsCompanyListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReturnsCompanyName" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetReturnsCompanyListResponse" type="tns:GetReturnsCompanyListResponseType" />
+	<xs:complexType name="GetReturnsCompanyListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ReturnsCompanyList" type="tns:ReturnsCompanyListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageBundleGroupRequest" type="tns:ManageBundleGroupRequestType" />
+	<xs:complexType name="ManageBundleGroupRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="BundleGroup" type="tns:BundleGroupType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageBundleGroupResponse" type="tns:ManageBundleGroupResponseType" />
+	<xs:complexType name="ManageBundleGroupResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="BundleGroupId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetBundleGroupRequest" type="tns:GetBundleGroupRequestType" />
+	<xs:complexType name="GetBundleGroupRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="BundleGroupId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetBundleGroupResponse" type="tns:GetBundleGroupResponseType" />
+	<xs:complexType name="GetBundleGroupResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="BundleGroup" type="tns:BundleGroupType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetHopeDeliveryGroupRequest" type="tns:GetHopeDeliveryGroupRequestType" />
+	<xs:complexType name="GetHopeDeliveryGroupRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="HopeDeliveryGroupId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetHopeDeliveryGroupResponse" type="tns:GetHopeDeliveryGroupResponseType" />
+	<xs:complexType name="GetHopeDeliveryGroupResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="HopeDeliveryGroup" type="tns:HopeDeliveryGroupType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetHopeDeliveryGroupListRequest" type="tns:GetHopeDeliveryGroupListRequestType" />
+	<xs:complexType name="GetHopeDeliveryGroupListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="HopeDeliveryGroupName" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetHopeDeliveryGroupListResponse" type="tns:GetHopeDeliveryGroupListResponseType" />
+	<xs:complexType name="GetHopeDeliveryGroupListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="HopeDeliveryGroupList" type="tns:HopeDeliveryGroupListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageHopeDeliveryGroupRequest" type="tns:ManageHopeDeliveryGroupRequestType" />
+	<xs:complexType name="ManageHopeDeliveryGroupRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="HopeDeliveryGroup" type="tns:HopeDeliveryGroupType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageHopeDeliveryGroupResponse" type="tns:ManageHopeDeliveryGroupResponseType" />
+	<xs:complexType name="ManageHopeDeliveryGroupResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="HopeDeliveryGroupId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- DeliveryInfoService Operation wrapper end -->
+</xs:schema>

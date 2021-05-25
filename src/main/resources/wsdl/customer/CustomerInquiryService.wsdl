@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions name="SearchAdAPI"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://customerinquiry.shopn.platform.nhncorp.com/"
+	targetNamespace="http://customerinquiry.shopn.platform.nhncorp.com/"
+>
+
+	<wsdl:types>
+		<xs:schema targetNamespace="http://customerinquiry.shopn.platform.nhncorp.com/">
+			<xs:include schemaLocation="CustomerInquiryServiceMessage.xsd" />
+		</xs:schema>
+	</wsdl:types>
+
+	<!-- CustomerInquiryService Messages -->
+	<wsdl:message name="CustomerInquiryService.GetCustomerInquiryListRequest">
+		<wsdl:part name="GetCustomerInquiryListRequest" element="tns:GetCustomerInquiryListRequest" />
+	</wsdl:message>
+	<wsdl:message name="CustomerInquiryService.GetCustomerInquiryListResponse">
+		<wsdl:part name="GetCustomerInquiryListResponse" element="tns:GetCustomerInquiryListResponse" />
+	</wsdl:message>
+	<wsdl:message name="CustomerInquiryService.AnswerCustomerInquiryRequest">
+		<wsdl:part name="AnswerCustomerInquiryRequest" element="tns:AnswerCustomerInquiryRequest" />
+	</wsdl:message>
+	<wsdl:message name="CustomerInquiryService.AnswerCustomerInquiryResponse">
+		<wsdl:part name="AnswerCustomerInquiryResponse" element="tns:AnswerCustomerInquiryResponse" />
+	</wsdl:message>
+
+	<!-- CustomerInquiryService PortType -->
+	<wsdl:portType name="CustomerInquiryServicePortType">
+		<wsdl:operation name="GetCustomerInquiryList">
+			<wsdl:input message="tns:CustomerInquiryService.GetCustomerInquiryListRequest" />
+			<wsdl:output message="tns:CustomerInquiryService.GetCustomerInquiryListResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="AnswerCustomerInquiry">
+			<wsdl:input message="tns:CustomerInquiryService.AnswerCustomerInquiryRequest" />
+			<wsdl:output message="tns:CustomerInquiryService.AnswerCustomerInquiryResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<!-- CustomerInquiryService SOAP 1.1 Binding -->
+	<wsdl:binding name="CustomerInquiryServiceSOAP11Binding" type="tns:CustomerInquiryServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="GetCustomerInquiryList">
+			<soap:operation soapAction="CustomerInquiryService#GetCustomerInquiryList" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AnswerCustomerInquiry">
+			<soap:operation soapAction="CustomerInquiryService#AnswerCustomerInquiry" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<!-- CustomerInquiryService SOAP 1.2 Binding -->
+	<wsdl:binding name="CustomerInquiryServiceSOAP12Binding" type="tns:CustomerInquiryServicePortType">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="GetCustomerInquiryList">
+			<soap12:operation soapAction="CustomerInquiryService#GetCustomerInquiryList" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AnswerCustomerInquiry">
+			<soap12:operation soapAction="CustomerInquiryService#AnswerCustomerInquiry" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<!-- CustomerInquiryService -->
+	<wsdl:service name="CustomerInquiryService">
+		<wsdl:port name="CustomerInquiryServiceSOAP11port_http" binding="tns:CustomerInquiryServiceSOAP11Binding">
+			<soap:address location="http://ec.api.naver.com/ShopN/CustomerInquiryService" />
+		</wsdl:port>
+		<wsdl:port name="CustomerInquiryServiceSOAP12port_http" binding="tns:CustomerInquiryServiceSOAP12Binding">
+			<soap12:address location="http://ec.api.naver.com/ShopN/CustomerInquiryService" />
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>
+
+
+

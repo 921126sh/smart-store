@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ProductService Message XML Schema -->
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://shopn.platform.nhncorp.com/"
+	targetNamespace="http://shopn.platform.nhncorp.com/"
+>
+	<xs:include schemaLocation="BaseType.xsd" />
+
+	<!-- ProductService Operation wrapper start -->
+	<xs:element name="ChangeProductSaleStatusRequest" type="tns:ChangeProductSaleStatusRequestType" />
+	<xs:complexType name="ChangeProductSaleStatusRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="SaleStatus" type="tns:SaleStatusType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ChangeProductSaleStatusResponse" type="tns:ChangeProductSaleStatusResponseType" />
+	<xs:complexType name="ChangeProductSaleStatusResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ProductId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetAllCategoryListRequest" type="tns:GetAllCategoryListRequestType" />
+	<xs:complexType name="GetAllCategoryListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="Last" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetAllCategoryListResponse" type="tns:GetAllCategoryListResponseType" />
+	<xs:complexType name="GetAllCategoryListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="CategoryList" type="tns:CategoryListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetAttributeListRequest" type="tns:GetAttributeListRequestType" />
+	<xs:complexType name="GetAttributeListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="CategoryId" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetAttributeListResponse" type="tns:GetAttributeListResponseType" />
+	<xs:complexType name="GetAttributeListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="AttributeList" type="tns:AttributeListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetAttributeValueListRequest" type="tns:GetAttributeValueListRequestType" />
+	<xs:complexType name="GetAttributeValueListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="CategoryId" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetAttributeValueListResponse" type="tns:GetAttributeValueListResponseType" />
+	<xs:complexType name="GetAttributeValueListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="AttributeValueList" type="tns:AttributeValueListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetAttributeValueUnitListRequest" type="tns:GetAttributeValueUnitListRequestType" />
+	<xs:complexType name="GetAttributeValueUnitListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetAttributeValueUnitListResponse" type="tns:GetAttributeValueUnitListResponseType" />
+	<xs:complexType name="GetAttributeValueUnitListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="AttributeValueUnitList" type="tns:AttributeValueUnitListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetBrandListRequest" type="tns:GetBrandListRequestType" />
+	<xs:complexType name="GetBrandListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="BrandName" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetBrandListResponse" type="tns:GetBrandListResponseType" />
+	<xs:complexType name="GetBrandListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="BrandList" type="tns:BrandListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetCategoryInfoRequest" type="tns:GetCategoryInfoRequestType" />
+	<xs:complexType name="GetCategoryInfoRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="CategoryId" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetCategoryInfoResponse" type="tns:GetCategoryInfoResponseType" />
+	<xs:complexType name="GetCategoryInfoResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="Category" type="tns:CategoryReturnType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetManufacturerListRequest" type="tns:GetManufacturerListRequestType" />
+	<xs:complexType name="GetManufacturerListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="ManufacturerName" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetManufacturerListResponse" type="tns:GetManufacturerListResponseType" />
+	<xs:complexType name="GetManufacturerListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ManufacturerList" type="tns:ManufacturerListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetModelListRequest" type="tns:GetModelListRequestType" />
+	<xs:complexType name="GetModelListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ModelId" type="xs:long" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ModelName" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Page" type="xs:int" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetModelListResponse" type="tns:GetModelListResponseType" />
+	<xs:complexType name="GetModelListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ModelList" type="tns:ModelListType" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Page" type="xs:int" />
+					<xs:element minOccurs="0" maxOccurs="1" name="TotalPage" type="xs:int" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetOptionRequest" type="tns:GetOptionRequestType" />
+	<xs:complexType name="GetOptionRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetOptionResponse" type="tns:GetOptionResponseType" />
+	<xs:complexType name="GetOptionResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="Option" type="tns:OptionType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetOriginAreaListRequest" type="tns:GetOriginAreaListRequestType" />
+	<xs:complexType name="GetOriginAreaListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="OriginAreaName" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="OriginAreaCode" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetOriginAreaListResponse" type="tns:GetOriginAreaListResponseType" />
+	<xs:complexType name="GetOriginAreaListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="OriginAreaList" type="tns:OriginAreaListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetProductRequest" type="tns:GetProductRequestType" />
+	<xs:complexType name="GetProductRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetProductResponse" type="tns:GetProductResponseType" />
+	<xs:complexType name="GetProductResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="Product" type="tns:ProductType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetProductListRequest" type="tns:GetProductListRequestType" />
+	<xs:complexType name="GetProductListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ProductId" type="xs:long" />
+					<xs:element minOccurs="0" maxOccurs="1" name="SellerManagementCode" type="xs:string" />
+					<xs:element minOccurs="0" name="StatusTypeList">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="StatusType" type="xs:string"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" maxOccurs="1" name="Page" type="xs:int" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PageSize" type="xs:int" />
+					<xs:element minOccurs="0" maxOccurs="1" name="OrderType" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PeriodType" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="FromDate" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ToDate" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetProductListResponse" type="tns:GetProductListResponseType" />
+	<xs:complexType name="GetProductListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ProductList" type="tns:ProductListType" />
+					<xs:element minOccurs="0" maxOccurs="1" name="Page" type="xs:int" />
+					<xs:element minOccurs="0" maxOccurs="1" name="TotalPage" type="xs:int" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetSubCategoryListRequest" type="tns:GetSubCategoryListRequestType" />
+	<xs:complexType name="GetSubCategoryListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="CategoryId" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetSubCategoryListResponse" type="tns:GetSubCategoryListResponseType" />
+	<xs:complexType name="GetSubCategoryListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="CategoryList" type="tns:CategoryListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetSubOriginAreaListRequest" type="tns:GetSubOriginAreaListRequestType" />
+	<xs:complexType name="GetSubOriginAreaListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="OriginAreaCode" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetSubOriginAreaListResponse" type="tns:GetSubOriginAreaListResponseType" />
+	<xs:complexType name="GetSubOriginAreaListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="OriginAreaList" type="tns:OriginAreaListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetSupplementProductRequest" type="tns:GetSupplementProductRequestType" />
+	<xs:complexType name="GetSupplementProductRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetSupplementProductResponse" type="tns:GetSupplementProductResponseType" />
+	<xs:complexType name="GetSupplementProductResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="SupplementProduct" type="tns:SupplementProductType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageOptionRequest" type="tns:ManageOptionRequestType" />
+	<xs:complexType name="ManageOptionRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Option" type="tns:OptionType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageOptionResponse" type="tns:ManageOptionResponseType" />
+	<xs:complexType name="ManageOptionResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ProductId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageProductRequest" type="tns:ManageProductRequestType" />
+	<xs:complexType name="ManageProductRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="Product" type="tns:ProductType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageProductResponse" type="tns:ManageProductResponseType" />
+	<xs:complexType name="ManageProductResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ProductId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageSupplementProductRequest" type="tns:ManageSupplementProductRequestType" />
+	<xs:complexType name="ManageSupplementProductRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="SupplementProduct" type="tns:SupplementProductType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageSupplementProductResponse" type="tns:ManageSupplementProductResponseType" />
+	<xs:complexType name="ManageSupplementProductResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ProductId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DeleteProductRequest" type="tns:DeleteProductRequestType" />
+	<xs:complexType name="DeleteProductRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element name="SellerId" type="xs:string" />
+					<xs:element name="ProductId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DeleteProductResponse" type="tns:DeleteProductResponseType" />
+	<xs:complexType name="DeleteProductResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetAllOriginAreaListRequest" type="tns:GetAllOriginAreaListRequestType" />
+	<xs:complexType name="GetAllOriginAreaListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetAllOriginAreaListResponse" type="tns:GetAllOriginAreaListResponseType" />
+	<xs:complexType name="GetAllOriginAreaListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="OriginAreaList" type="tns:OriginAreaListType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetModificationRequiredProductListRequest" type="tns:GetModificationRequiredProductListRequestType" />
+	<xs:complexType name="GetModificationRequiredProductListRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element name="SellerId" type="xs:string" />
+					<xs:element minOccurs="0" name="Page" type="xs:int" />
+					<xs:element minOccurs="0" name="PageSize" type="xs:int" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetModificationRequiredProductListResponse" type="tns:GetModificationRequiredProductListResponseType" />
+	<xs:complexType name="GetModificationRequiredProductListResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ModificationRequiredProductList" type="tns:ModificationRequiredProductListType" />
+					<xs:element minOccurs="0" name="Page" type="xs:int" />
+					<xs:element minOccurs="0" name="TotalPage" type="xs:int" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageMobileImageInfoRequest" type="tns:ManageMobileImageInfoRequestType" />
+	<xs:complexType name="ManageMobileImageInfoRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="MobileImageInfo" type="tns:MobileImageInfoType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageMobileImageInfoResponse" type="tns:ManageMobileImageInfoResponseType" />
+	<xs:complexType name="ManageMobileImageInfoResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="MobileImageInfo" type="tns:MobileImageInfoType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetMobileImageInfoRequest" type="tns:GetMobileImageInfoRequestType" />
+	<xs:complexType name="GetMobileImageInfoRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetMobileImageInfoResponse" type="tns:GetMobileImageInfoResponseType" />
+	<xs:complexType name="GetMobileImageInfoResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="MobileImageInfo" type="tns:MobileImageInfoType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="RestoreProductRequest" type="tns:RestoreProductRequestType" />
+	<xs:complexType name="RestoreProductRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element name="SellerId" type="xs:string" />
+					<xs:element name="ProductId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="RestoreProductResponse" type="tns:RestoreProductResponseType" />
+	<xs:complexType name="RestoreProductResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetStandardOptionCategoryRequest" type="tns:GetStandardOptionCategoryRequestType" />
+	<xs:complexType name="GetStandardOptionCategoryRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="CategoryId" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetStandardOptionCategoryResponse" type="tns:GetStandardOptionCategoryResponseType" />
+	<xs:complexType name="GetStandardOptionCategoryResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="StandardOptionCategory" type="tns:StandardOptionCategoryType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageStandardOptionRequest" type="tns:ManageStandardOptionRequestType" />
+	<xs:complexType name="ManageStandardOptionRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="StandardOption" type="tns:StandardOptionType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ManageStandardOptionResponse" type="tns:ManageStandardOptionResponseType" />
+	<xs:complexType name="ManageStandardOptionResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ProductId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetStandardOptionRequest" type="tns:GetStandardOptionRequestType" />
+	<xs:complexType name="GetStandardOptionRequestType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductRequestType">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" name="SellerId" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:long" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetStandardOptionResponse" type="tns:GetStandardOptionResponseType" />
+	<xs:complexType name="GetStandardOptionResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:BaseProductResponseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="StandardOption" type="tns:StandardOptionType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ProductService Operation wrapper end -->
+</xs:schema>
