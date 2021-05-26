@@ -13,7 +13,7 @@ import java.net.URL;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "RegisterSellerService", targetNamespace = "http://shopn.platform.nhncorp.com/", wsdlLocation = "file:/Users/seotaewan/smart-store/src/main/resources/wsdl/product/ShopNAPI.wsdl")
+@WebServiceClient(name = "RegisterSellerService", targetNamespace = "http://shopn.platform.nhncorp.com/", wsdlLocation = "file:./src/main/resources/wsdl/product/ShopNAPI.wsdl")
 public class RegisterSellerService
     extends Service
 {
@@ -26,7 +26,7 @@ public class RegisterSellerService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/Users/seotaewan/smart-store/src/main/resources/wsdl/product/ShopNAPI.wsdl");
+            url = new URL("file:./src/main/resources/wsdl/product/ShopNAPI.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
