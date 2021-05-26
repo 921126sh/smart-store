@@ -12,6 +12,7 @@ import com.example.localtest.smartstoreapi.seller.type.*;
 
 import javax.xml.datatype.DatatypeFactory;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 
@@ -25,6 +26,8 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     public List<SellerDAO> getStoreLog() {
         return sellerMapper.getStoreLog();
     }
+
+
 
 
     // 상품주문내역 상세조회
@@ -87,7 +90,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 상품주문내역 상세조회
-    public void 후_상품주문내역_상세조회(String ProductOrderID, long targetSeq) throws Exception {
+    public GetProductOrderInfoListResponse 후_상품주문내역_상세조회(String ProductOrderID, long targetSeq) throws Exception {
         //PRODUCT ID(TEST): 2001238236, 2001238220, 2001238211, 2001238206, 2001238205, 2001238197, 2001238196, 2001238195, 2001238194, 2001238174, 2001192790, 2001192789, 2001192785, 2001192784, 2001192783, 2001192210, 2001192189, 2001183501, 2001183500, 2001183499, 2001183498, 2001183496
         GetProductOrderInfoListRequest getProductOrderInfoListRequest = new GetProductOrderInfoListRequest();
 
@@ -131,6 +134,8 @@ public class SellerCoreServiceImpl implements SellerCoreService {
         }
 
         sellerMapper.updateStoreLogBySeq(sellerDAO);
+
+        return response;
     }
 
 
@@ -271,13 +276,15 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 발송 지연 처리
-    public void 발송지연_처리() throws Exception {
+    public void 발송지연_처리(String ProductOrderID, LocalDate DispatchDueDate, String DispatchDelayReasonCode) throws Exception {
         DelayProductOrderRequest delayProductOrderRequest = new DelayProductOrderRequest();
-        delayProductOrderRequest.setProductOrderID("PONO100000000004");
-        delayProductOrderRequest.setDispatchDelayReasonCode(DelayedDispatchReasonType.CUSTOMER_REQUEST);
+        delayProductOrderRequest.setProductOrderID(ProductOrderID);
+
+        DelayedDispatchReasonType dateSet = DelayedDispatchReasonType.fromValue(DispatchDelayReasonCode);
+        delayProductOrderRequest.setDispatchDelayReasonCode(dateSet);
 
         GregorianCalendar fromDate = new GregorianCalendar();
-        fromDate.set(2021, Calendar.JULY, 01);
+        fromDate.set(DispatchDueDate.getYear(), DispatchDueDate.getMonthValue() - 1, DispatchDueDate.getDayOfMonth());
 
         delayProductOrderRequest.setDispatchDueDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(fromDate));
 
