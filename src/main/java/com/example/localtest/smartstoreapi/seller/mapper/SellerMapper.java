@@ -8,4 +8,7 @@ import java.util.List;
 @Mapper
 public interface SellerMapper {
     public List<SellerDAO> getStoreLog();
+    public void afterInsertStoreLog(SellerDAO sellerDAO);
+    public SellerDAO getStoreLogBySeq(long targetSeq);
+    public void updateStoreLogBySeq(SellerDAO sellerDAO);
 }

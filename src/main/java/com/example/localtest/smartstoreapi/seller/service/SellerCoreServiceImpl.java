@@ -4,6 +4,7 @@ import com.example.localtest.smartstoreapi.common.Utils;
 import com.example.localtest.smartstoreapi.seller.dao.SellerDAO;
 import com.example.localtest.smartstoreapi.seller.mapper.SellerMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,7 @@ import com.example.localtest.smartstoreapi.seller.type.*;
 
 import javax.xml.datatype.DatatypeFactory;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 
 @Slf4j
@@ -25,21 +23,18 @@ public class SellerCoreServiceImpl implements SellerCoreService {
 
     @Override
     public List<SellerDAO> getStoreLog() {
-        List<SellerDAO> storeLogList = sellerMapper.getStoreLog();
-
-        System.out.println(storeLogList.get(0).getAfterClaimStatus());
-
-        return null;
+        return sellerMapper.getStoreLog();
     }
 
 
     // 상품주문내역 상세조회
-    public void 상품주문내역_상세조회() throws Exception {
+    public long 전_상품주문내역_상세조회(String ProductOrderID, JSONObject jsonObject) throws Exception {
         //PRODUCT ID(TEST): 2001238236, 2001238220, 2001238211, 2001238206, 2001238205, 2001238197, 2001238196, 2001238195, 2001238194, 2001238174, 2001192790, 2001192789, 2001192785, 2001192784, 2001192783, 2001192210, 2001192189, 2001183501, 2001183500, 2001183499, 2001183498, 2001183496
         GetProductOrderInfoListRequest getProductOrderInfoListRequest = new GetProductOrderInfoListRequest();
 
         ArrayList<String> productOrderIdList = new ArrayList<String>() {{
-            add("2021052528962071");
+//            add("2021052528962071");
+            add(ProductOrderID);
         }};
 
         productOrderIdList.forEach(str -> getProductOrderInfoListRequest.getProductOrderIDList().add(str));
@@ -50,12 +45,83 @@ public class SellerCoreServiceImpl implements SellerCoreService {
         SellerServicePortType port = sellerService.getSellerServiceSOAP12Port();
         GetProductOrderInfoListResponse response = port.getProductOrderInfoList(getProductOrderInfoListRequest);
 
+        ProductOrder po = null;
+        SellerDAO sellerDAO = new SellerDAO();
+        if (!response.getProductOrderInfoList().isEmpty()) {
+            po = response.getProductOrderInfoList().get(0).getProductOrder();
+
+            sellerDAO.setBeforeClaimStatus(Optional.ofNullable(po.getClaimStatus().value()).orElse(null));
+            sellerDAO.setBeforeClaimType(Optional.ofNullable(po.getClaimType().value()).orElse(null));
+            sellerDAO.setBeforeProductOrderStatus(Optional.ofNullable(po.getProductOrderStatus().value()).orElse(null));
+            sellerDAO.setProductOrderId(Optional.ofNullable(po.getProductOrderID()).orElse(null));
+            sellerDAO.setMallId(Optional.ofNullable(po.getMallID()).orElse(null));
+            sellerDAO.setProductId(Optional.ofNullable(po.getProductID()).orElse(null));
+            sellerDAO.setProductName(Optional.ofNullable(po.getProductName()).orElse(null));
+            sellerDAO.setProductOption(Optional.ofNullable(po.getProductOption()).orElse(null));
+        }
+
         log.info("response.toString() : " + response.toString());
         log.info("response.getWarningList() : " + response.getWarningList());
 
         // Response에서 상품번호 확인
         if ("SUCCESS".equals(response.getResponseType())) {
-            log.info("상품상태 : [" + response.getProductOrderInfoList().get(0).getProductOrder().getProductOrderStatus() + "]");
+//            log.info("상품상태 : [" + response.getProductOrderInfoList().get(0).getProductOrder().getProductOrderStatus() + "]");
+            log.info("TIMESTAMP : [" + response.getTimestamp() + "]");
+        } else {
+            log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
+            log.info("에러 코드 : [" + response.getError().getCode() + "]");
+            log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
+            System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+        }
+        ErrorType errorType = response.getError();
+
+        sellerDAO.setParameterJson(Optional.ofNullable(jsonObject.toJSONString()).orElse(null));
+
+        sellerDAO.setErrorCode(errorType == null ? null : errorType.getCode());
+        sellerDAO.setErrorMessage(errorType == null ? null : errorType.getMessage());
+        sellerDAO.setErrorDetail(errorType == null ? null : errorType.getDetail());
+
+        sellerMapper.afterInsertStoreLog(sellerDAO);
+
+        return sellerDAO.getSeq();
+    }
+
+    // 상품주문내역 상세조회
+    public void 후_상품주문내역_상세조회(String ProductOrderID, long targetSeq) throws Exception {
+        //PRODUCT ID(TEST): 2001238236, 2001238220, 2001238211, 2001238206, 2001238205, 2001238197, 2001238196, 2001238195, 2001238194, 2001238174, 2001192790, 2001192789, 2001192785, 2001192784, 2001192783, 2001192210, 2001192189, 2001183501, 2001183500, 2001183499, 2001183498, 2001183496
+        GetProductOrderInfoListRequest getProductOrderInfoListRequest = new GetProductOrderInfoListRequest();
+
+        ArrayList<String> productOrderIdList = new ArrayList<String>() {{
+//            add("2021052528962071");
+            add(ProductOrderID);
+        }};
+
+        productOrderIdList.forEach(str -> getProductOrderInfoListRequest.getProductOrderIDList().add(str));
+        Utils.setBaseSellerRequestType(getProductOrderInfoListRequest);
+        getProductOrderInfoListRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "GetProductOrderInfoList"));
+
+        SellerService sellerService = new SellerService();
+        SellerServicePortType port = sellerService.getSellerServiceSOAP12Port();
+        GetProductOrderInfoListResponse response = port.getProductOrderInfoList(getProductOrderInfoListRequest);
+
+        ProductOrder po = null;
+        SellerDAO sellerDAO = new SellerDAO();
+        if (!response.getProductOrderInfoList().isEmpty()) {
+            po = response.getProductOrderInfoList().get(0).getProductOrder();
+
+            sellerDAO.setAfterClaimStatus(po.getClaimStatus().value());
+            sellerDAO.setAfterClaimType(po.getClaimType().value());
+            sellerDAO.setAfterProductOrderStatus(po.getProductOrderStatus().value());
+        }
+
+        sellerDAO.setSeq(targetSeq);
+
+        log.info("response.toString() : " + response.toString());
+        log.info("response.getWarningList() : " + response.getWarningList());
+
+        // Response에서 상품번호 확인
+        if ("SUCCESS".equals(response.getResponseType())) {
+//            log.info("상품상태 : [" + response.getProductOrderInfoList().get(0).getProductOrder().getProductOrderStatus() + "]");
             log.info("TIMESTAMP : [" + response.getTimestamp() + "]");
         } else {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
@@ -64,9 +130,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
         }
 
-//        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
-//        assertThat(response.getProductOrderInfoList()).isNotNull();
-//        assertThat(response.getError()).isNull();
+        sellerMapper.updateStoreLogBySeq(sellerDAO);
     }
 
 
@@ -114,9 +178,9 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
 
-    public void 발주_확인처리() throws Exception {
+    public void 발주_확인처리(String ProductOrderID) throws Exception {
         PlaceProductOrderRequest placeProductOrderRequest = new PlaceProductOrderRequest();
-        placeProductOrderRequest.setProductOrderID("2021052528962071");
+        placeProductOrderRequest.setProductOrderID(ProductOrderID);
         placeProductOrderRequest.setCheckReceiverAddressChanged(true);
 
         Utils.setBaseSellerRequestType(placeProductOrderRequest);

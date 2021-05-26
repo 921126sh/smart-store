@@ -7,6 +7,22 @@
 <!--    </insert>-->
 
     <select id="getStoreLog" resultType="SellerDAO">
-        SELECT * FROM StoreLogs;
+        SELECT * FROM StoreLogs
+        ORDER BY seq DESC;
     </select>
+
+    <insert id="afterInsertStoreLog" useGeneratedKeys="true" keyProperty="seq" parameterType="SellerDAO">
+        INSERT INTO StoreLogs (beforeClaimStatus, beforeClaimType, beforeProductOrderStatus, afterClaimStatus, afterClaimType, afterProductOrderStatus, productOrderId, mallId, productId, productName, productOption, parameterJson, errorCode, errorMessage, errorDetail)
+        VALUES  (#{beforeClaimStatus}, #{beforeClaimType}, #{beforeProductOrderStatus}, #{afterClaimStatus}, #{afterClaimType}, #{afterProductOrderStatus}, #{productOrderId}, #{mallId}, #{productId}, #{productName}, #{productOption}, #{parameterJson}, #{errorCode}, #{errorMessage}, #{errorDetail});
+    </insert>
+
+    <select id="getStoreLogBySeq" parameterType="Integer" resultType="SellerDAO">
+        SELECT * FROM StoreLogs
+        WHERE seq = #{targetSeq};
+    </select>
+
+    <update id="updateStoreLogBySeq" parameterType="SellerDAO">
+        UPDATE StoreLogs SET afterClaimStatus = #{afterClaimStatus}, afterClaimType = #{afterClaimType}, afterProductOrderStatus = #{afterProductOrderStatus}
+        WHERE seq = #{seq};
+    </update>
 </mapper>

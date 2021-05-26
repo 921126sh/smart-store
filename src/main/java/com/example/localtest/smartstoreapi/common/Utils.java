@@ -6,8 +6,11 @@ import com.example.localtest.smartstoreapi.seller.type.BaseCheckoutRequestType;
 import com.nhncorp.psinfra.toolkit.SimpleCryptLib;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Security;
 import java.security.SignatureException;
 import java.sql.Timestamp;
@@ -16,6 +19,9 @@ import java.time.LocalDateTime;
 @Slf4j
 @Component
 public class Utils {
+    @Autowired
+    HttpServletRequest httpServletRequest;
+
     private final static String ACCESS_LICENSE = "0100010000bd64b60dc613e3f1148343a04179ea51dae2b19f0e318d3a4ea0d348cb08fb1f";
     private final static String SECRET_KEY = "AQABAACNhlc0Aw2o0rjMOsbLRWONGvwtF222firem3BkkgVXfQ==";
     private static String requestId = "twcadviceid_" + Timestamp.valueOf(LocalDateTime.now()).getTime();
@@ -103,4 +109,37 @@ public class Utils {
         wsdlType.setVersion("1.0");
         wsdlType.setDetailLevel("Full");
     }
+
+    public String getReqURI() {
+        return httpServletRequest.getRequestURI();
+    }
+
+    public ApiResponseEntity successResponse(Object result) {
+        return new ApiResponseEntity(
+                HttpStatus.OK.value(),
+                "",
+                result,
+                this.getReqURI()
+        );
+    }
+
+    public ApiResponseEntity badResponse(Object result) {
+        return new ApiResponseEntity(
+                HttpStatus.BAD_REQUEST.value(),
+                "",
+                result,
+                this.getReqURI()
+        );
+    }
+
+    public ApiResponseEntity badResponse(Object result, String error) {
+        return new ApiResponseEntity(
+                HttpStatus.BAD_REQUEST.value(),
+                error,
+                result,
+                this.getReqURI()
+        );
+    }
+
+
 }

@@ -31,7 +31,7 @@ public class RetrieveOrderService {
         GetProductOrderInfoListRequest getProductOrderInfoListRequest = new GetProductOrderInfoListRequest();
 
         ArrayList<String> productOrderIdList = new ArrayList<String>() {{
-            add("2021052528962071");
+            add("23492039402934092309230942--34");
         }};
 
         productOrderIdList.forEach(str -> getProductOrderInfoListRequest.getProductOrderIDList().add(str));
@@ -47,7 +47,7 @@ public class RetrieveOrderService {
 
         // Response에서 상품번호 확인
         if ("SUCCESS".equals(response.getResponseType())) {
-            log.info("상품상태 : [" + response.getProductOrderInfoList().get(0).getProductOrder().getProductOrderStatus() + "]");
+//            log.info("상품상태 : [" + response.getProductOrderInfoList().get(0).getProductOrder().getProductOrderStatus() + "]");
             log.info("TIMESTAMP : [" + response.getTimestamp() + "]");
         } else {
             log.info("에러 메시지 : [" + response.getError().getMessage() + "]");
@@ -71,16 +71,16 @@ public class RetrieveOrderService {
 //        getChangedProductOrderListRequest.setLastChangedStatusCode(ProductOrderChangeType.PURCHASE_DECIDED);
 
         GregorianCalendar fromDate = new GregorianCalendar();
-        fromDate.set(2010, Calendar.MAY, 05, 20, 01, 01);
+        fromDate.set(2021, Calendar.MAY, 24, 10, 01, 01);
 
-//        GregorianCalendar toDate = new GregorianCalendar();
-//        toDate.set(2012, Calendar.JANUARY, 02, 01, 01, 01);
+        GregorianCalendar toDate = new GregorianCalendar();
+        toDate.set(2021, Calendar.MAY, 25, 10, 01, 01);
 
         System.out.printf("START DATE -----> [%s]%n", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(fromDate.getTime()));
-//        System.out.printf("END DATE -----> [%s]%n", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(toDate.getTime()));
+        System.out.printf("END DATE -----> [%s]%n", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(toDate.getTime()));
 
         getChangedProductOrderListRequest.setInquiryTimeFrom(DatatypeFactory.newInstance().newXMLGregorianCalendar(fromDate));
-//        getChangedProductOrderListRequest.setInquiryTimeTo(DatatypeFactory.newInstance().newXMLGregorianCalendar(toDate));
+        getChangedProductOrderListRequest.setInquiryTimeTo(DatatypeFactory.newInstance().newXMLGregorianCalendar(toDate));
 
 
         Utils.setBaseSellerRequestType(getChangedProductOrderListRequest);

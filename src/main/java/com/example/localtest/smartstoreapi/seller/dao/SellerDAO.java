@@ -2,11 +2,14 @@ package com.example.localtest.smartstoreapi.seller.dao;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.json.simple.JSONObject;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class SellerDAO {
 
     private long seq;
@@ -16,7 +19,14 @@ public class SellerDAO {
     private String afterClaimStatus;
     private String afterClaimType;
     private String afterProductOrderStatus;
-    private long productOrderId;
-
+    private String productOrderId;
+    private String mallId;
+    private String productId;
+    private String productName;
+    private String productOption;
+    private String parameterJson;
+    private String errorCode;
+    private String errorMessage;
+    private String errorDetail;
 
 }
