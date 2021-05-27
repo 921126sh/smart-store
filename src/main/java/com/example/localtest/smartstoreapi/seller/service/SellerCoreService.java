@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface SellerCoreService {
     public List<SellerDAO> getStoreLog();
+    public List<SellerDAO> getStoreErrorLog();
 }

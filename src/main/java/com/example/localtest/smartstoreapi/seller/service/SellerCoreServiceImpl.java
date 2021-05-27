@@ -27,6 +27,11 @@ public class SellerCoreServiceImpl implements SellerCoreService {
         return sellerMapper.getStoreLog();
     }
 
+    @Override
+    public List<SellerDAO> getStoreErrorLog() {
+        return sellerMapper.getStoreErrorLog();
+    }
+
 
 
 

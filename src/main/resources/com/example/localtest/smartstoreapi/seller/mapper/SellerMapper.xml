@@ -6,9 +6,12 @@
 <!--        SELECT * FROM board;-->
 <!--    </insert>-->
 
-    <select id="getStoreLog" resultType="SellerDAO">
-        SELECT * FROM StoreLogs
-        ORDER BY seq DESC;
+    <select id="getStoreLog" resultType="StoreLogDTO">
+        SELECT DISTINCT beforeClaimStatus, beforeClaimType, beforeProductOrderStatus, endPoint, parameterJson, afterClaimStatus, afterClaimType, afterProductOrderStatus, regDate
+        FROM
+            logs.StoreLogs
+        WHERE errorCode IS NULL
+        ORDER BY regDate DESC;
     </select>
 
     <insert id="afterInsertStoreLog" useGeneratedKeys="true" keyProperty="seq" parameterType="SellerDAO">
@@ -25,4 +28,12 @@
         UPDATE StoreLogs SET afterClaimStatus = #{afterClaimStatus}, afterClaimType = #{afterClaimType}, afterProductOrderStatus = #{afterProductOrderStatus}
         WHERE seq = #{seq};
     </update>
+
+    <select id="getStoreErrorLog" resultType="StoreErrorLogDTO">
+        SELECT DISTINCT beforeClaimStatus, beforeClaimType, beforeProductOrderStatus, endPoint, parameterJson, afterClaimStatus, afterClaimType, afterProductOrderStatus, errorCode, errorMessage, regDate
+        FROM
+            logs.StoreLogs
+                WHERE errorCode IS NOT NULL
+        ORDER BY regDate DESC;
+    </select>
 </mapper>

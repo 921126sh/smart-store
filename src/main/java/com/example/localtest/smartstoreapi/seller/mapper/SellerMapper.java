@@ -11,4 +11,5 @@ public interface SellerMapper {
     public void afterInsertStoreLog(SellerDAO sellerDAO);
     public SellerDAO getStoreLogBySeq(long targetSeq);
     public void updateStoreLogBySeq(SellerDAO sellerDAO);
+    public List<SellerDAO> getStoreErrorLog();
 }

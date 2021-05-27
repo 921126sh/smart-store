@@ -8,5 +8,7 @@
     </settings>
     <typeAliases>
         <typeAlias alias="SellerDAO" type="com.example.localtest.smartstoreapi.seller.dao.SellerDAO"/>
+        <typeAlias alias="StoreErrorLogDTO" type="com.example.localtest.smartstoreapi.seller.dto.StoreErrorLogDTO"/>
+        <typeAlias alias="StoreLogDTO" type="com.example.localtest.smartstoreapi.seller.dto.StoreLogDTO"/>
     </typeAliases>
 </configuration>

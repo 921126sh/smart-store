@@ -42,12 +42,31 @@ public class SellerController {
     }
 
 
+    /**
+     * 성공 로그 리스트 API
+     * @return
+     * @throws Exception
+     */
     @GetMapping("/StoreLogsLists")
     public ResponseEntity<ApiResponseEntity> getStoreLogsLists() throws Exception {
         List<SellerDAO> sellerDAOList = sellerCoreService.getStoreLog();
 
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(sellerDAOList), HttpStatus.OK);
     }
+
+
+    /**
+     * 중복 제거 에러 로그 리스팅 API
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/StoreLogsErrorLists")
+    public ResponseEntity<ApiResponseEntity> getStoreLogsErrorLists() throws Exception {
+        List<SellerDAO> sellerDAOList = sellerCoreService.getStoreErrorLog();
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(sellerDAOList), HttpStatus.OK);
+    }
+
 
     /**
      * 발주 처리 확인
