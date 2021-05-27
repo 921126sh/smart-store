@@ -549,11 +549,14 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 교환 재배송 처리
-    public void 교환재배송_처리() throws Exception {
+    public void 교환재배송_처리(String ProductOrderID, String ReDeliveryMethodCode, String ReDeliveryCompanyCode) throws Exception {
         ReDeliveryExchangeRequest reDeliveryExchangeRequest = new ReDeliveryExchangeRequest();
-        reDeliveryExchangeRequest.setProductOrderID("PONO100000000004");
-        reDeliveryExchangeRequest.setReDeliveryMethodCode(DeliveryMethodType.RETURN_DELIVERY);
-        reDeliveryExchangeRequest.setReDeliveryCompanyCode("CJGLS");
+//        reDeliveryExchangeRequest.setProductOrderID("PONO100000000004");
+//        reDeliveryExchangeRequest.setReDeliveryMethodCode(DeliveryMethodType.RETURN_DELIVERY);
+//        reDeliveryExchangeRequest.setReDeliveryCompanyCode("CJGLS");
+        reDeliveryExchangeRequest.setProductOrderID(ProductOrderID);
+        reDeliveryExchangeRequest.setReDeliveryMethodCode(DeliveryMethodType.fromValue(ReDeliveryMethodCode));
+        reDeliveryExchangeRequest.setReDeliveryCompanyCode(ReDeliveryCompanyCode);
 
         Utils.setBaseSellerRequestType(reDeliveryExchangeRequest);
         reDeliveryExchangeRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "ReDeliveryExchange"));
@@ -581,9 +584,10 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 교환 거부
-    public void 교환_거부() throws Exception {
+    public void 교환_거부(String ProductOrderID, String RejectDetailContent) throws Exception {
         RejectExchangeRequest rejectExchangeRequest = new RejectExchangeRequest();
-        rejectExchangeRequest.setProductOrderID("PONO100000000004");
+        rejectExchangeRequest.setProductOrderID(ProductOrderID);
+        rejectExchangeRequest.setRejectDetailContent(RejectDetailContent);
 
         Utils.setBaseSellerRequestType(rejectExchangeRequest);
         rejectExchangeRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "RejectExchange"));
@@ -611,11 +615,11 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 교환 보류
-    public void 교환_보류() throws Exception {
+    public void 교환_보류(String ProductOrderID, String ExchangeHoldCode, String ExchangeHoldDetailContent) throws Exception {
         WithholdExchangeRequest withholdExchangeRequest = new WithholdExchangeRequest();
-        withholdExchangeRequest.setProductOrderID("PONO100000000004");
-        withholdExchangeRequest.setExchangeHoldCode(HoldbackClassType.ETC);
-        withholdExchangeRequest.setExchangeHoldDetailContent("테스트사유");
+        withholdExchangeRequest.setProductOrderID(ProductOrderID);
+        withholdExchangeRequest.setExchangeHoldCode(HoldbackClassType.fromValue(ExchangeHoldCode));
+        withholdExchangeRequest.setExchangeHoldDetailContent(ExchangeHoldDetailContent);
 
         Utils.setBaseSellerRequestType(withholdExchangeRequest);
         withholdExchangeRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "RejectExchange"));
@@ -643,9 +647,9 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 교환 보류 해제
-    public void 교환보류_해제() throws Exception {
+    public void 교환보류_해제(String ProductOrderID) throws Exception {
         ReleaseExchangeHoldRequest releaseExchangeHoldRequest = new ReleaseExchangeHoldRequest();
-        releaseExchangeHoldRequest.setProductOrderID("PONO100000000004");
+        releaseExchangeHoldRequest.setProductOrderID(ProductOrderID);
 
         Utils.setBaseSellerRequestType(releaseExchangeHoldRequest);
         releaseExchangeHoldRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "ReleaseExchangeHold"));

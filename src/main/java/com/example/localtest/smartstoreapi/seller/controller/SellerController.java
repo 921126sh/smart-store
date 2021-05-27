@@ -314,4 +314,104 @@ public class SellerController {
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
     }
 
+
+    /**
+     * 교환 상품 재발송
+     * @param ProductOrderID
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/ReDeliveryExchange")
+    public ResponseEntity<ApiResponseEntity> reDeliveryExchange(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                                @RequestParam("ReDeliveryCompanyCode") String ReDeliveryCompanyCode,
+                                                                @RequestParam(value = "ReDeliveryMethodCode", defaultValue = "RETURN_DELIVERY") String ReDeliveryMethodCode,
+                                                                HttpServletRequest httpServletRequest) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ProductOrderId", ProductOrderID);
+        jsonObject.put("ReDeliveryCompanyCode", ReDeliveryCompanyCode);
+        jsonObject.put("ReDeliveryMethodCode", ReDeliveryMethodCode);
+
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+//        sellerCoreService.교환재배송_처리(ProductOrderID, ReDeliveryMethodCode, ReDeliveryCompanyCode);
+        GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+    }
+
+
+    /**
+     * 교환 거부 처리
+     * @param ProductOrderID
+     * @param RejectDetailContent
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/RejectExchange")
+    public ResponseEntity<ApiResponseEntity> rejectExchange(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                            @RequestParam("RejectDetailContent") String RejectDetailContent,
+                                                            HttpServletRequest httpServletRequest) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ProductOrderId", ProductOrderID);
+        jsonObject.put("RejectDetailContent", RejectDetailContent);
+
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+//        sellerCoreService.교환_거부(ProductOrderID, RejectDetailContent);
+        GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+    }
+
+
+    /**
+     * 교환 보류 처리
+     * @param ProductOrderID
+     * @param ExchangeHoldCode
+     * @param ExchangeHoldDetailContent
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/WithholdExchange")
+    public ResponseEntity<ApiResponseEntity> withholdExchange(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                            @RequestParam(value = "ExchangeHoldCode", defaultValue = "ETC") String ExchangeHoldCode,
+                                                            @RequestParam("ExchangeHoldDetailContent") String ExchangeHoldDetailContent,
+                                                            HttpServletRequest httpServletRequest) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ProductOrderId", ProductOrderID);
+        jsonObject.put("ExchangeHoldCode", ExchangeHoldCode);
+        jsonObject.put("ExchangeHoldDetailContent", ExchangeHoldDetailContent);
+
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+//        sellerCoreService.교환_보류(ProductOrderID, ExchangeHoldCode, ExchangeHoldDetailContent);
+        GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+    }
+
+
+    /**
+     * 보류 해제 처리
+     * @param ProductOrderID
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/ReleaseExchangeHold")
+    public ResponseEntity<ApiResponseEntity> releaseExchangeHold(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                              HttpServletRequest httpServletRequest) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ProductOrderId", ProductOrderID);
+
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+//        sellerCoreService.교환보류_해제(ProductOrderID);
+        GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+    }
 }
