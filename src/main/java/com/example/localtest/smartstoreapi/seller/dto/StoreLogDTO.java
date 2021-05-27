@@ -11,6 +11,9 @@ import java.util.Date;
 @ToString
 public class StoreLogDTO {
 
+    private String productOrderId;
+    private String productId;
+    private String productName;
     private String beforeClaimStatus;
     private String beforeClaimType;
     private String beforeProductOrderStatus;

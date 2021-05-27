@@ -216,6 +216,8 @@ public class SellerController {
         jsonObject.put("ProductOrderID", ProductOrderID);
         jsonObject.put("ReturnReasonCode", ReturnReasonCode);
         jsonObject.put("CollectDeliveryMethodCode", CollectDeliveryMethodCode);
+        jsonObject.put("CollectDeliveryCompanyCode", CollectDeliveryCompanyCode);
+        jsonObject.put("CollectTrackingNumber", CollectTrackingNumber);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
 //        sellerCoreService.반품_접수(ProductOrderID, ReturnReasonCode, CollectDeliveryMethodCode, CollectDeliveryCompanyCode, CollectTrackingNumber); // Default Value Add
@@ -291,6 +293,7 @@ public class SellerController {
         jsonObject.put("ProductOrderId", ProductOrderID);
         jsonObject.put("ReturnHoldCode",ReturnHoldCode);
         jsonObject.put("ReturnHoldDetailContent", ReturnHoldDetailContent);
+        jsonObject.put("EtcFeeDemandAmount", EtcFeeDemandAmount);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
         sellerCoreService.반품_보류(ProductOrderID, ReturnHoldCode, ReturnHoldDetailContent, EtcFeeDemandAmount);

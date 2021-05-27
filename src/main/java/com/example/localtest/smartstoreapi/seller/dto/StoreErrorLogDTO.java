@@ -14,6 +14,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class StoreErrorLogDTO {
 
+    private String productOrderId;
+    private String productId;
+    private String productName;
     private String beforeClaimStatus;
     private String beforeClaimType;
     private String beforeProductOrderStatus;

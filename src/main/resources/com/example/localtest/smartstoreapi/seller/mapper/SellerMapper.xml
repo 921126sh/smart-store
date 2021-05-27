@@ -7,7 +7,7 @@
 <!--    </insert>-->
 
     <select id="getStoreLog" resultType="StoreLogDTO">
-        SELECT DISTINCT beforeClaimStatus, beforeClaimType, beforeProductOrderStatus, endPoint, parameterJson, afterClaimStatus, afterClaimType, afterProductOrderStatus, regDate
+        SELECT DISTINCT productOrderId, productId, productName, beforeClaimStatus, beforeClaimType, beforeProductOrderStatus, endPoint, parameterJson, afterClaimStatus, afterClaimType, afterProductOrderStatus, regDate
         FROM
             logs.StoreLogs
         WHERE errorCode IS NULL
@@ -30,7 +30,7 @@
     </update>
 
     <select id="getStoreErrorLog" resultType="StoreErrorLogDTO">
-        SELECT DISTINCT beforeClaimStatus, beforeClaimType, beforeProductOrderStatus, endPoint, parameterJson, afterClaimStatus, afterClaimType, afterProductOrderStatus, errorCode, errorMessage, regDate
+        SELECT DISTINCT productOrderId, productId, productName, beforeClaimStatus, beforeClaimType, beforeProductOrderStatus, endPoint, parameterJson, afterClaimStatus, afterClaimType, afterProductOrderStatus, errorCode, errorMessage, regDate
         FROM
             logs.StoreLogs
                 WHERE errorCode IS NOT NULL
