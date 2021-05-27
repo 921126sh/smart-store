@@ -31,7 +31,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
 
 
     // 상품주문내역 상세조회
-    public long 전_상품주문내역_상세조회(String ProductOrderID, JSONObject jsonObject) throws Exception {
+    public long 전_상품주문내역_상세조회(String ProductOrderID, JSONObject jsonObject, String endPoint) throws Exception {
         //PRODUCT ID(TEST): 2001238236, 2001238220, 2001238211, 2001238206, 2001238205, 2001238197, 2001238196, 2001238195, 2001238194, 2001238174, 2001192790, 2001192789, 2001192785, 2001192784, 2001192783, 2001192210, 2001192189, 2001183501, 2001183500, 2001183499, 2001183498, 2001183496
         GetProductOrderInfoListRequest getProductOrderInfoListRequest = new GetProductOrderInfoListRequest();
 
@@ -79,6 +79,8 @@ public class SellerCoreServiceImpl implements SellerCoreService {
         ErrorType errorType = response.getError();
 
         sellerDAO.setParameterJson(Optional.ofNullable(jsonObject.toJSONString()).orElse(null));
+        sellerDAO.setEndPoint(endPoint == null ? "" : endPoint);
+        sellerDAO.setRegDate(new Date());
 
         sellerDAO.setErrorCode(errorType == null ? null : errorType.getCode());
         sellerDAO.setErrorMessage(errorType == null ? null : errorType.getMessage());
@@ -314,13 +316,16 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 발송 처리
-    public void 발송_처리() throws Exception {
+    public void  발송_처리(String ProductOrderID, String DeliveryMethodCode, LocalDate DispatchDate) throws Exception {
         ShipProductOrderRequest shipProductOrderRequest = new ShipProductOrderRequest();
-        shipProductOrderRequest.setProductOrderID("2021052480881841");
-        shipProductOrderRequest.setDeliveryMethodCode(DeliveryMethodType.RETURN_DELIVERY);
+//        shipProductOrderRequest.setProductOrderID("2021052480881841");
+//        shipProductOrderRequest.setDeliveryMethodCode(DeliveryMethodType.RETURN_DELIVERY);
+        shipProductOrderRequest.setProductOrderID(ProductOrderID);
+        shipProductOrderRequest.setDeliveryMethodCode(DeliveryMethodType.fromValue(DeliveryMethodCode));
 
         GregorianCalendar fromDate = new GregorianCalendar();
-        fromDate.set(2021, Calendar.JULY, 01);
+//        fromDate.set(2021, Calendar.JULY, 01);
+        fromDate.set(DispatchDate.getYear(), DispatchDate.getMonthValue() - 1, DispatchDate.getDayOfMonth());
 
         shipProductOrderRequest.setDispatchDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(fromDate));
 

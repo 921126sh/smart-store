@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.datatype.DatatypeFactory;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -54,11 +56,11 @@ public class SellerController {
      * @throws Exception
      */
     @GetMapping("/PlaceProductOrder")
-    public ResponseEntity<ApiResponseEntity> placeProductOrder(@RequestParam("ProductOrderID") String ProductOrderID) throws Exception {
+    public ResponseEntity<ApiResponseEntity> placeProductOrder(@RequestParam("ProductOrderID") String ProductOrderID, HttpServletRequest httpServletRequest) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ProductOrderID", ProductOrderID);
 
-        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject);
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
 //        sellerCoreService.발주_확인처리(ProductOrderID);
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
@@ -76,22 +78,61 @@ public class SellerController {
     @GetMapping("/DelayProductOrder")
     public ResponseEntity<ApiResponseEntity> delayProductOrder(@RequestParam("ProductOrderID") String ProductOrderID,
                                                                @RequestParam("DispatchDueDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate DispatchDueDate,
-                                                               @RequestParam(value = "DispatchDelayReasonCode", defaultValue = "CUSTOMER_REQUEST") String DispatchDelayReasonCode) throws Exception {
+                                                               @RequestParam(value = "DispatchDelayReasonCode", defaultValue = "CUSTOMER_REQUEST") String DispatchDelayReasonCode,
+                                                               HttpServletRequest httpServletRequest) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ProductOrderID", ProductOrderID);
         jsonObject.put("DispatchDueDate", DispatchDueDate);
         jsonObject.put("DispatchDelayReasonCode", DispatchDelayReasonCode);
 
-        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject);
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
 //        sellerCoreService.발송지연_처리(ProductOrderID, DispatchDueDate, DispatchDelayReasonCode);
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
     }
 
-//    @GetMapping("/ShipProductOrder")
-//    public ResponseEntity<ApiResponseEntity> shipProductOrder
+    /**
+     * 발송 처리
+     * @param ProductOrderID
+     * @param DeliveryMethodCode
+     * @param DispatchDate
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/ShipProductOrder")
+    public ResponseEntity<ApiResponseEntity> shipProductOrder(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                              @RequestParam(value = "DeliveryMethodCode", defaultValue = "RETURN_DELIVERY") String DeliveryMethodCode,
+                                                              @RequestParam("DispatchDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate DispatchDate,
+                                                              HttpServletRequest httpServletRequest) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ProductOrderID", ProductOrderID);
+        jsonObject.put("DeliveryMethodCode", DeliveryMethodCode);
+        jsonObject.put("DispatchDate", DispatchDate);
+
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+//        sellerCoreService.발송_처리(ProductOrderID, DeliveryMethodCode, DispatchDate);
+        GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/CancelSale")
+    public ResponseEntity<ApiResponseEntity> cancelSale(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                        @RequestParam("CancelReasonCode") String CancelReasonCode,
+                                                        HttpServletRequest httpServletRequest) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+
+        sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(""), HttpStatus.OK);
+    }
 
 
 

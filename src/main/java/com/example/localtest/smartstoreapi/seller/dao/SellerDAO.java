@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.json.simple.JSONObject;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,5 +30,7 @@ public class SellerDAO {
     private String errorCode;
     private String errorMessage;
     private String errorDetail;
+    private String endPoint;
+    private Date regDate;
 
 }

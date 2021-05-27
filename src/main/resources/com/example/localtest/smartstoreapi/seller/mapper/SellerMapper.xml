@@ -12,8 +12,8 @@
     </select>
 
     <insert id="afterInsertStoreLog" useGeneratedKeys="true" keyProperty="seq" parameterType="SellerDAO">
-        INSERT INTO StoreLogs (beforeClaimStatus, beforeClaimType, beforeProductOrderStatus, afterClaimStatus, afterClaimType, afterProductOrderStatus, productOrderId, mallId, productId, productName, productOption, parameterJson, errorCode, errorMessage, errorDetail)
-        VALUES  (#{beforeClaimStatus}, #{beforeClaimType}, #{beforeProductOrderStatus}, #{afterClaimStatus}, #{afterClaimType}, #{afterProductOrderStatus}, #{productOrderId}, #{mallId}, #{productId}, #{productName}, #{productOption}, #{parameterJson}, #{errorCode}, #{errorMessage}, #{errorDetail});
+        INSERT INTO StoreLogs (beforeClaimStatus, beforeClaimType, beforeProductOrderStatus, afterClaimStatus, afterClaimType, afterProductOrderStatus, productOrderId, mallId, productId, productName, productOption, parameterJson, errorCode, errorMessage, errorDetail, endPoint, regDate)
+        VALUES  (#{beforeClaimStatus}, #{beforeClaimType}, #{beforeProductOrderStatus}, #{afterClaimStatus}, #{afterClaimType}, #{afterProductOrderStatus}, #{productOrderId}, #{mallId}, #{productId}, #{productName}, #{productOption}, #{parameterJson}, #{errorCode}, #{errorMessage}, #{errorDetail}, #{endPoint}, #{regDate});
     </insert>
 
     <select id="getStoreLogBySeq" parameterType="Integer" resultType="SellerDAO">
