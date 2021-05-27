@@ -393,9 +393,9 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 반품 승인
-    public void 반품_승인() throws Exception {
+    public void 반품_승인(String ProductOrderID) throws Exception {
         ApproveReturnApplicationRequest approveReturnApplicationRequest = new ApproveReturnApplicationRequest();
-        approveReturnApplicationRequest.setProductOrderID("PONO500000000001");
+        approveReturnApplicationRequest.setProductOrderID(ProductOrderID);
 
         Utils.setBaseSellerRequestType(approveReturnApplicationRequest);
         approveReturnApplicationRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "ApproveReturnApplication"));
@@ -423,9 +423,10 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 반품 거부
-    public void 반품_거부() throws Exception {
+    public void 반품_거부(String ProductOrderID, String RejectDetailContent) throws Exception {
         RejectReturnRequest rejectReturnRequest = new RejectReturnRequest();
-        rejectReturnRequest.setProductOrderID("PONO500000000002");
+        rejectReturnRequest.setProductOrderID(ProductOrderID);
+        rejectReturnRequest.setRejectDetailContent(RejectDetailContent); // 거부 사유
 
         Utils.setBaseSellerRequestType(rejectReturnRequest);
         rejectReturnRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "RejectReturn"));
@@ -453,11 +454,14 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 반품 보류
-    public void 반품_보류() throws Exception {
+    public void 반품_보류(String ProductOrderID, String ReturnHoldCode, String ReturnHoldDetailContent) throws Exception {
         WithholdReturnRequest withholdReturnRequest = new WithholdReturnRequest();
-        withholdReturnRequest.setProductOrderID("PONO100000000004");
-        withholdReturnRequest.setReturnHoldCode(HoldbackClassType.ETC);
-        withholdReturnRequest.setReturnHoldDetailContent("테스트사유");
+//        withholdReturnRequest.setProductOrderID("PONO100000000004");
+//        withholdReturnRequest.setReturnHoldCode(HoldbackClassType.ETC);
+//        withholdReturnRequest.setReturnHoldDetailContent("테스트사유");
+        withholdReturnRequest.setProductOrderID(ProductOrderID);
+        withholdReturnRequest.setReturnHoldCode(HoldbackClassType.fromValue(ReturnHoldCode));
+        withholdReturnRequest.setReturnHoldDetailContent(ReturnHoldDetailContent);
 
         Utils.setBaseSellerRequestType(withholdReturnRequest);
         withholdReturnRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "WithholdReturn"));

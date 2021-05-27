@@ -186,6 +186,8 @@ public class SellerController {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ProductOrderID", ProductOrderID);
+        jsonObject.put("ReturnReasonCode", ReturnReasonCode);
+        jsonObject.put("CollectDeliveryMethodCode", CollectDeliveryMethodCode);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
 //        sellerCoreService.반품_접수(ProductOrderID, ReturnReasonCode, CollectDeliveryMethodCode); // Default Value Add
@@ -194,5 +196,78 @@ public class SellerController {
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
     }
 
+    /**
+     * 반품 요청 승인 처리
+     * @param ProductOrderID
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/ApproveReturnApplication")
+    public ResponseEntity<ApiResponseEntity> approveReturnApplication(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                                      HttpServletRequest httpServletRequest) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ProductOrderID", ProductOrderID);
+
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+//        sellerCoreService.반품_승인(ProductOrderID);
+        GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+    }
+
+
+    /**
+     * 반품 거부 처리
+     * @param ProductOrderID
+     * @param RejectDetailContent
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/RejectReturn")
+    public ResponseEntity<ApiResponseEntity> rejectReturn(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                          @RequestParam("RejectDetailContent") String RejectDetailContent,
+                                                          HttpServletRequest httpServletRequest) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ProductOrderID", ProductOrderID);
+        jsonObject.put("RejectDetailContent", RejectDetailContent);
+
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+//        sellerCoreService.반품_거부(ProductOrderID, RejectDetailContent);
+        GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+    }
+
+
+    /**
+     * 반품 보류 처리
+     * @param ProductOrderID
+     * @param ReturnHoldCode
+     * @param ReturnHoldDetailContent
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/WithholdReturn")
+    public ResponseEntity<ApiResponseEntity> withholdReturn(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                            @RequestParam(value = "ReturnHoldCode", defaultValue = "ETC") String ReturnHoldCode,
+                                                            @RequestParam("ReturnHoldDetailContent") String ReturnHoldDetailContent,
+                                                            HttpServletRequest httpServletRequest) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ProductOrderId", ProductOrderID);
+        jsonObject.put("ReturnHoldCode",ReturnHoldCode);
+        jsonObject.put("ReturnHoldDetailContent", ReturnHoldDetailContent);
+
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+//        sellerCoreService.반품_보류(ProductOrderID, ReturnHoldCode, ReturnHoldDetailContent);
+        GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+    }
 
 }
