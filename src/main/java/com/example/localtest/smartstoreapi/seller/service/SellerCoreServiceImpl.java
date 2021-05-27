@@ -190,10 +190,11 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
 
-    public void 발주_확인처리(String ProductOrderID) throws Exception {
+    public void 발주_확인처리(String ProductOrderID, Boolean CheckReceiverAddressChanged) throws Exception {
         PlaceProductOrderRequest placeProductOrderRequest = new PlaceProductOrderRequest();
         placeProductOrderRequest.setProductOrderID(ProductOrderID);
-        placeProductOrderRequest.setCheckReceiverAddressChanged(true);
+//        placeProductOrderRequest.setCheckReceiverAddressChanged(true);
+        placeProductOrderRequest.setCheckReceiverAddressChanged(CheckReceiverAddressChanged);
 
         Utils.setBaseSellerRequestType(placeProductOrderRequest);
         placeProductOrderRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "PlaceProductOrder"));

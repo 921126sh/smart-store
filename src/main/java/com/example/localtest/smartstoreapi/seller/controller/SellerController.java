@@ -75,12 +75,14 @@ public class SellerController {
      * @throws Exception
      */
     @GetMapping("/PlaceProductOrder")
-    public ResponseEntity<ApiResponseEntity> placeProductOrder(@RequestParam("ProductOrderID") String ProductOrderID, HttpServletRequest httpServletRequest) throws Exception {
+    public ResponseEntity<ApiResponseEntity> placeProductOrder(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                               @RequestParam(value = "CheckReceiverAddressChanged", defaultValue = "true", required = false) Boolean CheckReceiverAddressChanged,
+                                                               HttpServletRequest httpServletRequest) throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ProductOrderID", ProductOrderID);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
-//        sellerCoreService.발주_확인처리(ProductOrderID);
+//        sellerCoreService.발주_확인처리(ProductOrderID, CheckReceiverAddressChanged); // Default Value Add
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
