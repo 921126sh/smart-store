@@ -247,10 +247,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 판매 취소
-    public void 판매_취소() throws Exception {
+    public void 판매_취소(String ProductOrderID, String CancelReasonCode) throws Exception {
         CancelSaleRequest cancelSaleRequest = new CancelSaleRequest();
-        cancelSaleRequest.setProductOrderID("PONO500000000001");
-        cancelSaleRequest.setCancelReasonCode(ClaimRequestReasonType.DROPPED_DELIVERY);
+//        cancelSaleRequest.setProductOrderID("PONO500000000001");
+//        cancelSaleRequest.setCancelReasonCode(ClaimRequestReasonType.DROPPED_DELIVERY);
+        cancelSaleRequest.setProductOrderID(ProductOrderID);
+        cancelSaleRequest.setCancelReasonCode(ClaimRequestReasonType.fromValue(CancelReasonCode));
 
         Utils.setBaseSellerRequestType(cancelSaleRequest);
         cancelSaleRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "CancelSale"));

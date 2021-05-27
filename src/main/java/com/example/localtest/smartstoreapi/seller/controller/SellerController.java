@@ -123,15 +123,18 @@ public class SellerController {
 
     @GetMapping("/CancelSale")
     public ResponseEntity<ApiResponseEntity> cancelSale(@RequestParam("ProductOrderID") String ProductOrderID,
-                                                        @RequestParam("CancelReasonCode") String CancelReasonCode,
+                                                        @RequestParam(value = "CancelReasonCode", defaultValue = "DROPPED_DELIVERY") String CancelReasonCode,
                                                         HttpServletRequest httpServletRequest) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ProductOrderID", ProductOrderID);
+        jsonObject.put("CancelReasonCode", CancelReasonCode);
 
-        sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+//        sellerCoreService.판매_취소(ProductOrderID, CancelReasonCode);
+        GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
-
-        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(""), HttpStatus.OK);
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
     }
 
 
