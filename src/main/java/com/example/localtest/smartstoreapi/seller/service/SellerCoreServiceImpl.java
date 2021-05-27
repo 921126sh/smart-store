@@ -358,11 +358,14 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 반품 접수
-    public void 반품_접수() throws Exception {
+    public void 반품_접수(String ProductOrderID, String ReturnReasonCode, String CollectDeliveryMethodCode) throws Exception {
         RequestReturnRequest requestReturnRequest = new RequestReturnRequest();
-        requestReturnRequest.setProductOrderID("PONO100000000004");
-        requestReturnRequest.setReturnReasonCode(ClaimRequestReasonType.DROPPED_DELIVERY);
-        requestReturnRequest.setCollectDeliveryMethodCode(DeliveryMethodType.RETURN_DELIVERY);
+//        requestReturnRequest.setProductOrderID("PONO100000000004");
+//        requestReturnRequest.setReturnReasonCode(ClaimRequestReasonType.DROPPED_DELIVERY);
+//        requestReturnRequest.setCollectDeliveryMethodCode(DeliveryMethodType.RETURN_DELIVERY);
+        requestReturnRequest.setProductOrderID(ProductOrderID);
+        requestReturnRequest.setReturnReasonCode(ClaimRequestReasonType.fromValue(ReturnReasonCode));
+        requestReturnRequest.setCollectDeliveryMethodCode(DeliveryMethodType.fromValue(CollectDeliveryMethodCode));
 
         Utils.setBaseSellerRequestType(requestReturnRequest);
         requestReturnRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "RequestReturn"));

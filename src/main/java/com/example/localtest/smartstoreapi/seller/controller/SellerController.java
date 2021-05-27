@@ -167,7 +167,32 @@ public class SellerController {
     }
 
 
-    
+    /**
+     * 반품 접수 처리
+     * @param ProductOrderID
+     * @param ReturnReasonCode
+     * @param CollectDeliveryMethodCode
+     * @param CollectTrackingNumber
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/RequestReturn")
+    public ResponseEntity<ApiResponseEntity> requestReturn(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                           @RequestParam(value = "ReturnReasonCode", defaultValue = "DROPPED_DELIVERY") String ReturnReasonCode,
+                                                           @RequestParam(value = "CollectDeliveryMethodCode", defaultValue = "RETURN_DELIVERY") String CollectDeliveryMethodCode,
+                                                           @RequestParam(value = "CollectTrackingNumber", required = false) String CollectTrackingNumber,
+                                                           HttpServletRequest httpServletRequest) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ProductOrderID", ProductOrderID);
+
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+//        sellerCoreService.반품_접수(ProductOrderID, ReturnReasonCode, CollectDeliveryMethodCode); // Default Value Add
+        GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+    }
 
 
 }
