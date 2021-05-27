@@ -377,7 +377,8 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 반품 접수
-    public void 반품_접수(String ProductOrderID, String ReturnReasonCode, String CollectDeliveryMethodCode) throws Exception {
+    public void 반품_접수(String ProductOrderID, String ReturnReasonCode, String CollectDeliveryMethodCode,
+                      String CollectDeliveryCompanyCode, String CollectTrackingNumber) throws Exception {
         RequestReturnRequest requestReturnRequest = new RequestReturnRequest();
 //        requestReturnRequest.setProductOrderID("PONO100000000004");
 //        requestReturnRequest.setReturnReasonCode(ClaimRequestReasonType.DROPPED_DELIVERY);
@@ -385,6 +386,9 @@ public class SellerCoreServiceImpl implements SellerCoreService {
         requestReturnRequest.setProductOrderID(ProductOrderID);
         requestReturnRequest.setReturnReasonCode(ClaimRequestReasonType.fromValue(ReturnReasonCode));
         requestReturnRequest.setCollectDeliveryMethodCode(DeliveryMethodType.fromValue(CollectDeliveryMethodCode));
+
+        requestReturnRequest.setCollectDeliveryCompanyCode(CollectDeliveryCompanyCode);
+        requestReturnRequest.setCollectTrackingNumber(CollectTrackingNumber);
 
         Utils.setBaseSellerRequestType(requestReturnRequest);
         requestReturnRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "RequestReturn"));
@@ -473,7 +477,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 반품 보류
-    public void 반품_보류(String ProductOrderID, String ReturnHoldCode, String ReturnHoldDetailContent) throws Exception {
+    public void 반품_보류(String ProductOrderID, String ReturnHoldCode, String ReturnHoldDetailContent, int EtcFeeDemandAmount) throws Exception {
         WithholdReturnRequest withholdReturnRequest = new WithholdReturnRequest();
 //        withholdReturnRequest.setProductOrderID("PONO100000000004");
 //        withholdReturnRequest.setReturnHoldCode(HoldbackClassType.ETC);
@@ -481,6 +485,9 @@ public class SellerCoreServiceImpl implements SellerCoreService {
         withholdReturnRequest.setProductOrderID(ProductOrderID);
         withholdReturnRequest.setReturnHoldCode(HoldbackClassType.fromValue(ReturnHoldCode));
         withholdReturnRequest.setReturnHoldDetailContent(ReturnHoldDetailContent);
+
+        // Optional Area
+        withholdReturnRequest.setEtcFeeDemandAmount(EtcFeeDemandAmount);
 
         Utils.setBaseSellerRequestType(withholdReturnRequest);
         withholdReturnRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "WithholdReturn"));
@@ -568,7 +575,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 교환 재배송 처리
-    public void 교환재배송_처리(String ProductOrderID, String ReDeliveryMethodCode, String ReDeliveryCompanyCode) throws Exception {
+    public void 교환재배송_처리(String ProductOrderID, String ReDeliveryMethodCode, String ReDeliveryCompanyCode, String ReDeliveryTrackingNumber) throws Exception {
         ReDeliveryExchangeRequest reDeliveryExchangeRequest = new ReDeliveryExchangeRequest();
 //        reDeliveryExchangeRequest.setProductOrderID("PONO100000000004");
 //        reDeliveryExchangeRequest.setReDeliveryMethodCode(DeliveryMethodType.RETURN_DELIVERY);
@@ -576,6 +583,9 @@ public class SellerCoreServiceImpl implements SellerCoreService {
         reDeliveryExchangeRequest.setProductOrderID(ProductOrderID);
         reDeliveryExchangeRequest.setReDeliveryMethodCode(DeliveryMethodType.fromValue(ReDeliveryMethodCode));
         reDeliveryExchangeRequest.setReDeliveryCompanyCode(ReDeliveryCompanyCode);
+
+        // Optional Area
+        reDeliveryExchangeRequest.setReDeliveryTrackingNumber(ReDeliveryTrackingNumber);
 
         Utils.setBaseSellerRequestType(reDeliveryExchangeRequest);
         reDeliveryExchangeRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "ReDeliveryExchange"));

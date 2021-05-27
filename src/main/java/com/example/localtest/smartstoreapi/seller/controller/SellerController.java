@@ -208,6 +208,7 @@ public class SellerController {
     public ResponseEntity<ApiResponseEntity> requestReturn(@RequestParam("ProductOrderID") String ProductOrderID,
                                                            @RequestParam(value = "ReturnReasonCode", defaultValue = "DROPPED_DELIVERY") String ReturnReasonCode,
                                                            @RequestParam(value = "CollectDeliveryMethodCode", defaultValue = "RETURN_DELIVERY") String CollectDeliveryMethodCode,
+                                                           @RequestParam(value = "CollectDeliveryCompanyCode", required = false) String CollectDeliveryCompanyCode,
                                                            @RequestParam(value = "CollectTrackingNumber", required = false) String CollectTrackingNumber,
                                                            HttpServletRequest httpServletRequest) throws Exception {
 
@@ -217,7 +218,7 @@ public class SellerController {
         jsonObject.put("CollectDeliveryMethodCode", CollectDeliveryMethodCode);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
-//        sellerCoreService.반품_접수(ProductOrderID, ReturnReasonCode, CollectDeliveryMethodCode); // Default Value Add
+//        sellerCoreService.반품_접수(ProductOrderID, ReturnReasonCode, CollectDeliveryMethodCode, CollectDeliveryCompanyCode, CollectTrackingNumber); // Default Value Add
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
@@ -283,6 +284,7 @@ public class SellerController {
     public ResponseEntity<ApiResponseEntity> withholdReturn(@RequestParam("ProductOrderID") String ProductOrderID,
                                                             @RequestParam(value = "ReturnHoldCode", defaultValue = "ETC") String ReturnHoldCode,
                                                             @RequestParam("ReturnHoldDetailContent") String ReturnHoldDetailContent,
+                                                            @RequestParam(value = "EtcFeeDemandAmount", required = false) int EtcFeeDemandAmount,
                                                             HttpServletRequest httpServletRequest) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
@@ -291,7 +293,7 @@ public class SellerController {
         jsonObject.put("ReturnHoldDetailContent", ReturnHoldDetailContent);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
-//        sellerCoreService.반품_보류(ProductOrderID, ReturnHoldCode, ReturnHoldDetailContent);
+        sellerCoreService.반품_보류(ProductOrderID, ReturnHoldCode, ReturnHoldDetailContent, EtcFeeDemandAmount);
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
@@ -353,6 +355,7 @@ public class SellerController {
     public ResponseEntity<ApiResponseEntity> reDeliveryExchange(@RequestParam("ProductOrderID") String ProductOrderID,
                                                                 @RequestParam("ReDeliveryCompanyCode") String ReDeliveryCompanyCode,
                                                                 @RequestParam(value = "ReDeliveryMethodCode", defaultValue = "RETURN_DELIVERY") String ReDeliveryMethodCode,
+                                                                @RequestParam(value = "ReDeliveryTrackingNumber", required = false) String ReDeliveryTrackingNumber,
                                                                 HttpServletRequest httpServletRequest) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
@@ -361,7 +364,7 @@ public class SellerController {
         jsonObject.put("ReDeliveryMethodCode", ReDeliveryMethodCode);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
-//        sellerCoreService.교환재배송_처리(ProductOrderID, ReDeliveryMethodCode, ReDeliveryCompanyCode);
+        sellerCoreService.교환재배송_처리(ProductOrderID, ReDeliveryMethodCode, ReDeliveryCompanyCode, ReDeliveryTrackingNumber);
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
