@@ -270,4 +270,48 @@ public class SellerController {
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
     }
 
+
+    /**
+     * 반품 보류 해제 처리
+     * @param ProductOrderID
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/ReleaseReturnHold")
+    public ResponseEntity<ApiResponseEntity> releaseReturnHold(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                            HttpServletRequest httpServletRequest) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ProductOrderId", ProductOrderID);
+
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+//        sellerCoreService.반품보류_해제(ProductOrderID);
+        GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+    }
+
+
+    /**
+     * 교환 수거 완료 처리
+     * @param ProductOrderID
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/ApproveCollectedExchange")
+    public ResponseEntity<ApiResponseEntity> approveCollectedExchange(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                                      HttpServletRequest httpServletRequest) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ProductOrderId", ProductOrderID);
+
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+//        sellerCoreService.교환_수거완료(ProductOrderID);
+        GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+    }
+
 }

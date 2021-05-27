@@ -489,9 +489,9 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 반품 보류 해제
-    public void 반품보류_해제() throws Exception {
+    public void 반품보류_해제(String ProductOrderID) throws Exception {
         ReleaseReturnHoldRequest releaseReturnHoldRequest = new ReleaseReturnHoldRequest();
-        releaseReturnHoldRequest.setProductOrderID("PONO100000000004");
+        releaseReturnHoldRequest.setProductOrderID(ProductOrderID);
 
         Utils.setBaseSellerRequestType(releaseReturnHoldRequest);
         releaseReturnHoldRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "ReleaseReturnHold"));
@@ -519,9 +519,9 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 교환 수거완료
-    public void 교환_수거완료() throws Exception {
+    public void 교환_수거완료(String ProductOrderID) throws Exception {
         ApproveCollectedExchangeRequest approveCollectedExchangeRequest = new ApproveCollectedExchangeRequest();
-        approveCollectedExchangeRequest.setProductOrderID("PONO100000000004");
+        approveCollectedExchangeRequest.setProductOrderID(ProductOrderID);
 
         Utils.setBaseSellerRequestType(approveCollectedExchangeRequest);
         approveCollectedExchangeRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "ApproveCollectedExchange"));
