@@ -26,7 +26,7 @@ public class CustomerInquiryService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/Users/seotaewan/smart-store/src/main/resources/wsdl/customer/CustomerInquiryService.wsdl");
+            url = new URL("file:./src/main/resources/wsdl/customer/CustomerInquiryService.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
