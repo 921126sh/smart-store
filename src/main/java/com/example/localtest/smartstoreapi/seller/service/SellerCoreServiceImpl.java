@@ -216,9 +216,10 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 취소 승인
-    public void 취소_승인() throws Exception {
+    public void 취소_승인(String ProductOrderID) throws Exception {
         ApproveCancelApplicationRequest approveCancelApplicationRequest = new ApproveCancelApplicationRequest();
-        approveCancelApplicationRequest.setProductOrderID("PONO400000000002");
+//        approveCancelApplicationRequest.setProductOrderID("PONO400000000002");
+        approveCancelApplicationRequest.setProductOrderID(ProductOrderID);
 
 
         Utils.setBaseSellerRequestType(approveCancelApplicationRequest);

@@ -120,7 +120,14 @@ public class SellerController {
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
     }
 
-
+    /**
+     * 판매 취소 처리
+     * @param ProductOrderID
+     * @param CancelReasonCode
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
     @GetMapping("/CancelSale")
     public ResponseEntity<ApiResponseEntity> cancelSale(@RequestParam("ProductOrderID") String ProductOrderID,
                                                         @RequestParam(value = "CancelReasonCode", defaultValue = "DROPPED_DELIVERY") String CancelReasonCode,
@@ -137,6 +144,30 @@ public class SellerController {
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
     }
 
+
+    /**
+     * 취소 요청 승인 처리
+     * @param ProductOrderID
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/ApproveCancelApplication")
+    public ResponseEntity<ApiResponseEntity> approveCancelApplication(@RequestParam("ProductOrderID") String ProductOrderID,
+                                                        HttpServletRequest httpServletRequest) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ProductOrderID", ProductOrderID);
+
+        long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
+//        sellerCoreService.취소_승인(ProductOrderID);
+        GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
+
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+    }
+
+
+    
 
 
 }
