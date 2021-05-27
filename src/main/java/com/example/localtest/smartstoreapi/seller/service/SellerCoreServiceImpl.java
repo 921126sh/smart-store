@@ -287,12 +287,13 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 발송 지연 처리
-    public void 발송지연_처리(String ProductOrderID, LocalDate DispatchDueDate, String DispatchDelayReasonCode) throws Exception {
+    public void 발송지연_처리(String ProductOrderID, LocalDate DispatchDueDate, String DispatchDelayReasonCode, String DispatchDelayDetailReason) throws Exception {
         DelayProductOrderRequest delayProductOrderRequest = new DelayProductOrderRequest();
         delayProductOrderRequest.setProductOrderID(ProductOrderID);
 
         DelayedDispatchReasonType dateSet = DelayedDispatchReasonType.fromValue(DispatchDelayReasonCode);
         delayProductOrderRequest.setDispatchDelayReasonCode(dateSet);
+        delayProductOrderRequest.setDispatchDelayDetailReason(DispatchDelayDetailReason);
 
         GregorianCalendar fromDate = new GregorianCalendar();
         fromDate.set(DispatchDueDate.getYear(), DispatchDueDate.getMonthValue() - 1, DispatchDueDate.getDayOfMonth());
@@ -325,12 +326,24 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 발송 처리
-    public void  발송_처리(String ProductOrderID, String DeliveryMethodCode, LocalDate DispatchDate) throws Exception {
+    public void  발송_처리(String ProductOrderID, String DeliveryMethodCode, LocalDate DispatchDate,
+                       String DeliveryCompanyCode, String TrackingNumber, String BarcodeNoList, String ECouponNo) throws Exception {
         ShipProductOrderRequest shipProductOrderRequest = new ShipProductOrderRequest();
 //        shipProductOrderRequest.setProductOrderID("2021052480881841");
 //        shipProductOrderRequest.setDeliveryMethodCode(DeliveryMethodType.RETURN_DELIVERY);
         shipProductOrderRequest.setProductOrderID(ProductOrderID);
         shipProductOrderRequest.setDeliveryMethodCode(DeliveryMethodType.fromValue(DeliveryMethodCode));
+
+        // Optional Area
+        shipProductOrderRequest.setDeliveryCompanyCode(DeliveryCompanyCode);
+        shipProductOrderRequest.setTrackingNumber(TrackingNumber);
+        if (!BarcodeNoList.isEmpty()) {
+            String[] Barcode = BarcodeNoList.split(",");
+            for (String item : Barcode) {
+                shipProductOrderRequest.getBarcodeNoList().add(item);
+            }
+        }
+        shipProductOrderRequest.setECouponNo(ECouponNo);
 
         GregorianCalendar fromDate = new GregorianCalendar();
 //        fromDate.set(2021, Calendar.JULY, 01);

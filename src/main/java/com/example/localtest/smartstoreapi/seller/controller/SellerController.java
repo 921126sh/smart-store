@@ -100,15 +100,17 @@ public class SellerController {
     public ResponseEntity<ApiResponseEntity> delayProductOrder(@RequestParam("ProductOrderID") String ProductOrderID,
                                                                @RequestParam("DispatchDueDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate DispatchDueDate,
                                                                @RequestParam(value = "DispatchDelayReasonCode", defaultValue = "CUSTOMER_REQUEST") String DispatchDelayReasonCode,
+                                                               @RequestParam(value = "DispatchDelayDetailReason", required = false) String DispatchDelayDetailReason,
                                                                HttpServletRequest httpServletRequest) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ProductOrderID", ProductOrderID);
         jsonObject.put("DispatchDueDate", DispatchDueDate);
         jsonObject.put("DispatchDelayReasonCode", DispatchDelayReasonCode);
+        jsonObject.put("DispatchDelayDetailReason", DispatchDelayDetailReason);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
-//        sellerCoreService.발송지연_처리(ProductOrderID, DispatchDueDate, DispatchDelayReasonCode);
+//        sellerCoreService.발송지연_처리(ProductOrderID, DispatchDueDate, DispatchDelayReasonCode, DispatchDelayDetailReason);
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
@@ -127,6 +129,10 @@ public class SellerController {
     public ResponseEntity<ApiResponseEntity> shipProductOrder(@RequestParam("ProductOrderID") String ProductOrderID,
                                                               @RequestParam(value = "DeliveryMethodCode", defaultValue = "RETURN_DELIVERY") String DeliveryMethodCode,
                                                               @RequestParam("DispatchDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate DispatchDate,
+                                                              @RequestParam(value = "DeliveryCompanyCode", required = false) String DeliveryCompanyCode,
+                                                              @RequestParam(value = "TrackingNumber", required = false) String TrackingNumber,
+                                                              @RequestParam(value = "BarcodeNoList", required = false) String BarcodeNoList,
+                                                              @RequestParam(value = "ECouponNo", required = false) String ECouponNo,
                                                               HttpServletRequest httpServletRequest) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
@@ -135,7 +141,7 @@ public class SellerController {
         jsonObject.put("DispatchDate", DispatchDate);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
-//        sellerCoreService.발송_처리(ProductOrderID, DeliveryMethodCode, DispatchDate);
+        sellerCoreService.발송_처리(ProductOrderID, DeliveryMethodCode, DispatchDate, DeliveryCompanyCode, TrackingNumber, BarcodeNoList, ECouponNo);
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
