@@ -36,4 +36,14 @@
                 WHERE errorCode IS NOT NULL
         ORDER BY regDate DESC;
     </select>
+
+    <update id="actionErrorCodeBySeq" parameterType="SellerDAO">
+        UPDATE StoreLogs SET actionErrorCode = #{actionErrorCode}
+        WHERE seq = #{seq};
+    </update>
+
+    <update id="endErrorCodeBySeq" parameterType="sellerDAO">
+        UPDATE StoreLogs SET endErrorCode = #{endErrorCode}
+        WHERE seq = #{seq};
+    </update>
 </mapper>

@@ -12,4 +12,7 @@ public interface SellerMapper {
     public SellerDAO getStoreLogBySeq(long targetSeq);
     public void updateStoreLogBySeq(SellerDAO sellerDAO);
     public List<SellerDAO> getStoreErrorLog();
+    public void actionErrorCodeBySeq(SellerDAO sellerDAO);
+    public void endErrorCodeBySeq(SellerDAO sellerDAO);
+
 }

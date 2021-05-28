@@ -32,5 +32,7 @@ public class SellerDAO {
     private String errorDetail;
     private String endPoint;
     private Date regDate;
+    private String actionErrorCode;
+    private String endErrorCode;
 
 }

@@ -138,6 +138,10 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            // EndErrorCode의 경우 Else문 처리
+            sellerDAO.setEndErrorCode(response.getError().getCode());
+            sellerMapper.endErrorCodeBySeq(sellerDAO);
         }
 
         sellerMapper.updateStoreLogBySeq(sellerDAO);
@@ -190,7 +194,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
 
-    public void 발주_확인처리(String ProductOrderID, Boolean CheckReceiverAddressChanged) throws Exception {
+    public void 발주_확인처리(String ProductOrderID, Boolean CheckReceiverAddressChanged, long targetSeq) throws Exception {
         PlaceProductOrderRequest placeProductOrderRequest = new PlaceProductOrderRequest();
         placeProductOrderRequest.setProductOrderID(ProductOrderID);
 //        placeProductOrderRequest.setCheckReceiverAddressChanged(true);
@@ -214,15 +218,18 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
-        }
 
-//        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
-//        assertThat(response.isIsReceiverAddressChanged()).isNotNull();
-//        assertThat(response.getError()).isNull();
+            // Error Action 내용의 경우 Else 문에 처리
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
+        }
     }
 
     // 취소 승인
-    public void 취소_승인(String ProductOrderID) throws Exception {
+    public void 취소_승인(String ProductOrderID, long targetSeq) throws Exception {
         ApproveCancelApplicationRequest approveCancelApplicationRequest = new ApproveCancelApplicationRequest();
 //        approveCancelApplicationRequest.setProductOrderID("PONO400000000002");
         approveCancelApplicationRequest.setProductOrderID(ProductOrderID);
@@ -246,6 +253,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
 
 //        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -254,7 +267,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 판매 취소
-    public void 판매_취소(String ProductOrderID, String CancelReasonCode) throws Exception {
+    public void 판매_취소(String ProductOrderID, String CancelReasonCode, long targetSeq) throws Exception {
         CancelSaleRequest cancelSaleRequest = new CancelSaleRequest();
 //        cancelSaleRequest.setProductOrderID("PONO500000000001");
 //        cancelSaleRequest.setCancelReasonCode(ClaimRequestReasonType.DROPPED_DELIVERY);
@@ -279,6 +292,13 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
+
         }
 
 //        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -287,7 +307,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 발송 지연 처리
-    public void 발송지연_처리(String ProductOrderID, LocalDate DispatchDueDate, String DispatchDelayReasonCode, String DispatchDelayDetailReason) throws Exception {
+    public void 발송지연_처리(String ProductOrderID, LocalDate DispatchDueDate, String DispatchDelayReasonCode, String DispatchDelayDetailReason, long targetSeq) throws Exception {
         DelayProductOrderRequest delayProductOrderRequest = new DelayProductOrderRequest();
         delayProductOrderRequest.setProductOrderID(ProductOrderID);
 
@@ -318,16 +338,19 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
-        }
 
-//        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
-//        assertThat(response.isIsReceiverAddressChanged()).isNotNull();
-//        assertThat(response.getError()).isNull();
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
+        }
     }
 
     // 발송 처리
     public void  발송_처리(String ProductOrderID, String DeliveryMethodCode, LocalDate DispatchDate,
-                       String DeliveryCompanyCode, String TrackingNumber, String BarcodeNoList, String ECouponNo) throws Exception {
+                       String DeliveryCompanyCode, String TrackingNumber, String BarcodeNoList, String ECouponNo,
+                       long targetSeq) throws Exception {
         ShipProductOrderRequest shipProductOrderRequest = new ShipProductOrderRequest();
 //        shipProductOrderRequest.setProductOrderID("2021052480881841");
 //        shipProductOrderRequest.setDeliveryMethodCode(DeliveryMethodType.RETURN_DELIVERY);
@@ -369,6 +392,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
 
 //        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -378,7 +407,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
 
     // 반품 접수
     public void 반품_접수(String ProductOrderID, String ReturnReasonCode, String CollectDeliveryMethodCode,
-                      String CollectDeliveryCompanyCode, String CollectTrackingNumber) throws Exception {
+                      String CollectDeliveryCompanyCode, String CollectTrackingNumber, long targetSeq) throws Exception {
         RequestReturnRequest requestReturnRequest = new RequestReturnRequest();
 //        requestReturnRequest.setProductOrderID("PONO100000000004");
 //        requestReturnRequest.setReturnReasonCode(ClaimRequestReasonType.DROPPED_DELIVERY);
@@ -408,6 +437,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
 
 //        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -416,7 +451,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 반품 승인
-    public void 반품_승인(String ProductOrderID) throws Exception {
+    public void 반품_승인(String ProductOrderID, long targetSeq) throws Exception {
         ApproveReturnApplicationRequest approveReturnApplicationRequest = new ApproveReturnApplicationRequest();
         approveReturnApplicationRequest.setProductOrderID(ProductOrderID);
 
@@ -438,6 +473,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
 
 //        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -446,7 +487,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 반품 거부
-    public void 반품_거부(String ProductOrderID, String RejectDetailContent) throws Exception {
+    public void 반품_거부(String ProductOrderID, String RejectDetailContent, long targetSeq) throws Exception {
         RejectReturnRequest rejectReturnRequest = new RejectReturnRequest();
         rejectReturnRequest.setProductOrderID(ProductOrderID);
         rejectReturnRequest.setRejectDetailContent(RejectDetailContent); // 거부 사유
@@ -469,6 +510,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
 
 //        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -477,7 +524,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 반품 보류
-    public void 반품_보류(String ProductOrderID, String ReturnHoldCode, String ReturnHoldDetailContent, int EtcFeeDemandAmount) throws Exception {
+    public void 반품_보류(String ProductOrderID, String ReturnHoldCode, String ReturnHoldDetailContent, int EtcFeeDemandAmount, long targetSeq) throws Exception {
         WithholdReturnRequest withholdReturnRequest = new WithholdReturnRequest();
 //        withholdReturnRequest.setProductOrderID("PONO100000000004");
 //        withholdReturnRequest.setReturnHoldCode(HoldbackClassType.ETC);
@@ -507,6 +554,13 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
+
         }
 
 //        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -515,7 +569,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 반품 보류 해제
-    public void 반품보류_해제(String ProductOrderID) throws Exception {
+    public void 반품보류_해제(String ProductOrderID, long targetSeq) throws Exception {
         ReleaseReturnHoldRequest releaseReturnHoldRequest = new ReleaseReturnHoldRequest();
         releaseReturnHoldRequest.setProductOrderID(ProductOrderID);
 
@@ -537,6 +591,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
 
 //        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -545,7 +605,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 교환 수거완료
-    public void 교환_수거완료(String ProductOrderID) throws Exception {
+    public void 교환_수거완료(String ProductOrderID, long targetSeq) throws Exception {
         ApproveCollectedExchangeRequest approveCollectedExchangeRequest = new ApproveCollectedExchangeRequest();
         approveCollectedExchangeRequest.setProductOrderID(ProductOrderID);
 
@@ -567,6 +627,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
 
 //        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -575,7 +641,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 교환 재배송 처리
-    public void 교환재배송_처리(String ProductOrderID, String ReDeliveryMethodCode, String ReDeliveryCompanyCode, String ReDeliveryTrackingNumber) throws Exception {
+    public void 교환재배송_처리(String ProductOrderID, String ReDeliveryMethodCode, String ReDeliveryCompanyCode, String ReDeliveryTrackingNumber, long targetSeq) throws Exception {
         ReDeliveryExchangeRequest reDeliveryExchangeRequest = new ReDeliveryExchangeRequest();
 //        reDeliveryExchangeRequest.setProductOrderID("PONO100000000004");
 //        reDeliveryExchangeRequest.setReDeliveryMethodCode(DeliveryMethodType.RETURN_DELIVERY);
@@ -605,6 +671,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
 
 //        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -613,7 +685,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 교환 거부
-    public void 교환_거부(String ProductOrderID, String RejectDetailContent) throws Exception {
+    public void 교환_거부(String ProductOrderID, String RejectDetailContent, long targetSeq) throws Exception {
         RejectExchangeRequest rejectExchangeRequest = new RejectExchangeRequest();
         rejectExchangeRequest.setProductOrderID(ProductOrderID);
         rejectExchangeRequest.setRejectDetailContent(RejectDetailContent);
@@ -636,6 +708,13 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
+
         }
 
 //        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -644,7 +723,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 교환 보류
-    public void 교환_보류(String ProductOrderID, String ExchangeHoldCode, String ExchangeHoldDetailContent) throws Exception {
+    public void 교환_보류(String ProductOrderID, String ExchangeHoldCode, String ExchangeHoldDetailContent, long targetSeq) throws Exception {
         WithholdExchangeRequest withholdExchangeRequest = new WithholdExchangeRequest();
         withholdExchangeRequest.setProductOrderID(ProductOrderID);
         withholdExchangeRequest.setExchangeHoldCode(HoldbackClassType.fromValue(ExchangeHoldCode));
@@ -668,6 +747,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
 
 //        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
@@ -676,7 +761,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 교환 보류 해제
-    public void 교환보류_해제(String ProductOrderID) throws Exception {
+    public void 교환보류_해제(String ProductOrderID, long targetSeq) throws Exception {
         ReleaseExchangeHoldRequest releaseExchangeHoldRequest = new ReleaseExchangeHoldRequest();
         releaseExchangeHoldRequest.setProductOrderID(ProductOrderID);
 
@@ -698,6 +783,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             log.info("에러 코드 : [" + response.getError().getCode() + "]");
             log.info("에러 상세정보 : [" + response.getError().getDetail() + "]");
             System.out.format(String.format("1. %s(%s)", response.getError().getCode(), response.getError().getMessage()));
+
+            SellerDAO sellerDAO = new SellerDAO();
+            sellerDAO.setActionErrorCode(response.getError().getCode());
+            sellerDAO.setSeq(targetSeq);
+
+            sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
 
 //        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
