@@ -106,7 +106,7 @@ public class SellerController {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ProductOrderID", ProductOrderID);
-        jsonObject.put("DispatchDueDate", DispatchDueDate);
+        jsonObject.put("DispatchDueDate", DispatchDueDate.toString());
         jsonObject.put("DispatchDelayReasonCode", DispatchDelayReasonCode);
         jsonObject.put("DispatchDelayDetailReason", DispatchDelayDetailReason);
 
@@ -144,7 +144,7 @@ public class SellerController {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ProductOrderID", ProductOrderID);
         jsonObject.put("DeliveryMethodCode", DeliveryMethodCode);
-        jsonObject.put("DispatchDate", DispatchDate);
+        jsonObject.put("DispatchDate", DispatchDate.toString());
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
         sellerCoreService.발송_처리(ProductOrderID, DeliveryMethodCode, DispatchDate, DeliveryCompanyCode, TrackingNumber, BarcodeNoList, ECouponNo, targetSeq);

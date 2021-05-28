@@ -1,6 +1,8 @@
 
 package com.example.localtest.smartstoreapi.seller.type;
 
+import org.springframework.lang.Nullable;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 

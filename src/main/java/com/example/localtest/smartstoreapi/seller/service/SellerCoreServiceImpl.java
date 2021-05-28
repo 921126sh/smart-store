@@ -58,14 +58,30 @@ public class SellerCoreServiceImpl implements SellerCoreService {
         if (!response.getProductOrderInfoList().isEmpty()) {
             po = response.getProductOrderInfoList().get(0).getProductOrder();
 
-            sellerDAO.setBeforeClaimStatus(Optional.ofNullable(po.getClaimStatus().value()).orElse(null));
-            sellerDAO.setBeforeClaimType(Optional.ofNullable(po.getClaimType().value()).orElse(null));
-            sellerDAO.setBeforeProductOrderStatus(Optional.ofNullable(po.getProductOrderStatus().value()).orElse(null));
-            sellerDAO.setProductOrderId(Optional.ofNullable(po.getProductOrderID()).orElse(null));
-            sellerDAO.setMallId(Optional.ofNullable(po.getMallID()).orElse(null));
-            sellerDAO.setProductId(Optional.ofNullable(po.getProductID()).orElse(null));
-            sellerDAO.setProductName(Optional.ofNullable(po.getProductName()).orElse(null));
-            sellerDAO.setProductOption(Optional.ofNullable(po.getProductOption()).orElse(null));
+            if (!Objects.isNull(po.getClaimStatus()))
+                sellerDAO.setBeforeClaimStatus(Optional.ofNullable(po.getClaimStatus().value()).orElse(null));
+
+            if (!Objects.isNull(po.getClaimType()))
+                sellerDAO.setBeforeClaimType(Optional.ofNullable(po.getClaimType().value()).orElse(null));
+
+            if (!Objects.isNull(po.getProductOrderStatus()))
+                sellerDAO.setBeforeProductOrderStatus(Optional.ofNullable(po.getProductOrderStatus().value()).orElse(null));
+
+            if (!Objects.isNull(po.getProductOrderID()))
+                sellerDAO.setProductOrderId(Optional.ofNullable(po.getProductOrderID()).orElse(null));
+
+            if (!Objects.isNull(po.getMallID()))
+                sellerDAO.setMallId(Optional.ofNullable(po.getMallID()).orElse(null));
+
+            if (!Objects.isNull(po.getProductID()))
+                sellerDAO.setProductId(Optional.ofNullable(po.getProductID()).orElse(null));
+
+            if (!Objects.isNull(po.getProductName()))
+                sellerDAO.setProductName(Optional.ofNullable(po.getProductName()).orElse(null));
+
+            if (!Objects.isNull(po.getProductOption()))
+                sellerDAO.setProductOption(Optional.ofNullable(po.getProductOption()).orElse(null));
+
         }
 
         log.info("response.toString() : " + response.toString());
@@ -119,9 +135,13 @@ public class SellerCoreServiceImpl implements SellerCoreService {
         if (!response.getProductOrderInfoList().isEmpty()) {
             po = response.getProductOrderInfoList().get(0).getProductOrder();
 
-            sellerDAO.setAfterClaimStatus(po.getClaimStatus().value());
-            sellerDAO.setAfterClaimType(po.getClaimType().value());
-            sellerDAO.setAfterProductOrderStatus(po.getProductOrderStatus().value());
+            if (!Objects.isNull(po.getClaimStatus()))
+                sellerDAO.setAfterClaimStatus(po.getClaimStatus().value());
+            if (!Objects.isNull(po.getClaimType()))
+                sellerDAO.setAfterClaimType(po.getClaimType().value());
+            if (!Objects.isNull(po.getProductOrderStatus()))
+                sellerDAO.setAfterProductOrderStatus(po.getProductOrderStatus().value());
+
         }
 
         sellerDAO.setSeq(targetSeq);
