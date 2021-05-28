@@ -743,11 +743,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 교환 보류
-    public void 교환_보류(String ProductOrderID, String ExchangeHoldCode, String ExchangeHoldDetailContent, long targetSeq) throws Exception {
+    public void 교환_보류(String ProductOrderID, String ExchangeHoldCode, String ExchangeHoldDetailContent, int EtcFeeDemandAmount, long targetSeq) throws Exception {
         WithholdExchangeRequest withholdExchangeRequest = new WithholdExchangeRequest();
         withholdExchangeRequest.setProductOrderID(ProductOrderID);
         withholdExchangeRequest.setExchangeHoldCode(HoldbackClassType.fromValue(ExchangeHoldCode));
         withholdExchangeRequest.setExchangeHoldDetailContent(ExchangeHoldDetailContent);
+        withholdExchangeRequest.setEtcFeeDemandAmount(EtcFeeDemandAmount);
 
         Utils.setBaseSellerRequestType(withholdExchangeRequest);
         withholdExchangeRequest.setAccessCredentials(Utils.createAccessCredentialsFromSeller("SellerService41", "RejectExchange"));
