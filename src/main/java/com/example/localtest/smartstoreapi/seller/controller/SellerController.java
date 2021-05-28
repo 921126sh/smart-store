@@ -418,15 +418,17 @@ public class SellerController {
     public ResponseEntity<ApiResponseEntity> withholdExchange(@RequestParam("ProductOrderID") String ProductOrderID,
                                                             @RequestParam(value = "ExchangeHoldCode", defaultValue = "ETC") String ExchangeHoldCode,
                                                             @RequestParam("ExchangeHoldDetailContent") String ExchangeHoldDetailContent,
+                                                              @RequestParam(value = "EtcFeeDemandAmount", required = false) int EtcFeeDemandAmount,
                                                             HttpServletRequest httpServletRequest) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ProductOrderId", ProductOrderID);
         jsonObject.put("ExchangeHoldCode", ExchangeHoldCode);
         jsonObject.put("ExchangeHoldDetailContent", ExchangeHoldDetailContent);
+        jsonObject.put("EtcFeeDemandAmount", EtcFeeDemandAmount);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
-        sellerCoreService.교환_보류(ProductOrderID, ExchangeHoldCode, ExchangeHoldDetailContent, targetSeq);
+        sellerCoreService.교환_보류(ProductOrderID, ExchangeHoldCode, ExchangeHoldDetailContent, EtcFeeDemandAmount, targetSeq);
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
         return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
