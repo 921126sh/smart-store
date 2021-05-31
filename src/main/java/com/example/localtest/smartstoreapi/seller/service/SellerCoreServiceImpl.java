@@ -214,7 +214,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
 
-    public void 발주_확인처리(String ProductOrderID, Boolean CheckReceiverAddressChanged, long targetSeq) throws Exception {
+    public PlaceProductOrderResponse 발주_확인처리(String ProductOrderID, Boolean CheckReceiverAddressChanged, long targetSeq) throws Exception {
         PlaceProductOrderRequest placeProductOrderRequest = new PlaceProductOrderRequest();
         placeProductOrderRequest.setProductOrderID(ProductOrderID);
 //        placeProductOrderRequest.setCheckReceiverAddressChanged(true);
@@ -246,10 +246,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
 
             sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
+
+        return response;
     }
 
     // 취소 승인
-    public void 취소_승인(String ProductOrderID, long targetSeq) throws Exception {
+    public ApproveCancelApplicationResponse 취소_승인(String ProductOrderID, long targetSeq) throws Exception {
         ApproveCancelApplicationRequest approveCancelApplicationRequest = new ApproveCancelApplicationRequest();
 //        approveCancelApplicationRequest.setProductOrderID("PONO400000000002");
         approveCancelApplicationRequest.setProductOrderID(ProductOrderID);
@@ -281,13 +283,11 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
 
-//        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
-//        assertThat(response.isIsReceiverAddressChanged()).isNotNull();
-//        assertThat(response.getError()).isNull();
+        return response;
     }
 
     // 판매 취소
-    public void 판매_취소(String ProductOrderID, String CancelReasonCode, long targetSeq) throws Exception {
+    public CancelSaleResponse 판매_취소(String ProductOrderID, String CancelReasonCode, long targetSeq) throws Exception {
         CancelSaleRequest cancelSaleRequest = new CancelSaleRequest();
 //        cancelSaleRequest.setProductOrderID("PONO500000000001");
 //        cancelSaleRequest.setCancelReasonCode(ClaimRequestReasonType.DROPPED_DELIVERY);
@@ -321,13 +321,11 @@ public class SellerCoreServiceImpl implements SellerCoreService {
 
         }
 
-//        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
-//        assertThat(response.isIsReceiverAddressChanged()).isNotNull();
-//        assertThat(response.getError()).isNull();
+        return response;
     }
 
     // 발송 지연 처리
-    public void 발송지연_처리(String ProductOrderID, LocalDate DispatchDueDate, String DispatchDelayReasonCode, String DispatchDelayDetailReason, long targetSeq) throws Exception {
+    public DelayProductOrderResponse 발송지연_처리(String ProductOrderID, LocalDate DispatchDueDate, String DispatchDelayReasonCode, String DispatchDelayDetailReason, long targetSeq) throws Exception {
         DelayProductOrderRequest delayProductOrderRequest = new DelayProductOrderRequest();
         delayProductOrderRequest.setProductOrderID(ProductOrderID);
 
@@ -365,10 +363,12 @@ public class SellerCoreServiceImpl implements SellerCoreService {
 
             sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
+
+        return response;
     }
 
     // 발송 처리
-    public void  발송_처리(String ProductOrderID, String DeliveryMethodCode, LocalDate DispatchDate,
+    public ShipProductOrderResponse 발송_처리(String ProductOrderID, String DeliveryMethodCode, LocalDate DispatchDate,
                        String DeliveryCompanyCode, String TrackingNumber, String BarcodeNoList, String ECouponNo,
                        long targetSeq) throws Exception {
         ShipProductOrderRequest shipProductOrderRequest = new ShipProductOrderRequest();
@@ -380,7 +380,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
         // Optional Area
         shipProductOrderRequest.setDeliveryCompanyCode(DeliveryCompanyCode);
         shipProductOrderRequest.setTrackingNumber(TrackingNumber);
-        if (!BarcodeNoList.isEmpty()) {
+        if (!Objects.isNull(BarcodeNoList)) {
             String[] Barcode = BarcodeNoList.split(",");
             for (String item : Barcode) {
                 shipProductOrderRequest.getBarcodeNoList().add(item);
@@ -420,9 +420,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
             sellerMapper.actionErrorCodeBySeq(sellerDAO);
         }
 
-//        assertThat(response.getResponseType()).isEqualTo("SUCCESS");
-//        assertThat(response.isIsReceiverAddressChanged()).isNotNull();
-//        assertThat(response.getError()).isNull();
+        return response;
     }
 
     // 반품 접수
@@ -544,7 +542,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 반품 보류
-    public void 반품_보류(String ProductOrderID, String ReturnHoldCode, String ReturnHoldDetailContent, int EtcFeeDemandAmount, long targetSeq) throws Exception {
+    public void 반품_보류(String ProductOrderID, String ReturnHoldCode, String ReturnHoldDetailContent, Integer EtcFeeDemandAmount, long targetSeq) throws Exception {
         WithholdReturnRequest withholdReturnRequest = new WithholdReturnRequest();
 //        withholdReturnRequest.setProductOrderID("PONO100000000004");
 //        withholdReturnRequest.setReturnHoldCode(HoldbackClassType.ETC);
@@ -743,7 +741,7 @@ public class SellerCoreServiceImpl implements SellerCoreService {
     }
 
     // 교환 보류
-    public void 교환_보류(String ProductOrderID, String ExchangeHoldCode, String ExchangeHoldDetailContent, int EtcFeeDemandAmount, long targetSeq) throws Exception {
+    public void 교환_보류(String ProductOrderID, String ExchangeHoldCode, String ExchangeHoldDetailContent, Integer EtcFeeDemandAmount, long targetSeq) throws Exception {
         WithholdExchangeRequest withholdExchangeRequest = new WithholdExchangeRequest();
         withholdExchangeRequest.setProductOrderID(ProductOrderID);
         withholdExchangeRequest.setExchangeHoldCode(HoldbackClassType.fromValue(ExchangeHoldCode));

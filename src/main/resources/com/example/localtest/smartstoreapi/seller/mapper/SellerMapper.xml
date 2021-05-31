@@ -10,7 +10,7 @@
         SELECT DISTINCT productOrderId, productId, productName, beforeClaimStatus, beforeClaimType, beforeProductOrderStatus, endPoint, parameterJson, afterClaimStatus, afterClaimType, afterProductOrderStatus, regDate
         FROM
             logs.StoreLogs
-        WHERE errorCode IS NULL
+        WHERE actionErrorCode IS NULL
         ORDER BY regDate DESC;
     </select>
 
@@ -33,7 +33,7 @@
         SELECT DISTINCT productOrderId, productId, productName, beforeClaimStatus, beforeClaimType, beforeProductOrderStatus, endPoint, parameterJson, afterClaimStatus, afterClaimType, afterProductOrderStatus, errorCode, errorMessage, regDate
         FROM
             logs.StoreLogs
-                WHERE errorCode IS NOT NULL
+                WHERE actionErrorCode IS NOT NULL
         ORDER BY regDate DESC;
     </select>
 

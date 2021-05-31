@@ -83,10 +83,10 @@ public class SellerController {
         jsonObject.put("CheckReceiverAddressChanged", CheckReceiverAddressChanged);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
-        sellerCoreService.발주_확인처리(ProductOrderID, CheckReceiverAddressChanged, targetSeq); // Default Value Add
+        PlaceProductOrderResponse placeProductOrderResponse =sellerCoreService.발주_확인처리(ProductOrderID, CheckReceiverAddressChanged, targetSeq); // Default Value Add
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
-        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(placeProductOrderResponse), HttpStatus.OK);
     }
 
     /**
@@ -114,12 +114,12 @@ public class SellerController {
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
 
         // ErrorCode Middle
-        sellerCoreService.발송지연_처리(ProductOrderID, DispatchDueDate, DispatchDelayReasonCode, DispatchDelayDetailReason, targetSeq);
+        DelayProductOrderResponse delayProductOrderResponse = sellerCoreService.발송지연_처리(ProductOrderID, DispatchDueDate, DispatchDelayReasonCode, DispatchDelayDetailReason, targetSeq);
 
         // ErrorCode End
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
-        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(delayProductOrderResponse), HttpStatus.OK);
     }
 
     /**
@@ -145,12 +145,18 @@ public class SellerController {
         jsonObject.put("ProductOrderID", ProductOrderID);
         jsonObject.put("DeliveryMethodCode", DeliveryMethodCode);
         jsonObject.put("DispatchDate", DispatchDate.toString());
+        jsonObject.put("DeliveryCompanyCode", DeliveryCompanyCode);
+        jsonObject.put("TrackingNumber", TrackingNumber);
+        jsonObject.put("BarcodeNoList", BarcodeNoList);
+        jsonObject.put("ECouponNo", ECouponNo);
+
+        log.info(jsonObject.toJSONString());
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
-        sellerCoreService.발송_처리(ProductOrderID, DeliveryMethodCode, DispatchDate, DeliveryCompanyCode, TrackingNumber, BarcodeNoList, ECouponNo, targetSeq);
+        ShipProductOrderResponse shipProductOrderResponse = sellerCoreService.발송_처리(ProductOrderID, DeliveryMethodCode, DispatchDate, DeliveryCompanyCode, TrackingNumber, BarcodeNoList, ECouponNo, targetSeq);
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
-        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(shipProductOrderResponse), HttpStatus.OK);
     }
 
     /**
@@ -171,10 +177,10 @@ public class SellerController {
         jsonObject.put("CancelReasonCode", CancelReasonCode);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
-        sellerCoreService.판매_취소(ProductOrderID, CancelReasonCode, targetSeq);
+        CancelSaleResponse cancelSaleResponse = sellerCoreService.판매_취소(ProductOrderID, CancelReasonCode, targetSeq);
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
-        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(cancelSaleResponse), HttpStatus.OK);
     }
 
 
@@ -193,10 +199,10 @@ public class SellerController {
         jsonObject.put("ProductOrderID", ProductOrderID);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
-        sellerCoreService.취소_승인(ProductOrderID, targetSeq);
+        ApproveCancelApplicationResponse approveCancelApplicationResponse = sellerCoreService.취소_승인(ProductOrderID, targetSeq);
         GetProductOrderInfoListResponse response = sellerCoreService.후_상품주문내역_상세조회(ProductOrderID, targetSeq);
 
-        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(response), HttpStatus.OK);
+        return new ResponseEntity<ApiResponseEntity>(utils.successResponse(approveCancelApplicationResponse), HttpStatus.OK);
     }
 
 
@@ -292,7 +298,7 @@ public class SellerController {
     public ResponseEntity<ApiResponseEntity> withholdReturn(@RequestParam("ProductOrderID") String ProductOrderID,
                                                             @RequestParam(value = "ReturnHoldCode", defaultValue = "ETC") String ReturnHoldCode,
                                                             @RequestParam("ReturnHoldDetailContent") String ReturnHoldDetailContent,
-                                                            @RequestParam(value = "EtcFeeDemandAmount", required = false) int EtcFeeDemandAmount,
+                                                            @RequestParam(value = "EtcFeeDemandAmount", required = false) Integer EtcFeeDemandAmount,
                                                             HttpServletRequest httpServletRequest) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
@@ -371,6 +377,7 @@ public class SellerController {
         jsonObject.put("ProductOrderId", ProductOrderID);
         jsonObject.put("ReDeliveryCompanyCode", ReDeliveryCompanyCode);
         jsonObject.put("ReDeliveryMethodCode", ReDeliveryMethodCode);
+        jsonObject.put("ReDeliveryTrackingNumber", ReDeliveryTrackingNumber);
 
         long targetSeq = sellerCoreService.전_상품주문내역_상세조회(ProductOrderID, jsonObject, httpServletRequest.getRequestURI());
         sellerCoreService.교환재배송_처리(ProductOrderID, ReDeliveryMethodCode, ReDeliveryCompanyCode, ReDeliveryTrackingNumber, targetSeq);
@@ -416,9 +423,9 @@ public class SellerController {
      */
     @GetMapping("/WithholdExchange")
     public ResponseEntity<ApiResponseEntity> withholdExchange(@RequestParam("ProductOrderID") String ProductOrderID,
-                                                            @RequestParam(value = "ExchangeHoldCode", defaultValue = "ETC") String ExchangeHoldCode,
-                                                            @RequestParam("ExchangeHoldDetailContent") String ExchangeHoldDetailContent,
-                                                              @RequestParam(value = "EtcFeeDemandAmount", required = false) int EtcFeeDemandAmount,
+                                                              @RequestParam(value = "ExchangeHoldCode", defaultValue = "ETC") String ExchangeHoldCode,
+                                                              @RequestParam("ExchangeHoldDetailContent") String ExchangeHoldDetailContent,
+                                                              @RequestParam(value = "EtcFeeDemandAmount", required = false) Integer EtcFeeDemandAmount,
                                                             HttpServletRequest httpServletRequest) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
