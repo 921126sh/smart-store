@@ -31,19 +31,40 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ProductOrderStatusType {
 
-    PAYMENT_WAITING,
-    CANCELED_BY_NOPAYMENT,
-    PAYED,
-    DELIVERING,
-    DELIVERED,
-    PURCHASE_DECIDED,
-    CANCELED,
-    RETURNED,
-    EXCHANGED;
+    PAYMENT_WAITING("PAYMENT_WAITING", "결제 대기"),
+    CANCELED_BY_NOPAYMENT("CANCELED_BY_NOPAYMENT", "미결제 취소"),
+    PAYED("PAYED", "결제 완료"),
+    DELIVERING("DELIVERING", "배송 중"),
+    DELIVERED("DELIVERED", "배송 완료"),
+    PURCHASE_DECIDED("PURCHASE_DECIDED", "구매 확정"),
+    CANCELED("CANCELED", "취소"),
+    RETURNED("RETURNED", "반품"),
+    EXCHANGED("EXCHANGED", "교환");
+
+    private String key;
+    private String value;
+
+    ProductOrderStatusType(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public String getKey() {
+        return this.key;
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
+//    public String value() {
+//        return name();
+//    }
 
     public String value() {
-        return name();
+        return this.key + " (" + this.value + ")";
     }
+
 
     public static ProductOrderStatusType fromValue(String v) {
         return valueOf(v);

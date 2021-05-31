@@ -27,14 +27,34 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ClaimType {
 
-    CANCEL,
-    RETURN,
-    EXCHANGE,
-    PURCHASE_DECISION_HOLDBACK,
-    ADMIN_CANCEL;
+    CANCEL("CANCEL", "취소"),
+    RETURN("RETURN", "교환"),
+    EXCHANGE("EXCHANGE", "반품"),
+    PURCHASE_DECISION_HOLDBACK("PURCHASE_DECISION_HOLDBACK", "구매 확정 보류"),
+    ADMIN_CANCEL("ADMIN_CANCEL", "직권 취소");
+
+    private String key;
+    private String value;
+
+    ClaimType(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public String getKey() {
+        return this.key;
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
+    //    public String value() {
+//        return name();
+//    }
 
     public String value() {
-        return name();
+        return this.key + " (" + this.value + ")";
     }
 
     public static ClaimType fromValue(String v) {
